@@ -13,6 +13,7 @@ import java.io.PrintWriter;
 import java.sql.SQLException;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -56,7 +57,15 @@ public class RegistrationNlogin extends HttpServlet {
                String username = request.getParameter("username");
             String password = request.getParameter("password");
             String email = request.getParameter("email");
-            l.createUser(username, password, email);
+            if(l.getUser(username).getUsername().isEmpty()) l.createUser(username, password, email);
+            else{
+                Cookie loginCookie = new Cookie("username",username);
+			//setting cookie to expiry in 30 mins
+			loginCookie.setMaxAge(30*60);
+			response.addCookie(loginCookie);
+			response.sendRedirect("LoginSuccess.jsp");
+
+            }
         }catch(Exception x){
             x.printStackTrace();
         }
