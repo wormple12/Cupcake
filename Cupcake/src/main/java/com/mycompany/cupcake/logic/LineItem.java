@@ -5,13 +5,21 @@
  */
 package com.mycompany.cupcake.logic;
 
+import com.mycompany.cupcake.data.cc_help_classes.Cupcake;
+
 /**
  *
  * @author Lukas Bjørnvad
  */
 public class LineItem {
-    private String cupcake;
+    private Cupcake cupcake;
     private int qty;
-    private int invoice_id;
+    private double price;
+    public LineItem(Cupcake cupcake, int qty) {
+        this.cupcake = cupcake;
+        this.qty = qty;
+        this.price = cupcake.getPrice();
+    }
+   
     
 }
