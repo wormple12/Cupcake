@@ -3,7 +3,7 @@
 
 package com.mycompany.cupcake.logic;
 
-import com.mycompany.cupcake.data.UserDAO;
+import com.mycompany.cupcake.logic.CupcakeDAO;
 import com.mycompany.cupcake.data.User;
 
 /**
@@ -20,7 +20,7 @@ public class LoginController {
     }
     
     public User getUser(String username){
-        return new UserDAO().getUser(username);
+        return new CupcakeDAO().getUser(username);
     }
     
 }
