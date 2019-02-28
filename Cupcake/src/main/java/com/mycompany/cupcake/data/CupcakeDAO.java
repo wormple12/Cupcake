@@ -80,7 +80,7 @@ public class CupcakeDAO {
         try {
             
             Statement stmt = c.createStatement();
-            ResultSet rs = stmt.executeQuery("select distinct recipe_name from recipe;");
+            ResultSet rs = stmt.executeQuery("select * from bottoms;");
             
             ArrayList<Bottom> allBottoms = new ArrayList();
             while (rs.next()) {
@@ -105,7 +105,7 @@ public class CupcakeDAO {
         try {
             
             Statement stmt = c.createStatement();
-            ResultSet rs = stmt.executeQuery("select distinct recipe_name from recipe;");
+            ResultSet rs = stmt.executeQuery("select * from toppings;");
             
             ArrayList<Topping> allToppings = new ArrayList();
             while (rs.next()) {
