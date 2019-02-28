@@ -21,14 +21,14 @@ USE `cupcakedb` ;
 -- -----------------------------------------------------
 -- Table `cupcakedb`.`bottoms`
 -- -----------------------------------------------------
-DROP TABLE IF EXISTS `cupcakedb`.`buttoms` ;
+DROP TABLE IF EXISTS `cupcakedb`.`bottoms` ;
 
-CREATE TABLE IF NOT EXISTS `cupcakedb`.`buttoms` (
-  `buttom_id` INT(11) NOT NULL AUTO_INCREMENT,
-  `buttom_name` VARCHAR(45) NOT NULL,
+CREATE TABLE IF NOT EXISTS `cupcakedb`.`bottoms` (
+  `bottom_id` INT(11) NOT NULL AUTO_INCREMENT,
+  `bottom_name` VARCHAR(45) NOT NULL,
   `price` DOUBLE NOT NULL,
-  PRIMARY KEY (`buttom_id`),
-  UNIQUE INDEX `buttom_id_UNIQUE` (`buttom_id` ASC) VISIBLE)
+  PRIMARY KEY (`bottom_id`),
+  UNIQUE INDEX `bottom_id_UNIQUE` (`bottom_id` ASC) VISIBLE)
 ENGINE = InnoDB
 DEFAULT CHARACTER SET = utf8mb4
 COLLATE = utf8mb4_0900_ai_ci;
@@ -94,12 +94,12 @@ DROP TABLE IF EXISTS `cupcakedb`.`ordered_cupcakes` ;
 CREATE TABLE IF NOT EXISTS `cupcakedb`.`ordered_cupcakes` (
   `order_number` INT(11) NOT NULL,
   `topping_id` INT(11) NOT NULL,
-  `buttom_id` INT(11) NOT NULL,
+  `bottom_id` INT(11) NOT NULL,
   `amount` INT(11) NOT NULL,
   INDEX `order_number` (`order_number` ASC) VISIBLE,
   INDEX `topping_id` (`topping_id` ASC) VISIBLE,
-  INDEX `buttom_id` (`buttom_id` ASC) VISIBLE,
-  PRIMARY KEY (`order_number`, `topping_id`, `buttom_id`),
+  INDEX `bottom_id` (`bottom_id` ASC) VISIBLE,
+  PRIMARY KEY (`order_number`, `topping_id`, `bottom_id`),
   CONSTRAINT `ordered_cupcakes_ibfk_1`
     FOREIGN KEY (`order_number`)
     REFERENCES `cupcakedb`.`orders` (`order_number`)
@@ -111,8 +111,8 @@ CREATE TABLE IF NOT EXISTS `cupcakedb`.`ordered_cupcakes` (
     ON DELETE CASCADE
     ON UPDATE CASCADE,
   CONSTRAINT `ordered_cupcakes_ibfk_3`
-    FOREIGN KEY (`buttom_id`)
-    REFERENCES `cupcakedb`.`buttoms` (`buttom_id`)
+    FOREIGN KEY (`bottom_id`)
+    REFERENCES `cupcakedb`.`bottoms` (`bottom_id`)
     ON DELETE CASCADE
     ON UPDATE CASCADE)
 ENGINE = InnoDB
@@ -120,19 +120,19 @@ DEFAULT CHARACTER SET = utf8mb4
 COLLATE = utf8mb4_0900_ai_ci;
 
 
-insert into buttoms (buttom_id, buttom_name, price)
+insert into bottoms (bottom_id, bottom_name, price)
 values (41,'Chocolate',5.00);
 
-insert into buttoms (buttom_id, buttom_name, price)
+insert into bottoms (bottom_id, bottom_name, price)
 values (42,'Vanilla',5.00);
 
-insert into buttoms (buttom_id, buttom_name, price)
+insert into bottoms (bottom_id, bottom_name, price)
 values (43,'Nutmeg',5.00);
 
-insert into buttoms (buttom_id, buttom_name, price)
+insert into bottoms (bottom_id, bottom_name, price)
 values (44,'Pistacio',6.00);
 
-insert into buttoms (buttom_id, buttom_name, price)
+insert into bottoms (bottom_id, bottom_name, price)
 values (45,'Almond',7.00);
 
 

@@ -3,7 +3,7 @@
 
 package com.mycompany.cupcake.data;
 
-import com.mycompany.cupcake.data.cc_help_classes.Buttom;
+import com.mycompany.cupcake.data.cc_help_classes.Bottom;
 import com.mycompany.cupcake.data.user_help_classes.User;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -74,18 +74,18 @@ public class CupcakeDAO {
    }
    
    
-   public ArrayList<Buttom> getAllBottoms() throws Exception {
+   public ArrayList<Bottom> getAllBottoms() throws Exception {
         try {
             
             Statement stmt = c.createStatement();
             ResultSet rs = stmt.executeQuery("select distinct recipe_name from recipe;");
             
-            ArrayList<String> allButtoms = new ArrayList();
+            ArrayList<Bottom> allBottoms = new ArrayList();
             while (rs.next()) {
-                String bottom_id = rs.getString("bottom_id");
+                int bottom_id = rs.getInt("bottom_id");
                 String bottom_name = rs.getString("bottom_name");
                 double price = rs.getDouble("price");
-                //allRecipeNames.add(new Buttom());
+                allBottoms.add(new Bottom(bottom_id,bottom_name,price));
             }
             
             return null;

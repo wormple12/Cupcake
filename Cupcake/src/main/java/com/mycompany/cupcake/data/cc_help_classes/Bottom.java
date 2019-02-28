@@ -9,24 +9,24 @@ package com.mycompany.cupcake.data.cc_help_classes;
  *
  * @author Emil PC
  */
-public class Buttom {
+public class Bottom {
     
-    private int buttom_id;
-    private String buttom_name;
+    private int bottom_id;
+    private String bottom_name;
     private double price;
 
-    public Buttom(int buttom_id, String buttom_name, double price) {
-        this.buttom_id = buttom_id;
-        this.buttom_name = buttom_name;
+    public Bottom(int bottom_id, String bottom_name, double price) {
+        this.bottom_id = bottom_id;
+        this.bottom_name = bottom_name;
         this.price = price;
     }
 
-    public int getButtom_id() {
-        return buttom_id;
+    public int getBottom_id() {
+        return bottom_id;
     }
 
-    public String getButtom_Name() {
-        return buttom_name;
+    public String getBottom_Name() {
+        return bottom_name;
     }
 
     public double getPrice() {
@@ -35,7 +35,7 @@ public class Buttom {
 
     @Override
     public String toString() {
-        return "Cupcake_buttom{" + "name=" + buttom_name + ", price=" + price + '}';
+        return "Cupcake_bottom{" + "name=" + bottom_name + ", price=" + price + '}';
     }
     
     
