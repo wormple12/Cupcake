@@ -74,6 +74,7 @@ public class CupcakeDAO {
         preparedStmt.execute();
    }
    
+
    //Returns an ArrayList with all Bottoms from the database
    public ArrayList<Bottom> getAllBottoms() throws Exception {
         try {
@@ -97,6 +98,7 @@ public class CupcakeDAO {
         }
         return null;
     }
+
    
    //Returns an ArrayList with all Toppings from the database
    public ArrayList<Topping> getAllToppings() throws Exception {
