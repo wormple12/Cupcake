@@ -11,25 +11,31 @@ package com.mycompany.cupcake.data.cc_help_classes;
  */
 public class Bottom {
     
-    private String name;
-    private int price;
+    private int bottom_id;
+    private String bottom_name;
+    private double price;
 
-    public Bottom(String name, int price) {
-        this.name = name;
+    public Bottom(int bottom_id, String bottom_name, double price) {
+        this.bottom_id = bottom_id;
+        this.bottom_name = bottom_name;
         this.price = price;
     }
 
-    public String getName() {
-        return name;
+    public int getBottom_id() {
+        return bottom_id;
     }
 
-    public int getPrice() {
+    public String getBottom_Name() {
+        return bottom_name;
+    }
+
+    public double getPrice() {
         return price;
     }
 
     @Override
     public String toString() {
-        return "Cupcake_bottom{" + "name=" + name + ", price=" + price + '}';
+        return "Cupcake_bottom{" + "name=" + bottom_name + ", price=" + price + '}';
     }
     
     

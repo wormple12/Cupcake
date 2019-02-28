@@ -3,20 +3,25 @@
 
 package com.mycompany.cupcake.data;
 
+import com.mycompany.cupcake.data.cc_help_classes.Bottom;
 import com.mycompany.cupcake.data.user_help_classes.User;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
 
 /**
  * @author Simon Asholt Norup
  */
 public class CupcakeDAO {
     
+    final static boolean DEBUG = true;
     private Connection c;
 
+    
+    //Constructor
     public CupcakeDAO() {
         try {
             DBConnector connector = new DBConnector();
@@ -25,6 +30,9 @@ public class CupcakeDAO {
             ex.printStackTrace();
         }
     } 
+    
+    
+    //Return user object based on username
     public User getUser(String username){
         User user = null;
         try {
@@ -51,6 +59,7 @@ public class CupcakeDAO {
         return user;
     }
 
+    //Creates new user object
    public void createUser(String email, String username, String password) throws Exception{
          PreparedStatement preparedStmt ;
          DBConnector connector = new DBConnector();
@@ -64,5 +73,30 @@ public class CupcakeDAO {
         preparedStmt.execute();
    }
    
+
+   //Returns an ArrayList with all Bottoms from the database
+   public ArrayList<Bottom> getAllBottoms() throws Exception {
+        try {
+            
+            Statement stmt = c.createStatement();
+            ResultSet rs = stmt.executeQuery("select distinct recipe_name from recipe;");
+            
+            ArrayList<Bottom> allBottoms = new ArrayList();
+            while (rs.next()) {
+                int bottom_id = rs.getInt("bottom_id");
+                String bottom_name = rs.getString("bottom_name");
+                double price = rs.getDouble("price");
+                allBottoms.add(new Bottom(bottom_id,bottom_name,price));
+            }
+            return allBottoms;
+        
+        } catch (SQLException ex) {
+            if (DEBUG) {
+                ex.printStackTrace();
+            }
+        }
+        return null;
+    }
+
    
 }
