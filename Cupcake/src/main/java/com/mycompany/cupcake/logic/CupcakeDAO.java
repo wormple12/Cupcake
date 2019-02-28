@@ -63,4 +63,12 @@ public class CupcakeDAO {
         preparedStmt.setString(3, password);
         preparedStmt.execute();
    }
+   
+   
+   
+   //Getters from database (cupcake)
+   
+   public 
+   
+   
 }
