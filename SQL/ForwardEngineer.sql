@@ -120,6 +120,48 @@ DEFAULT CHARACTER SET = utf8mb4
 COLLATE = utf8mb4_0900_ai_ci;
 
 
+insert into bottoms (bottom_id, bottom_name, price)
+values (41,'Chocolate',5.00);
+
+insert into bottoms (bottom_id, bottom_name, price)
+values (42,'Vanilla',5.00);
+
+insert into bottoms (bottom_id, bottom_name, price)
+values (43,'Nutmeg',5.00);
+
+insert into bottoms (bottom_id, bottom_name, price)
+values (44,'Pistacio',6.00);
+
+insert into bottoms (bottom_id, bottom_name, price)
+values (45,'Almond',7.00);
+
+
+insert into toppings (topping_id, topping_name, price)
+values (51,'Chocolate',5.00);
+
+insert into toppings (topping_id, topping_name, price)
+values (52,'Blueberry',5.00);
+
+insert into toppings (topping_id, topping_name, price)
+values (53,'Rasberry',5.00);
+
+insert into toppings (topping_id, topping_name, price)
+values (54,'Crispy',6.00);
+
+insert into toppings (topping_id, topping_name, price)
+values (55,'Rum/Raisin',7.00);
+
+insert into toppings (topping_id, topping_name, price)
+values (56,'Orange',8.00);
+
+insert into toppings (topping_id, topping_name, price)
+values (57,'Lemon',8.00);
+
+insert into toppings (topping_id, topping_name, price)
+values (58,'Crispy',9.00);
+
+
+
 SET SQL_MODE=@OLD_SQL_MODE;
 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS;
 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS;

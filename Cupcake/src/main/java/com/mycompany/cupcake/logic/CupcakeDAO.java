@@ -66,9 +66,4 @@ public class CupcakeDAO {
    
    
    
-   //Getters from database (cupcake)
-   
-   public 
-   
-   
 }
