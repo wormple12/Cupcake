@@ -3,20 +3,25 @@
 
 package com.mycompany.cupcake.data;
 
+import com.mycompany.cupcake.data.cc_help_classes.Buttom;
 import com.mycompany.cupcake.data.user_help_classes.User;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
 
 /**
  * @author Simon Asholt Norup
  */
 public class CupcakeDAO {
     
+    final static boolean DEBUG = true;
     private Connection c;
 
+    
+    //Constructor
     public CupcakeDAO() {
         try {
             DBConnector connector = new DBConnector();
@@ -25,6 +30,9 @@ public class CupcakeDAO {
             ex.printStackTrace();
         }
     } 
+    
+    
+    //Return user object based on username
     public User getUser(String username){
         User user = null;
         try {
@@ -51,6 +59,7 @@ public class CupcakeDAO {
         return user;
     }
 
+    //Creates new user object
    public void createUser(String email, String username, String password) throws Exception{
          PreparedStatement preparedStmt ;
          DBConnector connector = new DBConnector();
@@ -65,5 +74,28 @@ public class CupcakeDAO {
    }
    
    
+   public ArrayList<Buttom> getAllBottoms() throws Exception {
+        try {
+            
+            Statement stmt = c.createStatement();
+            ResultSet rs = stmt.executeQuery("select distinct recipe_name from recipe;");
+            
+            ArrayList<String> allButtoms = new ArrayList();
+            while (rs.next()) {
+                String bottom_id = rs.getString("bottom_id");
+                String bottom_name = rs.getString("bottom_name");
+                double price = rs.getDouble("price");
+                //allRecipeNames.add(new Buttom());
+            }
+            
+            return null;
+            
+        } catch (SQLException ex) {
+            if (DEBUG) {
+                ex.printStackTrace();
+            }
+        }
+         return null;
+    }
    
 }

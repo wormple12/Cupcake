@@ -3,17 +3,17 @@ package com.mycompany.cupcake.data.cc_help_classes;
 
 public class Cupcake {
     
-    private Bottom bottom;
+    private Buttom bottom;
     private Topping topping;
     private double price;
 
-    public Cupcake(Bottom bottom, Topping topping) {
+    public Cupcake(Buttom bottom, Topping topping) {
         this.bottom = bottom;
         this.topping = topping;
         this.price = bottom.getPrice()+topping.getPrice();
     }
 
-    public Bottom getBottom() {
+    public Buttom getBottom() {
         return bottom;
     }
 
