@@ -40,8 +40,14 @@ public class ListCupcakeOptionsCommand extends Command {
             out.println("<title>WebRecipes: Alle opskrifter</title>");
             out.println("</head>");
             out.println("<body>");
-            out.println("<h1>Velkommen til WebRecipes!</h1>");
-            // out.println(recipe_list.toString());
+            out.println("<h1>Toppings:</h1>");
+            for (Topping topping : toppings) {
+                out.println("<p>"+topping.getTopping_id() + ", " + topping.getTopping_name() + ", " + topping.getPrice() + ",- DKK</p>");
+            }
+            out.println("<h1>Bottoms:</h1>");
+            for (Bottom bottom : bottoms) {
+                out.println("<p>"+bottom.getBottom_id() + ", " + bottom.getBottom_Name() + ", " + bottom.getPrice() + ",- DKK</p>");
+            }
             out.println("</body>");
             out.println("</html>");
         }

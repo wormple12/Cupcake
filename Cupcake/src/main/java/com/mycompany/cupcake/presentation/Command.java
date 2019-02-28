@@ -24,6 +24,9 @@ public abstract class Command {
             case "login":
                 command = new LoginCommand();
                 break;
+            case "getcupstuff":
+                command = new ListCupcakeOptionsCommand();
+                break;
             default:
                 command = new UnknownCommand();
                 break;
