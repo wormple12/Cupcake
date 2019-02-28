@@ -4,6 +4,7 @@ package com.mycompany.cupcake.presentation.commands;
 
 import com.mycompany.cupcake.data.CupcakeDAO;
 import com.mycompany.cupcake.data.cc_help_classes.Bottom;
+import com.mycompany.cupcake.data.cc_help_classes.Topping;
 import com.mycompany.cupcake.presentation.Command;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -23,21 +24,15 @@ public class ListCupcakeOptionsCommand extends Command {
             throws ServletException, IOException {
         
         CupcakeDAO dao = new CupcakeDAO();
-        ArrayList<Bottom> recipes = dao.getAllBottoms();
+        ArrayList<Bottom> bottoms = dao.getAllBottoms();
         
         dao = new CupcakeDAO();
-        StringBuilder recipe_list = new StringBuilder();
-        for (Recipe recipe : recipes) {
-            int id = dao.getRecipeID(recipe.getName(), recipe.getAuthor());
-            String link_url = "http://localhost:8080/WebRecipes/c/recipe?id="+id;
-            recipe_list.append("<p><a href=\""+link_url+"\">"+recipe.getName()+"</a> - (skrevet af "+recipe.getAuthor()+")</p><br> ");
-        }
-        dao.closeConnection();
+        ArrayList<Topping> toppings = dao.getAllToppings();
 
-        printHTML(response, recipe_list);
+        printHTML(response, bottoms, toppings);
     }
 
-    private void printHTML(HttpServletResponse response, StringBuilder recipe_list) throws IOException {
+    private void printHTML(HttpServletResponse response, ArrayList<Bottom> bottoms, ArrayList<Topping> toppings) throws IOException {
         try (PrintWriter out = response.getWriter()) {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
@@ -46,7 +41,7 @@ public class ListCupcakeOptionsCommand extends Command {
             out.println("</head>");
             out.println("<body>");
             out.println("<h1>Velkommen til WebRecipes!</h1>");
-            out.println(recipe_list.toString());
+            // out.println(recipe_list.toString());
             out.println("</body>");
             out.println("</html>");
         }

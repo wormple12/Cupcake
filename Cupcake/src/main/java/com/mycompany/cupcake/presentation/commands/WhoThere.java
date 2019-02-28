@@ -5,12 +5,9 @@
  */
 package com.mycompany.cupcake.presentation.commands;
 
-import com.mycompany.cupcake.data.CupcakeDAO;
-import com.mycompany.cupcake.data.DBConnector;
-import com.mycompany.cupcake.data.DataException;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.sql.SQLException;
+import java.util.ArrayList;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.Cookie;
@@ -22,8 +19,8 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author Lukas Bjørnvad
  */
-@WebServlet(name = "RegistrationNlogin", urlPatterns = {"/RegistrationNlogin"})
-public class RegistrationNlogin extends HttpServlet {
+@WebServlet(name = "WhoThere", urlPatterns = {"/WhoThere"})
+public class WhoThere extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -38,37 +35,16 @@ public class RegistrationNlogin extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
-            CupcakeDAO l = new CupcakeDAO();
+            Cookie[] sok = request.getCookies();
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet RegistrationNlogin</title>");            
+            out.println("<title>Servlet WhoThere</title>");            
             out.println("</head>");
             out.println("<body>");
-            /*
-            Change the form action as it needs context with the database
-            */
-            out.println("<form action=/Recipes/addrecipe>Username: <br>" + "<input type=text name=username> <br>");
-            out.println("Password:<br> <input type= password name=password> <br>");
-            out.println("Email:<br> <input type= text name=email> <br><br> <input type=submit>" + "</form>");
+            out.println("<h1>Servlet WhoThere at " + sok.toString() + "</h1>");
             out.println("</body>");
             out.println("</html>");
-            
-               String username = request.getParameter("username");
-            String password = request.getParameter("password");
-            String email = request.getParameter("email");
-            if(l.getUser(username).getUsername().isEmpty()) l.createUser(username, password, email);
-            else{
-                Cookie loginCookie = new Cookie("username",username);
-			//setting cookie to expiry in 30 mins
-			loginCookie.setMaxAge(30*60);
-			response.addCookie(loginCookie);
-			loginCookie.setPath("/WhoThere");
-                        
-
-            }
-        }catch(Exception x){
-            x.printStackTrace();
         }
     }
 
