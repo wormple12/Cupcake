@@ -51,7 +51,7 @@ public class CupcakeDAO {
         return user;
     }
 
-   public void creatUser(String email, String username, String password) throws Exception{
+   public void createUser(String email, String username, String password) throws Exception{
          PreparedStatement preparedStmt ;
          DBConnector connector = new DBConnector();
             c = connector.getConnection();
