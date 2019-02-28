@@ -42,7 +42,7 @@ public class WhoThere extends HttpServlet {
             out.println("<title>Servlet WhoThere</title>");            
             out.println("</head>");
             out.println("<body>");
-            out.println("<h1>Servlet WhoThere at " + request.getContextPath() + "</h1>");
+            out.println("<h1>Servlet WhoThere at " + sok.toString() + "</h1>");
             out.println("</body>");
             out.println("</html>");
         }
