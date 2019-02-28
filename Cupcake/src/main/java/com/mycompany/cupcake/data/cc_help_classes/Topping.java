@@ -11,27 +11,31 @@ package com.mycompany.cupcake.data.cc_help_classes;
  */
 public class Topping {
     
-    private String name;
-    private int price;
+    private int topping_id;
+    private String topping_name;
+    private double price;
 
-    public Topping(String name, int price) {
-        this.name = name;
+    public Topping(int topping_id, String topping_name, double price) {
+        this.topping_id = topping_id;
+        this.topping_name = topping_name;
         this.price = price;
     }
 
-    public String getName() {
-        return name;
+    public int getTopping_id() {
+        return topping_id;
     }
 
-    public int getPrice() {
+    public String getTopping_name() {
+        return topping_name;
+    }
+
+    public double getPrice() {
         return price;
     }
 
     @Override
     public String toString() {
-        return "Cupcake_topping{" + "name=" + name + ", price=" + price + '}';
-    }
-    
-    
+        return "Topping{" + "topping_id=" + topping_id + ", topping_name=" + topping_name + ", price=" + price + '}';
+    }    
     
 }
