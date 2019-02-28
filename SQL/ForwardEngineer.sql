@@ -43,6 +43,7 @@ CREATE TABLE IF NOT EXISTS `cupcakedb`.`customers` (
   `username` VARCHAR(12) NOT NULL,
   `password` VARCHAR(45) NOT NULL,
   `balance` DOUBLE NOT NULL,
+  `email` VARCHAR(45) NOT NULL,
   PRIMARY KEY (`username`))
 ENGINE = InnoDB
 DEFAULT CHARACTER SET = utf8mb4
