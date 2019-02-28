@@ -5,6 +5,7 @@ package com.mycompany.cupcake.logic;
 
 import com.mycompany.cupcake.data.User;
 import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -50,5 +51,16 @@ public class CupcakeDAO {
         return user;
     }
 
-
+   public void creatUser(String email, String username, String password) throws Exception{
+         PreparedStatement preparedStmt ;
+         DBConnector connector = new DBConnector();
+            c = connector.getConnection();
+       String query
+                = " insert into users (email, username, password) VALUES(?,?,?)";
+        preparedStmt = c.prepareStatement(query);
+        preparedStmt.setString(1, email);
+        preparedStmt.setString(2, username);
+        preparedStmt.setString(3, password);
+        preparedStmt.execute();
+   }
 }

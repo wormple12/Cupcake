@@ -22,5 +22,5 @@ public class LoginController {
     public User getUser(String username){
         return new CupcakeDAO().getUser(username);
     }
-    
+        
 }
