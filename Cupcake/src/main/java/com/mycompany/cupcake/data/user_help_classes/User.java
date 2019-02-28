@@ -1,7 +1,7 @@
 /*
  */
 
-package com.mycompany.cupcake.data;
+package com.mycompany.cupcake.data.user_help_classes;
 
 /**
  * @author Simon Asholt Norup

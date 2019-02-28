@@ -1,9 +1,9 @@
 /*
  */
 
-package com.mycompany.cupcake.logic;
+package com.mycompany.cupcake.data;
 
-import com.mycompany.cupcake.data.User;
+import com.mycompany.cupcake.data.user_help_classes.User;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;

@@ -5,9 +5,9 @@
  */
 package com.mycompany.cupcake.presentation.commands;
 
-import com.mycompany.cupcake.logic.CupcakeDAO;
-import com.mycompany.cupcake.logic.DBConnector;
-import com.mycompany.cupcake.logic.DataException;
+import com.mycompany.cupcake.data.CupcakeDAO;
+import com.mycompany.cupcake.data.DBConnector;
+import com.mycompany.cupcake.data.DataException;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.SQLException;
