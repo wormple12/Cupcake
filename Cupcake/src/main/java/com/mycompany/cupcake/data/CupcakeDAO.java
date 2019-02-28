@@ -11,6 +11,8 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  * @author Simon Asholt Norup
@@ -74,7 +76,7 @@ public class CupcakeDAO {
    }
    
    
-   public ArrayList<Bottom> getAllBottoms() throws Exception {
+   public ArrayList<Bottom> getAllBottoms() {
         try {
             
             Statement stmt = c.createStatement();
@@ -87,7 +89,7 @@ public class CupcakeDAO {
                 double price = rs.getDouble("price");
                 allBottoms.add(new Bottom(bottom_id,bottom_name,price));
             }
-            
+            rs.close(); stmt.close();
             return null;
             
         } catch (SQLException ex) {
@@ -97,5 +99,15 @@ public class CupcakeDAO {
         }
          return null;
     }
+   
+   public void closeConnection(){
+        try {
+            c.close();
+        } catch (SQLException ex) {
+            if (DEBUG){
+                ex.printStackTrace();
+            }
+        }
+   }
    
 }
