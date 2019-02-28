@@ -4,6 +4,7 @@
 package com.mycompany.cupcake.data;
 
 import com.mycompany.cupcake.data.cc_help_classes.Bottom;
+import com.mycompany.cupcake.data.cc_help_classes.Topping;
 import com.mycompany.cupcake.data.user_help_classes.User;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -59,7 +60,7 @@ public class CupcakeDAO {
         return user;
     }
 
-    //Creates new user object
+   //Creates new user object
    public void createUser(String email, String username, String password) throws Exception{
          PreparedStatement preparedStmt ;
          DBConnector connector = new DBConnector();
@@ -88,6 +89,30 @@ public class CupcakeDAO {
                 allBottoms.add(new Bottom(bottom_id,bottom_name,price));
             }
             return allBottoms;
+        
+        } catch (SQLException ex) {
+            if (DEBUG) {
+                ex.printStackTrace();
+            }
+        }
+        return null;
+    }
+   
+   //Returns an ArrayList with all Toppings from the database
+   public ArrayList<Topping> getAllToppings() throws Exception {
+        try {
+            
+            Statement stmt = c.createStatement();
+            ResultSet rs = stmt.executeQuery("select distinct recipe_name from recipe;");
+            
+            ArrayList<Topping> allToppings = new ArrayList();
+            while (rs.next()) {
+                int topping_id = rs.getInt("topping_id");
+                String topping_name = rs.getString("topping_name");
+                double price = rs.getDouble("price");
+                allToppings.add(new Topping(topping_id,topping_name,price));
+            }
+            return allToppings;
         
         } catch (SQLException ex) {
             if (DEBUG) {
