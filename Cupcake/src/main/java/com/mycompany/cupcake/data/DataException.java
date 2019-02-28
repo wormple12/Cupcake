@@ -1,4 +1,4 @@
-package com.mycompany.cupcake.logic;
+package com.mycompany.cupcake.data;
 
 public class DataException extends Exception {
 

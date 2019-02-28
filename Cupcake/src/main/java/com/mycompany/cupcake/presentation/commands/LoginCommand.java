@@ -2,7 +2,7 @@
  */
 package com.mycompany.cupcake.presentation.commands;
 
-import com.mycompany.cupcake.data.User;
+import com.mycompany.cupcake.data.user_help_classes.User;
 import com.mycompany.cupcake.logic.LoginController;
 import com.mycompany.cupcake.presentation.Command;
 import java.io.IOException;

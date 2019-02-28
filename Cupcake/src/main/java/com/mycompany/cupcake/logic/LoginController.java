@@ -3,8 +3,8 @@
 
 package com.mycompany.cupcake.logic;
 
-import com.mycompany.cupcake.logic.CupcakeDAO;
-import com.mycompany.cupcake.data.User;
+import com.mycompany.cupcake.data.CupcakeDAO;
+import com.mycompany.cupcake.data.user_help_classes.User;
 
 /**
  * @author Simon Asholt Norup
