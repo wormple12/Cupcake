@@ -5,31 +5,20 @@
  */
 package com.mycompany.cupcake.presentation.commands;
 
-import com.mycompany.cupcake.data.CupcakeDAO;
-import com.mycompany.cupcake.data.DBConnector;
-import com.mycompany.cupcake.data.DataException;
-import com.mycompany.cupcake.data.user_help_classes.User;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.sql.SQLException;
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
-import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
 /**
  *
- * @author Lukas Bjørnvad
+ * @author Henning
  */
-@WebServlet(name = "RegistrationNlogin", urlPatterns = {"/RegistrationNlogin"})
-public class RegistrationNlogin extends HttpServlet {
+@WebServlet(name = "ProductControl", urlPatterns = {"/ProductControl"})
+public class ProductControl extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -44,44 +33,16 @@ public class RegistrationNlogin extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
-            final CupcakeDAO dao = new CupcakeDAO();
+            /* TODO output your page here. You may use following sample code. */
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet RegistrationNlogin</title>");
+            out.println("<title>Servlet ProductControl</title>");            
             out.println("</head>");
             out.println("<body>");
-            /*
-            Change the form action as it needs context with the database
-
-             */
-
-            out.println("<form action=/Cupcake/RegistrationNlogin> "
-                    + "Username: <br>" + "<input type=text name=username> <br> "
-                    + "Password:<br> <input type= password name=password> <br> "
-                    + "Email:<br> <input type= text name=email> <br><br> <input type=submit>"
-                    + "</form>");
-
+            out.println("<h1>Servlet ProductControl at " + request.getContextPath() + "</h1>");
             out.println("</body>");
             out.println("</html>");
-
-            final String username = request.getParameter("username");
-            final String password = request.getParameter("password");
-            final String email = request.getParameter("email");
-            if (username != null && password != null && email != null) {
-
-                User user = dao.getUser(username);
-                if (user == null) {
-                    dao.createUser(username, password, email);
-                    user = dao.getUser(username);
-                } else if (user.getPassword().equals(password)) {
-                    HttpSession session = request.getSession();
-                    session.setAttribute("username", username);
-                    // is this enough? I mean, probably... but what do I know, I'm just a poor boy, I need no sympathy 
-                }
-            }
-        } catch (Exception x) {
-            x.printStackTrace();
         }
     }
 

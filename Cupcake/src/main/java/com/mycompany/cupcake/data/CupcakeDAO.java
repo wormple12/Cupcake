@@ -4,6 +4,7 @@ package com.mycompany.cupcake.data;
 
 import com.mycompany.cupcake.data.cc_help_classes.Bottom;
 import com.mycompany.cupcake.data.cc_help_classes.Topping;
+import com.mycompany.cupcake.data.order_help_classes.Order;
 import com.mycompany.cupcake.data.user_help_classes.User;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -11,6 +12,8 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  * @author Simon Asholt Norup
@@ -19,24 +22,12 @@ public class CupcakeDAO {
     
     
     final static boolean DEBUG = true;
-    private DBConnector connector;
-    private Connection c;
-
-    //Constructor
-    public CupcakeDAO() {
-        try {
-            connector = new DBConnector();
-        } catch (Exception ex) {
-            ex.printStackTrace();
-        }
-    }
 
     //Return user object based on username
-    public User getUser(String username) {
+    public User getUser(String username) throws Exception {
         User user = null;
         try {
             user = getLoginInfo(username);
-            c.close();
         } catch (SQLException ex) {
             ex.printStackTrace();
         }
@@ -44,10 +35,11 @@ public class CupcakeDAO {
     }
 
     // DOES NOT USE PREPARESTATEMENT YET
-    private User getLoginInfo(String username) throws SQLException {
+    private User getLoginInfo(String username) throws Exception {
         User user = null;
 
-        c = connector.getConnection();
+        DBConnector connector = new DBConnector();
+        Connection c = connector.getConnection();
         String query = "select `password` from users where username = '" + username + "';";
         c = connector.getConnection();
         Statement stmt = c.createStatement();
@@ -63,15 +55,17 @@ public class CupcakeDAO {
     }
 
     //Creates new user object
-    public void createUser(String email, String username, String password) throws Exception {
+    public void createUser(String username, String password, String email) throws Exception {
         PreparedStatement preparedStmt;
-        c = connector.getConnection();
+        DBConnector connector = new DBConnector();
+        Connection c = connector.getConnection();
         String query
-                = " insert into users (email, username, password) VALUES(?,?,?)";
+                = " insert into users (username, password, balance, email) VALUES(?,?,?,?)";
         preparedStmt = c.prepareStatement(query);
-        preparedStmt.setString(1, email);
-        preparedStmt.setString(2, username);
-        preparedStmt.setString(3, password);
+        preparedStmt.setString(1, username);
+        preparedStmt.setString(2, password);
+        preparedStmt.setDouble(3, 0);
+        preparedStmt.setString(4, email);
         preparedStmt.execute();
 
         preparedStmt.close();
@@ -79,9 +73,10 @@ public class CupcakeDAO {
     }
 
     //Returns an ArrayList with all Bottoms from the database
-    public ArrayList<Bottom> getAllBottoms() {
+    public ArrayList<Bottom> getAllBottoms() throws Exception {
         try {
-            c = connector.getConnection();
+            DBConnector connector = new DBConnector();
+            Connection c = connector.getConnection();
             Statement stmt = c.createStatement();
             ResultSet rs = stmt.executeQuery("select * from bottoms;");
 
@@ -106,9 +101,10 @@ public class CupcakeDAO {
     }
 
     //Returns an ArrayList with all Toppings from the database
-    public ArrayList<Topping> getAllToppings() {
+    public ArrayList<Topping> getAllToppings() throws Exception {
         try {
-            c = connector.getConnection();
+            DBConnector connector = new DBConnector();
+            Connection c = connector.getConnection();
             Statement stmt = c.createStatement();
             ResultSet rs = stmt.executeQuery("select * from toppings;");
 
@@ -132,4 +128,83 @@ public class CupcakeDAO {
         return null;
     }
 
+    private double getBalance(String username) throws Exception {
+        double balance = -1.0;
+
+        DBConnector connector = new DBConnector();
+        Connection c = connector.getConnection();
+        String query = "select `balance` from users where username = '" + username + "';";
+        Statement stmt = c.createStatement();
+        ResultSet rs = stmt.executeQuery(query);
+        while (rs.next()) {
+            balance = rs.getDouble("balance");
+            if (balance < 0) {
+                throw new SQLException();
+            }
+        }
+        stmt.close();
+        rs.close();
+        c.close();
+        return balance;
+    }
+
+    public void editBalance(String username, double amount) throws Exception {
+        double balance = getBalance(username) + amount;
+        PreparedStatement preparedStmt;
+        DBConnector connector = new DBConnector();
+        Connection c = connector.getConnection();
+        String query
+                = " insert into users (balance) VALUES(?) "
+                + "where username = ?;";
+        preparedStmt = c.prepareStatement(query);
+        preparedStmt.setDouble(1, balance);
+        preparedStmt.setString(2, username);
+        preparedStmt.execute();
+
+        preparedStmt.close();
+        c.close();
+    }
+
+    public Order getOrder(int orderNumber) throws Exception {
+        Order order = null;
+        try {
+            order = getOrderInfo(orderNumber);
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+        return order;
+    }
+
+    private Order getOrderInfo(int orderID) throws Exception {
+        Order order = null;
+
+        DBConnector connector = new DBConnector();
+        Connection c = connector.getConnection();
+        String query = "select `username` from orders where orderID = '" + orderID + "';";
+        Statement stmt = c.createStatement();
+        ResultSet rs = stmt.executeQuery(query);
+        while (rs.next()) {
+            String username = rs.getString("username");
+            order = new Order(orderID, username);
+        }
+        stmt.close();
+        rs.close();
+        c.close();
+        return order;
+    }
+
+    public void createOrder(int orderNumber, String username) throws Exception {
+        PreparedStatement preparedStmt;
+        DBConnector connector = new DBConnector();
+        Connection c = connector.getConnection();
+        String query
+                = " insert into users (orderNumber, username) VALUES(?,?)";
+        preparedStmt = c.prepareStatement(query);
+        preparedStmt.setInt(1, orderNumber);
+        preparedStmt.setString(2, username);
+        preparedStmt.execute();
+
+        preparedStmt.close();
+        c.close();
+    }
 }
