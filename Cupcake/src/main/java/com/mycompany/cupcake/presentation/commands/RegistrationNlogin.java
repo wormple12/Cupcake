@@ -72,7 +72,7 @@ public class RegistrationNlogin extends HttpServlet {
 
                 User user = dao.getUser(username);
                 if (user == null) {
-                    dao.createUser(username, password, email);
+                    dao.createUser(new User(username, password, email));
                     user = dao.getUser(username);
                 } else if (user.getPassword().equals(password)) {
                     HttpSession session = request.getSession();
