@@ -21,5 +21,4 @@ public class LineItem {
         this.price = cupcake.getPrice();
     }
    
-    
 }

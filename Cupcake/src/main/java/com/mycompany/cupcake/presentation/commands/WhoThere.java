@@ -35,15 +35,14 @@ public class WhoThere extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
-            Cookie[] sok = request.getCookies();
-            String lok = sok[0].getValue();
+            request.getSession();
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
             out.println("<title>Servlet WhoThere</title>");            
             out.println("</head>");
             out.println("<body>");
-            //out.println("<h1>Servlet WhoThere at " + lok + "</h1>");
+            out.println("<h1>Servlet WhoThere at " + request.getSession() + "</h1>");
             out.println("<h1>Servlet WhoThere at </h1>");
             out.println("</body>");
             out.println("</html>");
