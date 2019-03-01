@@ -17,6 +17,7 @@ import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 /**
  *
@@ -58,12 +59,9 @@ public class RegistrationNlogin extends HttpServlet {
             String password = request.getParameter("password");
             String email = request.getParameter("email");
             if(l.getUser(username).getUsername().isEmpty()) l.createUser(username, password, email);
-            else{
-                Cookie loginCookie = new Cookie("username",username);
-			//setting cookie to expiry in 30 mins
-			loginCookie.setMaxAge(30*60);
-			response.addCookie(loginCookie);
-			loginCookie.setPath("/WhoThere");
+            else if(l.getUser(username).getPassword().equals(password)){
+             HttpSession session = request.getSession();
+             session.setAttribute("username", username);
                         
 
             }
