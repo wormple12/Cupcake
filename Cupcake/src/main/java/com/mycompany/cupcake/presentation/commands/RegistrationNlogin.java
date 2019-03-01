@@ -12,6 +12,10 @@ import com.mycompany.cupcake.data.user_help_classes.User;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.SQLException;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.Cookie;
@@ -40,7 +44,7 @@ public class RegistrationNlogin extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
-            CupcakeDAO dao = new CupcakeDAO();
+            final CupcakeDAO dao = new CupcakeDAO();
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
@@ -61,18 +65,21 @@ public class RegistrationNlogin extends HttpServlet {
             out.println("</body>");
             out.println("</html>");
 
-            String username = request.getParameter("username");
-            String password = request.getParameter("password");
-            String email = request.getParameter("email");
+            final String username = request.getParameter("username");
+            final String password = request.getParameter("password");
+            final String email = request.getParameter("email");
             if (username != null && password != null && email != null) {
 
                 User user = dao.getUser(username);
                 if (user == null) {
                     dao.createUser(username, password, email);
                     user = dao.getUser(username);
-                    if (user == null) {
-                        throw new DataException();
-                    }
+//                    while (true) {
+//                        user = dao.getUser(username);
+//                        if (user != null) {
+//                            break;
+//                        }
+//                    }
                 } else if (user.getPassword().equals(password)) {
                     HttpSession session = request.getSession();
                     session.setAttribute("username", username);

@@ -21,24 +21,12 @@ import java.util.logging.Logger;
 public class CupcakeDAO {
 
     final static boolean DEBUG = true;
-    private DBConnector connector;
-    private Connection c;
-
-    //Constructor
-    public CupcakeDAO() {
-        try {
-            connector = new DBConnector();
-        } catch (Exception ex) {
-            ex.printStackTrace();
-        }
-    }
 
     //Return user object based on username
-    public User getUser(String username) {
+    public User getUser(String username) throws Exception {
         User user = null;
         try {
             user = getLoginInfo(username);
-            c.close();
         } catch (SQLException ex) {
             ex.printStackTrace();
         }
@@ -46,10 +34,11 @@ public class CupcakeDAO {
     }
 
     // DOES NOT USE PREPARESTATEMENT YET
-    private User getLoginInfo(String username) throws SQLException {
+    private User getLoginInfo(String username) throws Exception {
         User user = null;
 
-        c = connector.getConnection();
+        DBConnector connector = new DBConnector();
+        Connection c = connector.getConnection();
         String query = "select `password` from users where username = '" + username + "';";
         c = connector.getConnection();
         Statement stmt = c.createStatement();
@@ -65,20 +54,17 @@ public class CupcakeDAO {
     }
 
     //Creates new user object
-    public void createUser(String email, String username, String password) throws SQLException {
+    public void createUser(String username, String password, String email) throws Exception {
         PreparedStatement preparedStmt;
-        try {
-            DBConnector db = new DBConnector();
-            c = db.getConnection();
-        } catch (Exception ex) {
-            ex.printStackTrace();
-        }
+        DBConnector connector = new DBConnector();
+        Connection c = connector.getConnection();
         String query
-                = " insert into users (email, username, password) VALUES(?,?,?)";
+                = " insert into users (username, password, balance, email) VALUES(?,?,?,?)";
         preparedStmt = c.prepareStatement(query);
-        preparedStmt.setString(1, email);
-        preparedStmt.setString(2, username);
-        preparedStmt.setString(3, password);
+        preparedStmt.setString(1, username);
+        preparedStmt.setString(2, password);
+        preparedStmt.setDouble(3, 0);
+        preparedStmt.setString(4, email);
         preparedStmt.execute();
 
         preparedStmt.close();
@@ -86,9 +72,10 @@ public class CupcakeDAO {
     }
 
     //Returns an ArrayList with all Bottoms from the database
-    public ArrayList<Bottom> getAllBottoms() {
+    public ArrayList<Bottom> getAllBottoms() throws Exception {
         try {
-            c = connector.getConnection();
+            DBConnector connector = new DBConnector();
+            Connection c = connector.getConnection();
             Statement stmt = c.createStatement();
             ResultSet rs = stmt.executeQuery("select * from bottoms;");
 
@@ -113,9 +100,10 @@ public class CupcakeDAO {
     }
 
     //Returns an ArrayList with all Toppings from the database
-    public ArrayList<Topping> getAllToppings() {
+    public ArrayList<Topping> getAllToppings() throws Exception {
         try {
-            c = connector.getConnection();
+            DBConnector connector = new DBConnector();
+            Connection c = connector.getConnection();
             Statement stmt = c.createStatement();
             ResultSet rs = stmt.executeQuery("select * from toppings;");
 
@@ -139,18 +127,19 @@ public class CupcakeDAO {
         return null;
     }
 
-    
-    private double getBalance(String username) throws SQLException {
+    private double getBalance(String username) throws Exception {
         double balance = -1.0;
 
-        c = connector.getConnection();
+        DBConnector connector = new DBConnector();
+        Connection c = connector.getConnection();
         String query = "select `balance` from users where username = '" + username + "';";
-        c = connector.getConnection();
         Statement stmt = c.createStatement();
         ResultSet rs = stmt.executeQuery(query);
         while (rs.next()) {
             balance = rs.getDouble("balance");
-            if (balance < 0) throw new SQLException();
+            if (balance < 0) {
+                throw new SQLException();
+            }
         }
         stmt.close();
         rs.close();
@@ -158,10 +147,11 @@ public class CupcakeDAO {
         return balance;
     }
 
-    public void editBalance(String username, double amount) throws SQLException {
-        double balance = getBalance(username)+amount;
+    public void editBalance(String username, double amount) throws Exception {
+        double balance = getBalance(username) + amount;
         PreparedStatement preparedStmt;
-        c = connector.getConnection();
+        DBConnector connector = new DBConnector();
+        Connection c = connector.getConnection();
         String query
                 = " insert into users (balance) VALUES(?) "
                 + "where username = ?;";
@@ -174,12 +164,22 @@ public class CupcakeDAO {
         c.close();
     }
 
-        private Order getOrderInfo(int orderID) throws SQLException {
+    public Order getOrder(int orderNumber) throws Exception {
+        Order order = null;
+        try {
+            order = getOrderInfo(orderNumber);
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+        return order;
+    }
+
+    private Order getOrderInfo(int orderID) throws Exception {
         Order order = null;
 
-        c = connector.getConnection();
+        DBConnector connector = new DBConnector();
+        Connection c = connector.getConnection();
         String query = "select `username` from orders where orderID = '" + orderID + "';";
-        c = connector.getConnection();
         Statement stmt = c.createStatement();
         ResultSet rs = stmt.executeQuery(query);
         while (rs.next()) {
@@ -191,22 +191,11 @@ public class CupcakeDAO {
         c.close();
         return order;
     }
-    
 
-    public Order getOrder(int orderNumber) {
-        Order order = null;
-        try {
-            order = getOrderInfo(orderNumber);
-            c.close();
-        } catch (SQLException ex) {
-            ex.printStackTrace();
-        }
-        return order;
-    }
-
-    public void createOrder(int orderNumber,String username) throws Exception {
+    public void createOrder(int orderNumber, String username) throws Exception {
         PreparedStatement preparedStmt;
-        c = connector.getConnection();
+        DBConnector connector = new DBConnector();
+        Connection c = connector.getConnection();
         String query
                 = " insert into users (orderNumber, username) VALUES(?,?)";
         preparedStmt = c.prepareStatement(query);

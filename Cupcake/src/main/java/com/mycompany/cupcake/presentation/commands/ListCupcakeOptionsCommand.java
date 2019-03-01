@@ -10,6 +10,8 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.Stack;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -22,12 +24,17 @@ public class ListCupcakeOptionsCommand extends Command {
     @Override
     public void execute(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        
-        CupcakeDAO dao = new CupcakeDAO();
-        ArrayList<Bottom> bottoms = dao.getAllBottoms();
-        
-        dao = new CupcakeDAO();
-        ArrayList<Topping> toppings = dao.getAllToppings();
+
+        ArrayList<Bottom> bottoms = null;
+        ArrayList<Topping> toppings = null;
+        try {
+            CupcakeDAO dao = new CupcakeDAO();
+            bottoms = dao.getAllBottoms();
+            dao = new CupcakeDAO();
+            toppings = dao.getAllToppings();
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
 
         printHTML(response, bottoms, toppings);
     }
@@ -42,11 +49,11 @@ public class ListCupcakeOptionsCommand extends Command {
             out.println("<body>");
             out.println("<h1>Toppings:</h1>");
             for (Topping topping : toppings) {
-                out.println("<p>"+topping.getTopping_id() + ", " + topping.getTopping_name() + ", " + topping.getPrice() + ",- DKK</p>");
+                out.println("<p>" + topping.getTopping_id() + ", " + topping.getTopping_name() + ", " + topping.getPrice() + ",- DKK</p>");
             }
             out.println("<h1>Bottoms:</h1>");
             for (Bottom bottom : bottoms) {
-                out.println("<p>"+bottom.getBottom_id() + ", " + bottom.getBottom_Name() + ", " + bottom.getPrice() + ",- DKK</p>");
+                out.println("<p>" + bottom.getBottom_id() + ", " + bottom.getBottom_Name() + ", " + bottom.getPrice() + ",- DKK</p>");
             }
             out.println("</body>");
             out.println("</html>");
