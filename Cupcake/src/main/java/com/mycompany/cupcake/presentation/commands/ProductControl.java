@@ -7,20 +7,18 @@ package com.mycompany.cupcake.presentation.commands;
 
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.util.ArrayList;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
-import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 /**
  *
- * @author Lukas Bjørnvad
+ * @author Henning
  */
-@WebServlet(name = "WhoThere", urlPatterns = {"/WhoThere"})
-public class WhoThere extends HttpServlet {
+@WebServlet(name = "ProductControl", urlPatterns = {"/ProductControl"})
+public class ProductControl extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -35,16 +33,14 @@ public class WhoThere extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
-            request.getSession();
+            /* TODO output your page here. You may use following sample code. */
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet WhoThere</title>");            
+            out.println("<title>Servlet ProductControl</title>");            
             out.println("</head>");
             out.println("<body>");
-            //out.println("<h1>Servlet WhoThere at " + lok + "</h1>");
-            out.println("<h1>Servlet WhoThere at " + request.getSession() + "</h1>");
-            out.println("<h1>Servlet WhoThere at </h1>");
+            out.println("<h1>Servlet ProductControl at " + request.getContextPath() + "</h1>");
             out.println("</body>");
             out.println("</html>");
         }

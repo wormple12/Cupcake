@@ -4,6 +4,7 @@ package com.mycompany.cupcake.data;
 
 import com.mycompany.cupcake.data.cc_help_classes.Bottom;
 import com.mycompany.cupcake.data.cc_help_classes.Topping;
+import com.mycompany.cupcake.data.order_help_classes.Order;
 import com.mycompany.cupcake.data.user_help_classes.User;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -137,6 +138,7 @@ public class CupcakeDAO {
         }
         return null;
     }
+
     
     private double getBalance(String username) throws SQLException {
         double balance = -1.0;
@@ -172,4 +174,47 @@ public class CupcakeDAO {
         c.close();
     }
 
+        private Order getOrderInfo(int orderID) throws SQLException {
+        Order order = null;
+
+        c = connector.getConnection();
+        String query = "select `username` from orders where orderID = '" + orderID + "';";
+        c = connector.getConnection();
+        Statement stmt = c.createStatement();
+        ResultSet rs = stmt.executeQuery(query);
+        while (rs.next()) {
+            String username = rs.getString("username");
+            order = new Order(orderID, username);
+        }
+        stmt.close();
+        rs.close();
+        c.close();
+        return order;
+    }
+    
+
+    public Order getOrder(int orderNumber) {
+        Order order = null;
+        try {
+            order = getOrderInfo(orderNumber);
+            c.close();
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+        return order;
+    }
+
+    public void createOrder(int orderNumber,String username) throws Exception {
+        PreparedStatement preparedStmt;
+        c = connector.getConnection();
+        String query
+                = " insert into users (orderNumber, username) VALUES(?,?)";
+        preparedStmt = c.prepareStatement(query);
+        preparedStmt.setInt(1, orderNumber);
+        preparedStmt.setString(2, username);
+        preparedStmt.execute();
+
+        preparedStmt.close();
+        c.close();
+    }
 }
