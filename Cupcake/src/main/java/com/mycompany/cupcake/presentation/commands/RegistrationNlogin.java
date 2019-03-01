@@ -49,13 +49,13 @@ public class RegistrationNlogin extends HttpServlet {
             /*
             Change the form action as it needs context with the database
             */
-            out.println("<form action=/Recipes/addrecipe>Username: <br>" + "<input type=text name=username> <br>");
+            out.println("<form action=/Cupcake/RegistrationNlogin>Username: <br>" + "<input type=text name=username> <br>");
             out.println("Password:<br> <input type= password name=password> <br>");
             out.println("Email:<br> <input type= text name=email> <br><br> <input type=submit>" + "</form>");
             out.println("</body>");
             out.println("</html>");
             
-               String username = request.getParameter("username");
+            String username = request.getParameter("username");
             String password = request.getParameter("password");
             String email = request.getParameter("email");
             if(l.getUser(username).getUsername().isEmpty()) l.createUser(username, password, email);
