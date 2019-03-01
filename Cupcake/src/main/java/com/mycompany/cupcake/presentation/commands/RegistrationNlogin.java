@@ -50,8 +50,7 @@ public class RegistrationNlogin extends HttpServlet {
             /*
             Change the form action as it needs context with the database
 
-            */
-                  
+             */
 
             out.println("<form action=/Cupcake/RegistrationNlogin> "
                     + "Username: <br>" + "<input type=text name=username> <br> "
@@ -65,17 +64,20 @@ public class RegistrationNlogin extends HttpServlet {
             String username = request.getParameter("username");
             String password = request.getParameter("password");
             String email = request.getParameter("email");
-            User user = dao.getUser(username);
-            if (user == null) {
-                dao.createUser(username, password, email);
-                user = dao.getUser(username);
+            if (username != null && password != null && email != null) {
+
+                User user = dao.getUser(username);
                 if (user == null) {
-                    throw new DataException();
+                    dao.createUser(username, password, email);
+                    user = dao.getUser(username);
+                    if (user == null) {
+                        throw new DataException();
+                    }
+                } else if (user.getPassword().equals(password)) {
+                    HttpSession session = request.getSession();
+                    session.setAttribute("username", username);
+                    // is this enough? I mean, probably... but what do I know, I'm just a poor boy, I need no sympathy 
                 }
-            } else if (user.getPassword().equals(password)) {
-                HttpSession session = request.getSession();
-                session.setAttribute("username", username);
-                // is this enough? I mean, probably... but what do I know, I'm just a poor boy, I need no sympathy 
             }
         } catch (Exception x) {
             x.printStackTrace();

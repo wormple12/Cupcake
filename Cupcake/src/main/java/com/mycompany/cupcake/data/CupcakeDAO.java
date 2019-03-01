@@ -11,6 +11,8 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  * @author Simon Asholt Norup
@@ -62,9 +64,14 @@ public class CupcakeDAO {
     }
 
     //Creates new user object
-    public void createUser(String email, String username, String password) throws Exception {
+    public void createUser(String email, String username, String password) throws SQLException {
         PreparedStatement preparedStmt;
-        c = connector.getConnection();
+        try {
+            DBConnector db = new DBConnector();
+            c = db.getConnection();
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
         String query
                 = " insert into users (email, username, password) VALUES(?,?,?)";
         preparedStmt = c.prepareStatement(query);
@@ -129,6 +136,40 @@ public class CupcakeDAO {
             }
         }
         return null;
+    }
+    
+    private double getBalance(String username) throws SQLException {
+        double balance = -1.0;
+
+        c = connector.getConnection();
+        String query = "select `balance` from users where username = '" + username + "';";
+        c = connector.getConnection();
+        Statement stmt = c.createStatement();
+        ResultSet rs = stmt.executeQuery(query);
+        while (rs.next()) {
+            balance = rs.getDouble("balance");
+            if (balance < 0) throw new SQLException();
+        }
+        stmt.close();
+        rs.close();
+        c.close();
+        return balance;
+    }
+
+    public void editBalance(String username, double amount) throws SQLException {
+        double balance = getBalance(username)+amount;
+        PreparedStatement preparedStmt;
+        c = connector.getConnection();
+        String query
+                = " insert into users (balance) VALUES(?) "
+                + "where username = ?;";
+        preparedStmt = c.prepareStatement(query);
+        preparedStmt.setDouble(1, balance);
+        preparedStmt.setString(2, username);
+        preparedStmt.execute();
+
+        preparedStmt.close();
+        c.close();
     }
 
 }
