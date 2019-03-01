@@ -13,7 +13,7 @@ import com.mycompany.cupcake.data.cc_help_classes.Cupcake;
  */
 public class LineItem {
     private final Cupcake cupcake;
-    private final int qty;
+    private int qty;
     private final double price;
     
     public LineItem(Cupcake cupcake, int qty) {
@@ -30,6 +30,10 @@ public class LineItem {
         return qty;
     }
 
+    public void addQty(int l) {
+        this.qty = qty+l;
+    }
+    
     public double getPrice() {
         return price;
     }
