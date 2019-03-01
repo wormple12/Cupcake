@@ -8,6 +8,7 @@ package com.mycompany.cupcake.presentation.commands;
 import com.mycompany.cupcake.data.CupcakeDAO;
 import com.mycompany.cupcake.data.DBConnector;
 import com.mycompany.cupcake.data.DataException;
+import com.mycompany.cupcake.data.user_help_classes.User;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.SQLException;
@@ -39,33 +40,41 @@ public class RegistrationNlogin extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
-            CupcakeDAO l = new CupcakeDAO();
+            CupcakeDAO dao = new CupcakeDAO();
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet RegistrationNlogin</title>");            
+            out.println("<title>Servlet RegistrationNlogin</title>");
             out.println("</head>");
             out.println("<body>");
             /*
             Change the form action as it needs context with the database
-            */
-            out.println("<form action=/Recipes/addrecipe>Username: <br>" + "<input type=text name=username> <br>");
-            out.println("Password:<br> <input type= password name=password> <br>");
-            out.println("Email:<br> <input type= text name=email> <br><br> <input type=submit>" + "</form>");
+             */
+            out.println("<form action=/Recipes/addrecipe> "
+                    + "Username: <br>" + "<input type=text name=username> <br> "
+                    + "Password:<br> <input type= password name=password> <br> "
+                    + "Email:<br> <input type= text name=email> <br><br> <input type=submit>"
+                    + "</form>");
+
             out.println("</body>");
             out.println("</html>");
-            
-               String username = request.getParameter("username");
+
+            String username = request.getParameter("username");
             String password = request.getParameter("password");
             String email = request.getParameter("email");
-            if(l.getUser(username).getUsername().isEmpty()) l.createUser(username, password, email);
-            else if(l.getUser(username).getPassword().equals(password)){
-             HttpSession session = request.getSession();
-             session.setAttribute("username", username);
-                        
-
+            User user = dao.getUser(username);
+            if (user == null) {
+                dao.createUser(username, password, email);
+                user = dao.getUser(username);
+                if (user == null) {
+                    throw new DataException();
+                }
+            } else if (user.getPassword().equals(password)) {
+                HttpSession session = request.getSession();
+                session.setAttribute("username", username);
+                // is this enough? I mean, probably... but what do I know, I'm just a poor boy, I need no sympathy 
             }
-        }catch(Exception x){
+        } catch (Exception x) {
             x.printStackTrace();
         }
     }
