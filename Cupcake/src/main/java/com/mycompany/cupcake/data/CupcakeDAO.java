@@ -16,7 +16,8 @@ import java.util.ArrayList;
  * @author Simon Asholt Norup
  */
 public class CupcakeDAO {
-
+    
+    
     final static boolean DEBUG = true;
     private DBConnector connector;
     private Connection c;

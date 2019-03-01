@@ -12,13 +12,14 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 /**
  *
  * @author Emil PC
  */
-@WebServlet(name = "ShopCommand", urlPatterns = {"/ShopCommand"})
-public class ShopCommand extends HttpServlet {
+@WebServlet(name = "ShopCommand", urlPatterns = {"/ShopServlet"})
+public class ShopServlet extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -33,6 +34,9 @@ public class ShopCommand extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
+            
+            HttpSession session = request.getSession();
+            String username = (String) session.getAttribute("username");
             /* TODO output your page here. You may use following sample code. */
             out.println("<!DOCTYPE html>");
             out.println("<html>");
@@ -40,7 +44,7 @@ public class ShopCommand extends HttpServlet {
             out.println("<title>Servlet ShopCommand</title>");            
             out.println("</head>");
             out.println("<body>");
-            out.println("<h1>Servlet ShopCommand at " + request.getContextPath() + "</h1>");
+            out.println("<h1>Servlet ShopCommand at " + username + "</h1>");
             out.println("</body>");
             out.println("</html>");
         }
