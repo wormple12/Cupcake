@@ -12,13 +12,26 @@ import com.mycompany.cupcake.data.cc_help_classes.Cupcake;
  * @author Lukas Bjørnvad
  */
 public class LineItem {
-    private Cupcake cupcake;
-    private int qty;
-    private double price;
+    private final Cupcake cupcake;
+    private final int qty;
+    private final double price;
+    
     public LineItem(Cupcake cupcake, int qty) {
         this.cupcake = cupcake;
         this.qty = qty;
-        this.price = cupcake.getPrice();
+        this.price = cupcake.getPrice()*qty;
     }
-   
+
+    public Cupcake getCupcake() {
+        return cupcake;
+    }
+
+    public int getQty() {
+        return qty;
+    }
+
+    public double getPrice() {
+        return price;
+    }
+
 }
