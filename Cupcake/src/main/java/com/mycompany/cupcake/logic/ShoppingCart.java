@@ -5,6 +5,7 @@
  */
 package com.mycompany.cupcake.logic;
 
+import com.mycompany.cupcake.data.cc_help_classes.Cupcake;
 import java.util.List;
 
 /**
@@ -14,10 +15,26 @@ import java.util.List;
 public class ShoppingCart {
     List<LineItem> items;
     public void addToCart(LineItem x){
+        int check =checkIf(x.getCupcake());
+        if(check>=0) items.get(check).addQty(check);
+        else{
         items.add(x);
+        }
     }
     public List<LineItem> getCart(){
         return items;
     }
+    public double getTPrice(){
+        double price=0;
+        for(int i=0; i<items.size(); i++){
+            price = price+ items.get(i).getPrice();
+        }
+        return price;
+    }
     
+  private int checkIf(Cupcake cupcake){
+     for(int i =0; i<items.size(); i++){
+      if (items.get(i).getCupcake().equals(cupcake)) return i;
+  } return -1;
+  }
 }
