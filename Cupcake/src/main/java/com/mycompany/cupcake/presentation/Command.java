@@ -21,10 +21,7 @@ public abstract class Command {
         String path = request.getPathInfo().substring(1); // substrings "/" out of the path
 
         switch (path) {
-            case "login":
-                command = new LoginCommand();
-                break;
-            case "getcupstuff":
+            case "possibilities":
                 command = new ListCupcakeOptionsCommand();
                 break;
             default:
