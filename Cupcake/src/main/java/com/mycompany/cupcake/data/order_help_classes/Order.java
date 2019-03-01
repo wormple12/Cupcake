@@ -10,5 +10,21 @@ package com.mycompany.cupcake.data.order_help_classes;
  * @author Henning
  */
 public class Order {
-    
+
+    private final int orderNumber;
+    private final String username;
+
+    public Order(int orderNumber, String customerName) {
+        this.orderNumber = orderNumber;
+        this.username = customerName;
+    }
+
+    public int getOrderNumber() {
+        return orderNumber;
+    }
+
+    public String getUsername() {
+        return username;
+    }
+
 }
