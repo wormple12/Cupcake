@@ -56,7 +56,7 @@ public class RegistrationNlogin extends HttpServlet {
 
              */
 
-            out.println("<form action=/Cupcake/RegistrationNlogin> "
+            out.println("<form action=\"/Cupcake/RegistrationNlogin\" method=POST> "
                     + "Username: <br>" + "<input type=text name=username> <br> "
                     + "Password:<br> <input type= password name=password> <br> "
                     + "Email:<br> <input type= text name=email> <br><br> <input type=submit>"
@@ -70,13 +70,13 @@ public class RegistrationNlogin extends HttpServlet {
             final String email = request.getParameter("email");
             if (username != null && password != null && email != null) {
 
-                User user = dao.getUser(username);
+                User user = dao.getUser(username); // validate password to DAO
                 if (user == null) {
-                    dao.createUser(username, password, email);
+                    dao.createUser(user);
                     user = dao.getUser(username);
                 } else if (user.getPassword().equals(password)) {
                     HttpSession session = request.getSession();
-                    session.setAttribute("username", username);
+                    session.setAttribute("user", user);
                     // is this enough? I mean, probably... but what do I know, I'm just a poor boy, I need no sympathy 
                 }
             }

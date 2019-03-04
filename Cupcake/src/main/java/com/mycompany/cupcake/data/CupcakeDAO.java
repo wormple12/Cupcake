@@ -39,13 +39,14 @@ public class CupcakeDAO {
 
         DBConnector connector = new DBConnector();
         Connection c = connector.getConnection();
-        String query = "select `password` from users where username = '" + username + "';";
+        String query = "select `password`, email from users where username = '" + username + "';";
         c = connector.getConnection();
         Statement stmt = c.createStatement();
         ResultSet rs = stmt.executeQuery(query);
         while (rs.next()) {
             String password = rs.getString("password");
-            user = new User(username, password);
+            String email = rs.getString("email");
+            user = new User(username, password, email);
         }
         stmt.close();
         rs.close();
@@ -54,17 +55,17 @@ public class CupcakeDAO {
     }
 
     //Creates new user object
-    public void createUser(String username, String password, String email) throws Exception {
+    public void createUser(User user) throws Exception {
         PreparedStatement preparedStmt;
         DBConnector connector = new DBConnector();
         Connection c = connector.getConnection();
         String query
                 = " insert into users (username, password, balance, email) VALUES(?,?,?,?)";
         preparedStmt = c.prepareStatement(query);
-        preparedStmt.setString(1, username);
-        preparedStmt.setString(2, password);
+        preparedStmt.setString(1, user.getUsername());
+        preparedStmt.setString(2, user.getPassword());
         preparedStmt.setDouble(3, 0);
-        preparedStmt.setString(4, email);
+        preparedStmt.setString(4, user.getEmail());
         preparedStmt.execute();
 
         preparedStmt.close();

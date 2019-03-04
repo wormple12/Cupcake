@@ -19,6 +19,7 @@ public abstract class Command {
     public static Command from(HttpServletRequest request) {
         Command command;
         String path = request.getPathInfo().substring(1); // substrings "/" out of the path
+//        String path = request.getParameter("path");
 
         switch (path) {
             case "possibilities":
