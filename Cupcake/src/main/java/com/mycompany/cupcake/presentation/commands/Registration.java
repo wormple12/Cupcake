@@ -5,6 +5,8 @@
  */
 package com.mycompany.cupcake.presentation.commands;
 
+import com.mycompany.cupcake.data.CupcakeDAO;
+import com.mycompany.cupcake.data.user_help_classes.User;
 import java.io.IOException;
 import java.io.PrintWriter;
 import javax.servlet.ServletException;
@@ -12,14 +14,13 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
 /**
  *
  * @author Emil PC
  */
-@WebServlet(name = "ShopCommand", urlPatterns = {"/ShopServlet"})
-public class ShopServlet extends HttpServlet {
+@WebServlet(name = "Registration", urlPatterns = {"/Registration"})
+public class Registration extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -33,20 +34,45 @@ public class ShopServlet extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
+        response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
-            
-            HttpSession session = request.getSession();
-            String username = (String) session.getAttribute("username");
-            /* TODO output your page here. You may use following sample code. */
+            final CupcakeDAO dao = new CupcakeDAO();
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet ShopCommand</title>");            
+            out.println("<title>Servlet RegistrationNlogin</title>");
             out.println("</head>");
             out.println("<body>");
-            out.println("<h1>Servlet ShopCommand at " + username + "</h1>");
+            /*
+            Change the form action as it needs context with the database
+
+             */
+            out.println("<h1> Create new user</h1>");
+            out.println("<form action=/Cupcake/Registration> "
+                     + "Username: <br> <input type=text name=username> <br> "
+                     + "Password: <br> <input type= password name=password> <br> "
+                     + "Email: <br> <input type= text name=email> <br>"
+                     + "Create new user<br> <input type=submit>"
+                     //+ "<p><a href=\"CreateNewUser.jsp\"> Create New User </a></p>"
+                     + "</form>");
             out.println("</body>");
-            out.println("</html>");
+            out.println("</html>");            
+            
+            String username = request.getParameter("username");
+            String password = request.getParameter("password");
+            String email = request.getParameter("email");
+            
+            if (username != null && password != null && email != null){// && email != null) {    
+                User user = dao.getUser(username);
+                if (user == null) {
+                    dao.createUser(new User(username,password,email));
+                    redirectJSP.redirectUserCreated(response);
+                } else {
+                    redirectJSP.redirectUserCreationFail(response);
+                }
+            }
+        } catch (Exception x) {
+            x.printStackTrace();
         }
     }
 
