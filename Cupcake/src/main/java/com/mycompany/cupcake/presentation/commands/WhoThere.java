@@ -42,6 +42,7 @@ public class WhoThere extends HttpServlet {
             out.println("<title>Servlet WhoThere</title>");            
             out.println("</head>");
             out.println("<body>");
+            //out.println("<h1>Servlet WhoThere at " + lok + "</h1>");
             out.println("<h1>Servlet WhoThere at " + request.getSession() + "</h1>");
             out.println("<h1>Servlet WhoThere at </h1>");
             out.println("</body>");

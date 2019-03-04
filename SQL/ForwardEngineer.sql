@@ -35,14 +35,14 @@ COLLATE = utf8mb4_0900_ai_ci;
 
 
 -- -----------------------------------------------------
--- Table `cupcakedb`.`customers`
+-- Table `cupcakedb`.`users`
 -- -----------------------------------------------------
-DROP TABLE IF EXISTS `cupcakedb`.`customers` ;
+DROP TABLE IF EXISTS `cupcakedb`.`users` ;
 
-CREATE TABLE IF NOT EXISTS `cupcakedb`.`customers` (
+CREATE TABLE IF NOT EXISTS `cupcakedb`.`users` (
   `username` VARCHAR(12) NOT NULL,
   `password` VARCHAR(45) NOT NULL,
-  `balance` DOUBLE NOT NULL,
+  `balance` DOUBLE NOT NULL DEFAULT 0.0,
   `email` VARCHAR(45) NOT NULL,
   PRIMARY KEY (`username`))
 ENGINE = InnoDB
@@ -63,7 +63,7 @@ CREATE TABLE IF NOT EXISTS `cupcakedb`.`orders` (
   UNIQUE INDEX `order_number_UNIQUE` (`order_number` ASC) VISIBLE,
   CONSTRAINT `orders_ibfk_1`
     FOREIGN KEY (`username`)
-    REFERENCES `cupcakedb`.`customers` (`username`)
+    REFERENCES `cupcakedb`.`users` (`username`)
     ON DELETE CASCADE
     ON UPDATE CASCADE)
 ENGINE = InnoDB
