@@ -40,7 +40,7 @@ public class CupcakeDAO {
 
         DBConnector connector = new DBConnector();
         Connection c = connector.getConnection();
-        String query = "select `password` from users where username = '" + username + "';";
+        String query = "select * from users where username = '" + username + "';";
         c = connector.getConnection();
         Statement stmt = c.createStatement();
         ResultSet rs = stmt.executeQuery(query);

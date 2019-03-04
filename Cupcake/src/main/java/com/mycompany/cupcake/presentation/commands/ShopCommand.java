@@ -24,9 +24,10 @@ public class ShopCommand extends Command{
     public void execute(HttpServletRequest request, HttpServletResponse response) 
             throws ServletException, IOException {
             HttpSession session = request.getSession();
-            String username = (String) session.getAttribute("username");
-            String password = (String) session.getAttribute("password");
-            String email = (String) session.getAttribute("email");
+            User user = (User) session.getAttribute("User");
+            String username = user.getUsername();
+            String password = user.getPassword();
+            String email = user.getEmail();
             printHTML(new User(username,password,email),response);
     }
     
@@ -41,7 +42,10 @@ public class ShopCommand extends Command{
             out.println("<title>Servlet ShopCommand</title>");            
             out.println("</head>");
             out.println("<body>");
-            out.println("<h1>Servlet ShopCommand at " + username + "</h1>");
+            out.println("<h1>Welcome back : " + username + "</h1>");
+            out.println("<p><a href=\"possibilities\"> Check out the menu! </a></p>");
+            //Logout virker ikke
+            out.println("<p><a href=\"RegistrationNlogin\"> Logout VIRKER IKKE </a></p>");
             out.println("</body>");
             out.println("</html>");
         }

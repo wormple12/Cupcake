@@ -24,6 +24,9 @@ public abstract class Command {
             case "possibilities":
                 command = new ListCupcakeOptionsCommand();
                 break;
+            case "registration":
+                command = new RegistrationCommand();
+                break;
             case "shopping":
                 command = new ShopCommand();
                 break;

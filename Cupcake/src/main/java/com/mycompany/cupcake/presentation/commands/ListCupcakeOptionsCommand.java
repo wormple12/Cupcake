@@ -55,6 +55,7 @@ public class ListCupcakeOptionsCommand extends Command {
             for (Bottom bottom : bottoms) {
                 out.println("<p>" + bottom.getBottom_id() + ", " + bottom.getBottom_Name() + ", " + bottom.getPrice() + ",- DKK</p>");
             }
+            out.println("<p><a href=\"shopping\"> Go back </a></p>");
             out.println("</body>");
             out.println("</html>");
         }
