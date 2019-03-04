@@ -9,6 +9,7 @@ import com.mycompany.cupcake.data.CupcakeDAO;
 import com.mycompany.cupcake.data.DBConnector;
 import com.mycompany.cupcake.data.DataException;
 import com.mycompany.cupcake.data.user_help_classes.User;
+import com.mycompany.cupcake.presentation.Command;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.SQLException;
@@ -57,10 +58,10 @@ public class RegistrationNlogin extends HttpServlet {
              */
 
             out.println("<form action=/Cupcake/RegistrationNlogin> "
-                    + "Username: <br>" + "<input type=text name=username> <br> "
-                    + "Password:<br> <input type= password name=password> <br> "
-                    + "Email:<br> <input type= text name=email> <br><br> <input type=submit>"
-                    + "</form>");
+                     + "Username: <br>" + "<input type=text name=username> <br> "
+                     + "Password:<br> <input type= password name=password> <br> "
+                     + "Email:<br> <input type= text name=email> <br><br> <input type=submit>"
+                     + "</form>");
 
             out.println("</body>");
             out.println("</html>");
@@ -71,12 +72,27 @@ public class RegistrationNlogin extends HttpServlet {
             if (username != null && password != null && email != null) {
 
                 User user = dao.getUser(username);
+                
                 if (user == null) {
                     dao.createUser(new User(username, password, email));
-                    user = dao.getUser(username);
-                } else if (user.getPassword().equals(password)) {
                     HttpSession session = request.getSession();
                     session.setAttribute("username", username);
+                    session.setAttribute("password", password);
+                    session.setAttribute("email", email);
+                    user = dao.getUser(username);
+                    
+                    Command c = new ShopCommand();
+                    c.execute(request, response);
+                    
+                } else if (user.getPassword().equals(password)&&user.getEmail().equals(email)) {
+                    HttpSession session = request.getSession();
+                    session.setAttribute("username", username);
+                    session.setAttribute("password", password);
+                    session.setAttribute("email", email);
+                
+                    Command c = new ShopCommand();
+                    c.execute(request, response);
+                    
                     // is this enough? I mean, probably... but what do I know, I'm just a poor boy, I need no sympathy 
                 }
             }
