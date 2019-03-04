@@ -19,7 +19,8 @@ import java.util.logging.Logger;
  * @author Simon Asholt Norup
  */
 public class CupcakeDAO {
-
+    
+    
     final static boolean DEBUG = true;
 
     //Return user object based on username
