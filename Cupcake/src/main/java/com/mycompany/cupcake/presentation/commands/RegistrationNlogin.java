@@ -58,11 +58,13 @@ public class RegistrationNlogin extends HttpServlet {
              */
 
             out.println("<form action=/Cupcake/RegistrationNlogin> "
-                     + "Username: <br>" + "<input type=text name=username> <br> "
-                     + "Password:<br> <input type= password name=password> <br> "
-                     + "Email:<br> <input type= text name=email> <br><br> <input type=submit>"
+                     + "Username: <br> <input type=text name=username> <br> "
+                     + "Password: <br> <input type= password name=password> <br> "
+                     + "Email: <br> <input type= text name=email> <br>"
+                     + "<br> <input type=submit>"
                      + "</form>");
-
+            
+            wait(10);
             out.println("</body>");
             out.println("</html>");
 
@@ -80,7 +82,7 @@ public class RegistrationNlogin extends HttpServlet {
                     session.setAttribute("password", password);
                     session.setAttribute("email", email);
                     user = dao.getUser(username);
-                    
+                    response.sendRedirect("ShopCommand");
                     Command c = new ShopCommand();
                     c.execute(request, response);
                     
@@ -89,7 +91,7 @@ public class RegistrationNlogin extends HttpServlet {
                     session.setAttribute("username", username);
                     session.setAttribute("password", password);
                     session.setAttribute("email", email);
-                
+                    response.sendRedirect("ShopCommand");
                     Command c = new ShopCommand();
                     c.execute(request, response);
                     

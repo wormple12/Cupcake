@@ -23,9 +23,10 @@ public class ShopCommand extends Command{
     @Override
     public void execute(HttpServletRequest request, HttpServletResponse response) 
             throws ServletException, IOException {
-            String username = (String) request.getAttribute("username");
-            String password = (String) request.getAttribute("password");
-            String email = (String) request.getAttribute("email");
+            HttpSession session = request.getSession();
+            String username = (String) session.getAttribute("username");
+            String password = (String) session.getAttribute("password");
+            String email = (String) session.getAttribute("email");
             printHTML(new User(username,password,email),response);
     }
     
