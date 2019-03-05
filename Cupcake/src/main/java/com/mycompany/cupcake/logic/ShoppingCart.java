@@ -5,6 +5,7 @@
  */
 package com.mycompany.cupcake.logic;
 
+import com.mycompany.cupcake.data.DataException;
 import com.mycompany.cupcake.data.cc_help_classes.Cupcake;
 import java.util.List;
 
@@ -17,8 +18,9 @@ public class ShoppingCart {
     List<LineItem> items;
 
 
-    public void addToCart(LineItem x) {
+    public void addToCart(LineItem x) throws DataException {
         int check = checkIf(x.getCupcake());
+        if(check <0) throw new DataException();
         if (check >= 0) {
             items.get(check).addQty(check);
         } else {

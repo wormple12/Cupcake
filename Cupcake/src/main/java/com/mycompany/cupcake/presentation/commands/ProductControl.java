@@ -55,6 +55,7 @@ public class ProductControl extends HttpServlet {
             out.println("</head>");
             out.println("<body>");
             out.println("<h1>Adding: " +qty+" "+top+ " with "+ bottom+ " bottom" + "</h1>");
+            //out.println("<h1>Adding: "+" bottom" + "</h1>");
             out.println("</body>");
             out.println("</html>");
             try {
