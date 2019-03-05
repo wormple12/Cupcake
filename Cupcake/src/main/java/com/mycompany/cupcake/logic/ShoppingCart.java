@@ -16,13 +16,16 @@ public class ShoppingCart {
 
     List<LineItem> items;
 
+
     public void addToCart(LineItem x) {
         int check = checkIf(x.getCupcake());
         if (check >= 0) {
             items.get(check).addQty(check);
         } else {
             items.add(x);
+
         }
+        
     }
 
     public List<LineItem> getCart() {
