@@ -42,6 +42,8 @@ public class RegistrationNlogin extends HttpServlet {
             out.println("<html>");
             out.println("<head>");
             out.println("<title>Servlet RegistrationNlogin</title>");
+            out.println("<link rel=\"stylesheet\" href=\"https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css\">");
+            out.println("<link rel=\"stylesheet\" type=\"text/css\" href=\"css.css\">");
             out.println("</head>");
             out.println("<body>");
             /*
