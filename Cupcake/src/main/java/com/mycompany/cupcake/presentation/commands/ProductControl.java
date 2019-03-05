@@ -42,35 +42,36 @@ public class ProductControl extends HttpServlet {
         try (PrintWriter out = response.getWriter()) {
             /* TODO output your page here. You may use following sample code. */
             request.getSession();
-            String top=  request.getParameter("top");
-            String bottom= request.getParameter("bottom");
+            String top = request.getParameter("top");
+            String bottom = request.getParameter("bottom");
             String qty = request.getParameter("quantity");
             int tqty = Integer.valueOf(qty);
             CupcakeDAO k = new CupcakeDAO();
-            
+
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Adding cupcakes to shopping cart</title>");            
+            out.println("<title>Adding cupcakes to shopping cart</title>");
             out.println("</head>");
             out.println("<body>");
             out.println("<h1>Adding: " +qty+" "+top+ " with "+ bottom+ " bottom" + "</h1>");
             //out.println("<h1>Adding: "+" bottom" + "</h1>");
             out.println("</body>");
             out.println("</html>");
+
             try {
                 Cupcake newcupcake = new Cupcake(k.getBottom(bottom), k.getTopping(top));
                 LineItem item = new LineItem(newcupcake, tqty);
                 ShoppingCart cart;
-                if(request.getSession().getAttribute("ShoppingCart").toString().length() >0){
-                cart = new ShoppingCart();
-                cart.addToCart(item);
-                }else{
-                cart = (ShoppingCart) request.getSession().getAttribute("ShoppingCart");
+                if (request.getSession().getAttribute("ShoppingCart").toString().length() > 0) {
+                    cart = new ShoppingCart();
+                    cart.addToCart(item);
+                } else {
+                    cart = (ShoppingCart) request.getSession().getAttribute("ShoppingCart");
                 }
                 request.getSession().removeAttribute("ShoppingCart");
                 request.getSession().setAttribute("ShoppingCart", cart);
-                
+
             } catch (Exception ex) {
                 ex.printStackTrace();
             }
