@@ -54,7 +54,7 @@ public class CustomerPage extends HttpServlet {
             System.out.println("Error occured in CustomerPage");
             redirectFailedLogin(response);
         }
-
+        
         try (PrintWriter out = response.getWriter()) {
             /* TODO output your page here. You may use following sample code. */
             out.println("<!DOCTYPE html>");
@@ -65,6 +65,7 @@ public class CustomerPage extends HttpServlet {
             out.println("<body>");
             out.println("<h1>Servlet CustomerPage at " + request.getContextPath() + "</h1>");
             out.println("<h1> Session bypass... " + "</h1>");
+            request.getRequestDispatcher("UserShow.jsp").forward(request, response);
             out.println("</body>");
             out.println("</html>");
         }
