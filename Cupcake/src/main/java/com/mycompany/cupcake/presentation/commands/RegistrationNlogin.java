@@ -63,9 +63,12 @@ public class RegistrationNlogin extends HttpServlet {
             String username = request.getParameter("username");
             String password = request.getParameter("password");
             String email = request.getParameter("email");
+
+            
             
             if (username != null && password != null){// && email != null) {    
                 User user = dao.getUser(username);
+                System.out.println(user + "test in registration");
                 if (user == null) {
                     redirectJSP.redirectFailedLogin(response);
                 } else {
