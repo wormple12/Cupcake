@@ -48,7 +48,7 @@ public class CustomerPage extends HttpServlet {
                 request.setAttribute("errormessage", "User not logged in...");
                 redirectFailedLogin(response);
                 response.sendRedirect("FailedLogin.jsp");
-      p     }
+           }
         } catch (Exception e) {
             System.out.println("Error occured in CustomerPage");
             redirectFailedLogin(response);
