@@ -38,12 +38,11 @@ public class CustomerPage extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
 
         HttpSession session = request.getSession();
-
+        User user = (User) session.getAttribute("User");
+        String username = user.getUsername();
+        String password = user.getPassword();
+        String email = user.getEmail();
         try {
-            User user = (User) session.getAttribute("User");
-            String username = user.getUsername();
-            String password = user.getPassword();
-            String email = user.getEmail();
 
             if (username == null) {
                 request.setAttribute("errormessage", "User not logged in...");
@@ -54,18 +53,18 @@ public class CustomerPage extends HttpServlet {
             System.out.println("Error occured in CustomerPage");
             redirectFailedLogin(response);
         }
-        
+
         try (PrintWriter out = response.getWriter()) {
             /* TODO output your page here. You may use following sample code. */
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet CustomerPage</title>");
+            out.println("<title> <h1>Servlet CustomerPage" + "username: " + username + " email: "+ email + "<h1>" + "</title>");
             out.println("</head>");
             out.println("<body>");
             out.println("<h1>Servlet CustomerPage at " + request.getContextPath() + "</h1>");
             out.println("<h1> Session bypass... " + "</h1>");
-            request.getRequestDispatcher("UserShow.jsp").forward(request, response);
+            //request.getRequestDispatcher("UserShow.jsp").forward(request, response);
             out.println("</body>");
             out.println("</html>");
         }
