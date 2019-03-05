@@ -49,7 +49,7 @@ public class ListCupcakeOptionsCommand extends Command {
             out.println("<link rel=\"stylesheet\" type=\"text/css\" href=\"css.css\">");
             out.println("</head>");
             out.println("<body>");
-            out.println("<form action=\"http://localhost:8080/Cupcake/ProductControl\" method = POST>");
+            out.println("<form action=\"/Cupcake/ProductControl\" method = POST>");
             out.println("<select name = top>Toppings:");
             for (Topping topping : toppings) {
                 out.println("<option value =" + topping.getTopping_id() + "> " + topping.getTopping_name() + ", " + topping.getPrice() + ",- DKK</option>");
