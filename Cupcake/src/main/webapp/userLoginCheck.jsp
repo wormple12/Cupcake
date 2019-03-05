@@ -2,11 +2,14 @@
     Document   : userLoginCheck
     Created on : 05-Mar-2019, 11:10:53
     Author     : Henning
+    Note       : Possibly deprecated.
 --%>
 
 <%@page import="com.mycompany.cupcake.data.user_help_classes.User"%>
 <%@page import="com.mycompany.cupcake.data.CupcakeDAO"%>
 <%
+    
+    
     
     try {
         User userLoggedIn = (User) session.getAttribute("username");
