@@ -15,7 +15,7 @@
         <title>JSP Page</title>
     </head>
     <body>
-        <form>
+        <form >
             <%
             ShoppingCart cart = (ShoppingCart)  request.getSession().getAttribute("ShoppingCart");
             double tprice=0;
@@ -25,8 +25,8 @@
             Cupcake cupcake = item.getCupcake();
              double price = item.getPrice();
             
-            out.print("<div>");
-            out.print("<p>Cupcake: " + cupcake.toString() +", Quantity: "+qty+ "</p>");
+            out.print("<div align= \"left\">");
+            out.print("<p>Cupcake: " + cupcake.getBottom().getBottom_Name()+" frosting with "+ cupcake.getTopping().getTopping_name() +" bottom, Quantity: "+qty+ "</p>");
             out.print("<br>");
             out.print("</div>");
             tprice = tprice +price;

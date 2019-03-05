@@ -74,8 +74,9 @@ public class ProductControl extends HttpServlet {
             }
             cart.addToCart(item);
             request.getSession().setAttribute("ShoppingCart", cart);
-            out.println("<h1>Adding: " + cart.getCart().get(0).getCupcake().toString() + "</h1>");
-            out.println("<form action="+"http://localhost:8080/Cupcake/Products.jsp"+"><input type=submit></form>");
+            out.println("<form  action="+"Products.jsp"+"><input value=\"Go to Checkout\" type=submit>"
+                    + "<input type=submit value=\"Order more\" formaction=c/possibilities>"
+                    + "</form>");
             out.println("</body>");
             out.println("</html>");
 
