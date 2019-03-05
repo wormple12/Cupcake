@@ -39,6 +39,9 @@ public class FrontController extends HttpServlet {
                 out.println("<html>");
                 out.println("<head>");
                 out.println("<title>Servlet LoginServlet</title>");
+                out.println("<link rel=\"stylesheet\" type=\"text/css\" href=\"css.css\">");
+                out.println("<link rel=\"stylesheet\" href=\"https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css\">");
+                
                 out.println("</head>");
                 out.println("<body>");
                 out.println("<h1>Error 666: </h1>");

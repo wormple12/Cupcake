@@ -45,6 +45,8 @@ public class ListCupcakeOptionsCommand extends Command {
             out.println("<html>");
             out.println("<head>");
             out.println("<title>WebRecipes: Alle opskrifter</title>");
+            out.println("<link rel=\"stylesheet\" href=\"https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css\">");
+            out.println("<link rel=\"stylesheet\" type=\"text/css\" href=\"css.css\">");
             out.println("</head>");
             out.println("<body>");
             out.println("<form action=\"http://localhost:8080/Cupcake/ProductControl\" method = POST>");

@@ -43,21 +43,24 @@ public class ProductControl extends HttpServlet {
         try (PrintWriter out = response.getWriter()) {
             /* TODO output your page here. You may use following sample code. */
             request.getSession();
-            String top=  request.getParameter("top");
-            String bottom= request.getParameter("bottom");
+            String top = request.getParameter("top");
+            String bottom = request.getParameter("bottom");
             String qty = request.getParameter("quantity");
             int tqty = Integer.valueOf(qty);
             int topId = Integer.valueOf(top);
             int botId = Integer.valueOf(bottom);
             CupcakeDAO k = new CupcakeDAO();
+
             Cupcake newcupcake = new Cupcake(k.getBottom(botId), k.getTopping(topId));
             
+
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Adding cupcakes to shopping cart</title>");            
+            out.println("<title>Adding cupcakes to shopping cart</title>");
             out.println("</head>");
             out.println("<body>");
+
             out.println("<h1>Adding: " +qty+" "+newcupcake.getTopping().getTopping_name()+ " cupcakes with "+ newcupcake.getBottom().getBottom_Name()+ " bottom" + "</h1>");
            /* User p = (User) request.getSession().getAttribute("User");
             out.println("<h1>Adding: "+p.getUsername() + "</h1>");*/
@@ -71,6 +74,8 @@ public class ProductControl extends HttpServlet {
                
                 }else{
                 cart = (ShoppingCart) request.getSession().getAttribute("ShoppingCart");
+
+
                 }
                 cart.addToCart(item);
                 request.getSession().setAttribute("ShoppingCart", cart);
@@ -78,6 +83,7 @@ public class ProductControl extends HttpServlet {
                // response.sendRedirect("http://localhost:8080/Cupcake/Products.jsp");
                   out.println("</body>");
             out.println("</html>");
+
             } catch (Exception ex) {
                 ex.printStackTrace();
             
