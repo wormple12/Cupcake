@@ -6,12 +6,14 @@ import com.mycompany.cupcake.data.cc_help_classes.Bottom;
 import com.mycompany.cupcake.data.cc_help_classes.Topping;
 import com.mycompany.cupcake.data.order_help_classes.Order;
 import com.mycompany.cupcake.data.user_help_classes.User;
+import com.mycompany.cupcake.logic.LineItem;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  * @author Simon Asholt Norup
