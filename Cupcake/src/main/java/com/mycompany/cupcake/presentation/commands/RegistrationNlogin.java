@@ -51,6 +51,7 @@ public class RegistrationNlogin extends HttpServlet {
 
              */
 
+            
             out.println("<h1> Login </h1>");
             out.println("<form action=/Cupcake/RegistrationNlogin method=POST> "
                      + "Username: <br> <input type=text name=username> <br> "
@@ -70,7 +71,6 @@ public class RegistrationNlogin extends HttpServlet {
             
             if (username != null && password != null){// && email != null) {    
                 User user = dao.getUser(username);
-                System.out.println(user + "test in registration");
                 if (user == null) {
                     redirectJSP.redirectFailedLogin(response);
                 } else {

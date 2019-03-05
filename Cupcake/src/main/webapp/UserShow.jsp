@@ -6,6 +6,7 @@
 --%>
 
 <%@page import="com.mycompany.cupcake.data.user_help_classes.User"%>
+<%@page import="com.mycompany.cupcake.data.CupcakeDAO"%>
 
 
 <html>
@@ -14,26 +15,27 @@
         <title>JSP Page</title>
     </head>
     <body>
-        <h1>User has been created!</h1>
-        
-        <p><a href="/Cupcake/RegistrationNlogin"> Go back </a></p>
+        <form>
+            <%
+                User user = (User) request.getSession().getAttribute("User");
+                String username = user.getUsername();
+                CupcakeDAO dao = new CupcakeDAO();
+                user = dao.getUser(username);
+                String email = user.getEmail();
+
+                out.print("<div align= \"right\">");
+                out.print("<p>username: " + username + "</p>");
+                out.print("<p>email: " + email + "</p>");
+                out.print("<br>");
+                out.print("</div>");
+            %>
+        </form>
     </body>
 </html>
 
-    <%
-        User user = (User) request.getAttribute("User");
 
-        String username = user.getUsername();
-        String email = user.getEmail();
+<!--   
+    out.print(username);
+    out.print(email);
 
-//        out.print("<p>username: " + username + "</p>");
-//        out.print("<p>email: " + email + "</p>");
-        System.out.println(username);
-        out.print( username );
-        out.print(email);
-        out.print("lul");
-
-    %>
-welcome&lt;to&gt;
-</div>-->
-
+-->

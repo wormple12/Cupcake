@@ -39,9 +39,11 @@ public class CustomerPage extends HttpServlet {
 
         HttpSession session = request.getSession();
         User user = (User) session.getAttribute("User");
+        System.out.println("user in customerPage: "+user);
         String username = user.getUsername();
         String password = user.getPassword();
         String email = user.getEmail();
+        System.out.println("email in customerPage: "+email);
         try {
 
             if (username == null) {
@@ -63,8 +65,7 @@ public class CustomerPage extends HttpServlet {
             out.println("</head>");
             out.println("<body>");
             out.println("<h1>Servlet CustomerPage at " + request.getContextPath() + "</h1>");
-            out.println("<h1> Session bypass... " + "</h1>");
-            //request.getRequestDispatcher("UserShow.jsp").forward(request, response);
+            request.getRequestDispatcher("UserShow.jsp").forward(request, response);
             out.println("</body>");
             out.println("</html>");
         }
