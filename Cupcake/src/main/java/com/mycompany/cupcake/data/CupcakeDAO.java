@@ -220,4 +220,27 @@ public class CupcakeDAO {
         preparedStmt.execute();
         c.close();
     }
+    
+    public Bottom getBottom(String bottom) throws Exception{
+         DBConnector connector = new DBConnector();
+            Connection c = connector.getConnection();
+            Statement stmt = c.createStatement();
+            ResultSet rs = stmt.executeQuery("select * from toppings WHERE bottom_name= '"+bottom+"' ;");
+            int bottom_id = rs.getInt("bottom_id");
+            String bottom_name = rs.getString("bottom_name");
+            double price = rs.getDouble("price");
+            return new Bottom(bottom_id,bottom_name,price);
+    }
+    
+    public Topping getTopping(String top) throws Exception{
+           DBConnector connector = new DBConnector();
+            Connection c = connector.getConnection();
+            Statement stmt = c.createStatement();
+            ResultSet rs = stmt.executeQuery("select * from toppings Where topping_name= '"+top+ "' ;");
+            
+            int topping_id = rs.getInt("topping_id");
+            String topping_name = rs.getString("topping_name");
+            double price = rs.getDouble("price");
+            return new Topping(topping_id, topping_name, price);
+    }
 }
