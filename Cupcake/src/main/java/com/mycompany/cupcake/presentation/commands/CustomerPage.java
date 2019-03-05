@@ -48,7 +48,7 @@ public class CustomerPage extends HttpServlet {
                 request.setAttribute("errormessage", "User not logged in...");
                 redirectFailedLogin(response);
                 response.sendRedirect("FailedLogin.jsp");
-            }
+      p     }
         } catch (Exception e) {
             System.out.println("Error occured in CustomerPage");
             redirectFailedLogin(response);
@@ -59,7 +59,7 @@ public class CustomerPage extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title> <h1>Servlet CustomerPage" + "username: " + username + " email: "+ email + "<h1>" + "</title>");
+            out.println("<title>Servlet CustomerPage" + "username: " + username + " email: "+ email + "<h1>" + "</title>");
             out.println("</head>");
             out.println("<body>");
             out.println("<h1>Servlet CustomerPage at " + request.getContextPath() + "</h1>");
