@@ -38,30 +38,39 @@ public class CustomerPage extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
 
         HttpSession session = request.getSession();
-        User user = (User) session.getAttribute("User");
-        System.out.println("user in customerPage: "+user);
-        String username = user.getUsername();
-        String password = user.getPassword();
-        String email = user.getEmail();
-        System.out.println("email in customerPage: "+email);
-        try {
 
+        
+        //Failed
+        
+        try {
+            User user = (User) session.getAttribute("User");
+            System.out.println("user in customerPage: " + user);
+            String username = user.getUsername();
+            String password = user.getPassword();
+            String email = user.getEmail();
+            System.out.println("email in customerPage: " + email);
             if (username == null) {
                 request.setAttribute("errormessage", "User not logged in...");
-                redirectFailedLogin(response);
-                response.sendRedirect("FailedLogin.jsp");
-           }
+                request.getRequestDispatcher("UserLoginCheck.jsp").forward(request, response);
+            }
         } catch (Exception e) {
             System.out.println("Error occured in CustomerPage");
-            redirectFailedLogin(response);
+            request.getRequestDispatcher("RegistrationNlogin").forward(request, response);
         }
 
+        
         try (PrintWriter out = response.getWriter()) {
+            User user = (User) session.getAttribute("User");
+            System.out.println("user in customerPage: " + user);
+            String username = user.getUsername();
+            String password = user.getPassword();
+            String email = user.getEmail();
+            System.out.println("email in customerPage: " + email);
             /* TODO output your page here. You may use following sample code. */
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet CustomerPage" + "username: " + username + " email: "+ email + "<h1>" + "</title>");
+            out.println("<title>Servlet CustomerPage" + "username: " + username + " email: " + email + "<h1>" + "</title>");
             out.println("</head>");
             out.println("<body>");
             out.println("<h1>Servlet CustomerPage at " + request.getContextPath() + "</h1>");

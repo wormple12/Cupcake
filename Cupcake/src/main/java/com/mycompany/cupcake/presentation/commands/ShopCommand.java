@@ -46,6 +46,7 @@ public class ShopCommand extends Command{
             out.println("<body>");
             out.println("<h1>Welcome back : " + username + "</h1>");
             out.println("<p><a href=\"possibilities\"> Check out the menu! </a></p>");
+           // out.println("<p><a href=\"possibilities\"> Check out the menu! </a></p>");
             //Logout virker ikke
             out.println("<p><a href=\"RegistrationNlogin\"> Logout VIRKER IKKE </a></p>");
             out.println("</body>");
