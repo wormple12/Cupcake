@@ -52,7 +52,6 @@ public class ProductControl extends HttpServlet {
             CupcakeDAO k = new CupcakeDAO();
 
             Cupcake newcupcake = new Cupcake(k.getBottom(botId), k.getTopping(topId));
-            
 
             out.println("<!DOCTYPE html>");
             out.println("<html>");
@@ -60,33 +59,29 @@ public class ProductControl extends HttpServlet {
             out.println("<title>Adding cupcakes to shopping cart</title>");
             out.println("</head>");
             out.println("<body>");
-
-            out.println("<h1>Adding: " +qty+" "+newcupcake.getTopping().getTopping_name()+ " cupcakes with "+ newcupcake.getBottom().getBottom_Name()+ " bottom" + "</h1>");
-           /* User p = (User) request.getSession().getAttribute("User");
+            out.println("<h1>Adding: " + qty + " " + newcupcake.getTopping().getTopping_name() + " cupcakes with " + newcupcake.getBottom().getBottom_Name() + " bottom" + "</h1>");
+            /* User p = (User) request.getSession().getAttribute("User");
             out.println("<h1>Adding: "+p.getUsername() + "</h1>");*/
-          
-            
-                
-                LineItem item = new LineItem(newcupcake, tqty);
-                ShoppingCart cart;
-                if(request.getSession().getAttribute("ShoppingCart") == null){
+
+            LineItem item = new LineItem(newcupcake, tqty);
+            ShoppingCart cart;
+            if (request.getSession().getAttribute("ShoppingCart") == null) {
                 cart = new ShoppingCart();
-               
-                }else{
+
+            } else {
                 cart = (ShoppingCart) request.getSession().getAttribute("ShoppingCart");
 
-
-                }
-                cart.addToCart(item);
-                request.getSession().setAttribute("ShoppingCart", cart);
-                out.println("<h1>Adding: "+cart.getCart().get(0).getCupcake().toString()+"</h1>");
-               // response.sendRedirect("http://localhost:8080/Cupcake/Products.jsp");
-                  out.println("</body>");
+            }
+            cart.addToCart(item);
+            request.getSession().setAttribute("ShoppingCart", cart);
+            out.println("<h1>Adding: " + cart.getCart().get(0).getCupcake().toString() + "</h1>");
+            out.println("<form action="+"http://localhost:8080/Cupcake/Products.jsp"+"><input type=submit></form>");
+            out.println("</body>");
             out.println("</html>");
 
-            } catch (Exception ex) {
-                ex.printStackTrace();
-            
+        } catch (Exception ex) {
+            ex.printStackTrace();
+
         }
     }
 
