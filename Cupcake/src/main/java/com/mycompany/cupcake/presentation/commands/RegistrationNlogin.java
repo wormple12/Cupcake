@@ -1,4 +1,4 @@
-/*
+    /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
@@ -6,19 +6,12 @@
 package com.mycompany.cupcake.presentation.commands;
 
 import com.mycompany.cupcake.data.CupcakeDAO;
-import com.mycompany.cupcake.data.DBConnector;
-import com.mycompany.cupcake.data.DataException;
 import com.mycompany.cupcake.data.user_help_classes.User;
+import com.mycompany.cupcake.presentation.Command;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.sql.SQLException;
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
-import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -56,28 +49,30 @@ public class RegistrationNlogin extends HttpServlet {
 
              */
 
-            out.println("<form action=/Cupcake/RegistrationNlogin> "
-                    + "Username: <br>" + "<input type=text name=username> <br> "
-                    + "Password:<br> <input type= password name=password> <br> "
-                    + "Email:<br> <input type= text name=email> <br><br> <input type=submit>"
-                    + "</form>");
-
+            out.println("<h1> Login </h1>");
+            out.println("<form action=/Cupcake/RegistrationNlogin method=POST> "
+                     + "Username: <br> <input type=text name=username> <br> "
+                     + "Password: <br> <input type= password name=password> <br> "
+                     //+ "Email: <br> <input type= text name=email> <br>"
+                     + "<br> <input type=submit>"
+                     + "<p><a href=\"c/registration\"> Create New User </a></p>"
+                     + "</form>");
             out.println("</body>");
-            out.println("</html>");
-
-            final String username = request.getParameter("username");
-            final String password = request.getParameter("password");
-            final String email = request.getParameter("email");
-            if (username != null && password != null && email != null) {
-
+            out.println("</html>");            
+            
+            String username = request.getParameter("username");
+            String password = request.getParameter("password");
+            String email = request.getParameter("email");
+            
+            if (username != null && password != null){// && email != null) {    
                 User user = dao.getUser(username);
                 if (user == null) {
-                    dao.createUser(new User(username, password, email));
-                    user = dao.getUser(username);
-                } else if (user.getPassword().equals(password)) {
+                    redirectJSP.redirectFailedLogin(response);
+                } else {
                     HttpSession session = request.getSession();
-                    session.setAttribute("username", username);
-                    // is this enough? I mean, probably... but what do I know, I'm just a poor boy, I need no sympathy 
+                    session.removeAttribute("User");
+                    session.setAttribute("User",new User(username,password,email));
+                    redirectJSP.redirectShopping(response);
                 }
             }
         } catch (Exception x) {

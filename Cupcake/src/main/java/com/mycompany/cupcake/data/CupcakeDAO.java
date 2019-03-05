@@ -12,8 +12,6 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 /**
  * @author Simon Asholt Norup
@@ -40,7 +38,7 @@ public class CupcakeDAO {
 
         DBConnector connector = new DBConnector();
         Connection c = connector.getConnection();
-        String query = "select `password` from users where username = '" + username + "';";
+        String query = "select `password`, email from users where username = '" + username + "';";
         c = connector.getConnection();
         Statement stmt = c.createStatement();
         ResultSet rs = stmt.executeQuery(query);
@@ -176,17 +174,17 @@ public class CupcakeDAO {
         return order;
     }
 
-    private Order getOrderInfo(int orderID) throws Exception {
+    private Order getOrderInfo(int orderNumber) throws Exception {
         Order order = null;
 
         DBConnector connector = new DBConnector();
         Connection c = connector.getConnection();
-        String query = "select `username` from orders where orderID = '" + orderID + "';";
+        String query = "select `username` from orders where order_number = '" + orderNumber + "';";
         Statement stmt = c.createStatement();
         ResultSet rs = stmt.executeQuery(query);
         while (rs.next()) {
             String username = rs.getString("username");
-            order = new Order(orderID, username);
+            order = new Order(orderNumber, username);
         }
         stmt.close();
         rs.close();
@@ -206,6 +204,20 @@ public class CupcakeDAO {
         preparedStmt.execute();
 
         preparedStmt.close();
+        c.close();
+    }
+    
+    public void deleteOrder(String column, String identifier) throws Exception 
+    {
+        PreparedStatement preparedStmt;
+        DBConnector connector = new DBConnector();
+        Connection c = connector.getConnection();
+        String query
+                = "DELETE FROM orders WHERE ? = ?";
+        preparedStmt = c.prepareStatement(query);
+        preparedStmt.setString(1, column);
+        preparedStmt.setString(2, identifier);
+        preparedStmt.execute();
         c.close();
     }
 }
