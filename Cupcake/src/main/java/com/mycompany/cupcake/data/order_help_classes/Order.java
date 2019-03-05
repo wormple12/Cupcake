@@ -27,4 +27,9 @@ public class Order {
         return username;
     }
 
+    @Override
+    public String toString() {
+        return "Order{" + "orderNumber=" + orderNumber + ", username=" + username + '}';
+    }
+
 }
