@@ -8,6 +8,7 @@ package com.mycompany.cupcake.presentation.commands;
 import com.mycompany.cupcake.data.CupcakeDAO;
 import com.mycompany.cupcake.data.cc_help_classes.Bottom;
 import com.mycompany.cupcake.data.cc_help_classes.Cupcake;
+import com.mycompany.cupcake.data.user_help_classes.User;
 import com.mycompany.cupcake.logic.LineItem;
 import com.mycompany.cupcake.logic.ShoppingCart;
 import java.io.IOException;
@@ -46,7 +47,10 @@ public class ProductControl extends HttpServlet {
             String bottom= request.getParameter("bottom");
             String qty = request.getParameter("quantity");
             int tqty = Integer.valueOf(qty);
+            int topId = Integer.valueOf(top);
+            int botId = Integer.valueOf(bottom);
             CupcakeDAO k = new CupcakeDAO();
+            Cupcake newcupcake = new Cupcake(k.getBottom(botId), k.getTopping(topId));
             
             out.println("<!DOCTYPE html>");
             out.println("<html>");
@@ -54,26 +58,29 @@ public class ProductControl extends HttpServlet {
             out.println("<title>Adding cupcakes to shopping cart</title>");            
             out.println("</head>");
             out.println("<body>");
-            out.println("<h1>Adding: " +qty+" "+top+ " with "+ bottom+ " bottom" + "</h1>");
-            //out.println("<h1>Adding: "+" bottom" + "</h1>");
-            out.println("</body>");
-            out.println("</html>");
-            try {
-                Cupcake newcupcake = new Cupcake(k.getBottom(bottom), k.getTopping(top));
+            out.println("<h1>Adding: " +qty+" "+newcupcake.getTopping().getTopping_name()+ " cupcakes with "+ newcupcake.getBottom().getBottom_Name()+ " bottom" + "</h1>");
+           /* User p = (User) request.getSession().getAttribute("User");
+            out.println("<h1>Adding: "+p.getUsername() + "</h1>");*/
+          
+            
+                
                 LineItem item = new LineItem(newcupcake, tqty);
                 ShoppingCart cart;
-                if(request.getSession().getAttribute("ShoppingCart").toString().length() >0){
+                if(request.getSession().getAttribute("ShoppingCart") == null){
                 cart = new ShoppingCart();
-                cart.addToCart(item);
+               
                 }else{
                 cart = (ShoppingCart) request.getSession().getAttribute("ShoppingCart");
                 }
-                request.getSession().removeAttribute("ShoppingCart");
+                cart.addToCart(item);
                 request.getSession().setAttribute("ShoppingCart", cart);
-                
+                out.println("<h1>Adding: "+cart.getCart().get(0).getCupcake().toString()+"</h1>");
+               // response.sendRedirect("http://localhost:8080/Cupcake/Products.jsp");
+                  out.println("</body>");
+            out.println("</html>");
             } catch (Exception ex) {
                 ex.printStackTrace();
-            }
+            
         }
     }
 

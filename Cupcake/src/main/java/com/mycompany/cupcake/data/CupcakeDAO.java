@@ -223,23 +223,24 @@ public class CupcakeDAO {
         c.close();
     }
     
-    public Bottom getBottom(String bottom) throws Exception{
+    public Bottom getBottom(int id) throws Exception{
          DBConnector connector = new DBConnector();
             Connection c = connector.getConnection();
             Statement stmt = c.createStatement();
-            ResultSet rs = stmt.executeQuery("select * from toppings WHERE bottom_name= '"+bottom+"' ;");
+            ResultSet rs = stmt.executeQuery("select * from bottoms WHERE bottom_id= "+id+" ;");
+            rs.next();
             int bottom_id = rs.getInt("bottom_id");
             String bottom_name = rs.getString("bottom_name");
             double price = rs.getDouble("price");
             return new Bottom(bottom_id,bottom_name,price);
     }
     
-    public Topping getTopping(String top) throws Exception{
+    public Topping getTopping(int id) throws Exception{
            DBConnector connector = new DBConnector();
             Connection c = connector.getConnection();
             Statement stmt = c.createStatement();
-            ResultSet rs = stmt.executeQuery("select * from toppings Where topping_name= '"+top+ "' ;");
-            
+            ResultSet rs = stmt.executeQuery("select * from toppings Where topping_id= "+id+ " ;");
+            rs.next();
             int topping_id = rs.getInt("topping_id");
             String topping_name = rs.getString("topping_name");
             double price = rs.getDouble("price");

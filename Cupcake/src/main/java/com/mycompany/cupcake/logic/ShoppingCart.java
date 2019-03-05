@@ -7,6 +7,7 @@ package com.mycompany.cupcake.logic;
 
 import com.mycompany.cupcake.data.DataException;
 import com.mycompany.cupcake.data.cc_help_classes.Cupcake;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -15,12 +16,11 @@ import java.util.List;
  */
 public class ShoppingCart {
 
-    List<LineItem> items;
+    ArrayList<LineItem> items = new ArrayList<>();
 
 
     public void addToCart(LineItem x) throws DataException {
         int check = checkIf(x.getCupcake());
-        if(check <0) throw new DataException();
         if (check >= 0) {
             items.get(check).addQty(check);
         } else {
@@ -30,7 +30,7 @@ public class ShoppingCart {
         
     }
 
-    public List<LineItem> getCart() {
+    public ArrayList<LineItem> getCart() {
         return items;
     }
 

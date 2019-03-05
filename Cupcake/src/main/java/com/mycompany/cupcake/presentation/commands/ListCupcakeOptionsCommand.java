@@ -47,15 +47,20 @@ public class ListCupcakeOptionsCommand extends Command {
             out.println("<title>WebRecipes: Alle opskrifter</title>");
             out.println("</head>");
             out.println("<body>");
-            out.println("<h1>Toppings:</h1>");
+            out.println("<form action=\"http://localhost:8080/Cupcake/ProductControl\" method = POST>");
+            out.println("<select name = top>Toppings:");
             for (Topping topping : toppings) {
-                out.println("<p>" + topping.getTopping_id() + ", " + topping.getTopping_name() + ", " + topping.getPrice() + ",- DKK</p>");
+                out.println("<option value =" + topping.getTopping_id() + "> " + topping.getTopping_name() + ", " + topping.getPrice() + ",- DKK</option>");
             }
-            out.println("<h1>Bottoms:</h1>");
+            
+            out.println("</select><select name = bottom>Bottoms:");
             for (Bottom bottom : bottoms) {
-                out.println("<p>" + bottom.getBottom_id() + ", " + bottom.getBottom_Name() + ", " + bottom.getPrice() + ",- DKK</p>");
+                out.println("<option value=\"" + bottom.getBottom_id()+/**/"\">"+  bottom.getBottom_Name() + ", " + bottom.getPrice() + ",- DKK</option>");
             }
-            out.println("<p><a href=\"shopping\"> Go back </a></p>");
+            out.println("<input name=\"quantity\">"+"Quantity"+"</input>");
+            out.println("<input type= submit>");
+            out.println("</form>");
+            out.println("</select><p><a href=\"shopping\"> Go back </a></p>");
             out.println("</body>");
             out.println("</html>");
         }
