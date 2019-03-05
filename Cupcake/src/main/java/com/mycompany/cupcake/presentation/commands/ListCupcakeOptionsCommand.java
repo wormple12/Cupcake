@@ -60,5 +60,4 @@ public class ListCupcakeOptionsCommand extends Command {
             out.println("</html>");
         }
     }
-
 }
