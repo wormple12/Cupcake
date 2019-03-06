@@ -34,21 +34,25 @@ public class Registration extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
             final CupcakeDAO dao = new CupcakeDAO();
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<link rel=\"stylesheet\" href=\"https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css\">");
+            out.println("<title>Servlet Registration</title>");
             out.println("<link rel=\"stylesheet\" type=\"text/css\" href=\"css.css\">");
-            out.println("<title>Servlet RegistrationNlogin</title>");
+            out.println("<link rel=\"stylesheet\" type=\"text/css\" href=\"cupcakebackgroun.css\">");
             out.println("</head>");
+            
             out.println("<body>");
-            /*
-            Change the form action as it needs context with the database
-
-             */
+            
+            out.println("<div name=\"topmenu\">");
+            out.println("<select onChange=\"window.location.href=this.value\">");   
+            out.println("<option value = \"c/registration\"> Create new user </option>");
+            out.println("<option value = \"RegistrationNlogin\"> Login </option>");
+            out.println("</select>");
+            out.println("</div>");
+            
             out.println("<h1> Create new user</h1>");
             out.println("<form action=/Cupcake/Registration> "
                      + "Username: <br> <input type=text name=username> <br> "
@@ -57,7 +61,7 @@ public class Registration extends HttpServlet {
                      + "Create new user<br> <input type=submit>"
                      //+ "<p><a href=\"CreateNewUser.jsp\"> Create New User </a></p>"
                      + "</form>");
-            out.println("<p><a href=\"/Cupcake/RegistrationNlogin\"> Go back </a></p>");
+            //out.println("<p><a href=\"/Cupcake/RegistrationNlogin\"> Go back </a></p>");
             out.println("</body>");
             out.println("</html>");            
             

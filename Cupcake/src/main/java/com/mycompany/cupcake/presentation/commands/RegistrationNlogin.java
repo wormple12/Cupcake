@@ -42,28 +42,24 @@ public class RegistrationNlogin extends HttpServlet {
             out.println("<html>");
             out.println("<head>");
             out.println("<title>Servlet RegistrationNlogin</title>");
-            //out.println("<link rel=\"stylesheet\" href=\"https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css\">");
             out.println("<link rel=\"stylesheet\" type=\"text/css\" href=\"css.css\">");
             out.println("<link rel=\"stylesheet\" type=\"text/css\" href=\"cupcakebackgroun.css\">");
             out.println("</head>");
+            
             out.println("<body>");
             
             out.println("<div name=\"topmenu\">");
-            out.println("<select>");
-            out.println("<option value = \"hello\"> Hello </option>");
-            out.println("<option value = \"hello1\"> Hello </option>");
-            out.println("<option value = \"hello2\"> Hello1 </option>");
+            out.println("<select onChange=\"window.location.href=this.value\">");   
+            out.println("<option value = \"RegistrationNlogin\"> Login </option>");
+            out.println("<option value = \"c/registration\"> Create new user </option>");
             out.println("</select>");
             out.println("</div>");
 
             out.println("<h1> Login </h1>");
             out.println("<form action=/Cupcake/RegistrationNlogin method=POST> "
-
                     + "Username: <br> <input type=text name=username> <br> "
                     + "Password: <br> <input type= password name=password> <br> "
-                    //+ "Email: <br> <input type= text name=email> <br>"
                     + "<br> <input type=submit>"
-                    + "<p><a href=\"c/registration\"> Create New User </a></p>"
                     + "</form>");
             out.println("</body>");
             out.println("</html>");
