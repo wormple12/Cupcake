@@ -43,11 +43,11 @@ public class Finalization extends HttpServlet {
             String pricetext = request.getParameter("tprice");
             double tprice = Double.parseDouble(pricetext);
             CupcakeDAO k = new CupcakeDAO();
-            ShoppingCart cart = (ShoppingCart) request.getAttribute("ShoppingCart");
+            ShoppingCart cart = (ShoppingCart) request.getSession().getAttribute("ShoppingCart");
             
             if (k.getBalance(l.getUsername()) > tprice) {
                 k.addCarttoDB(cart, l.getUsername());
-                k.editBalance(l.getUsername(), tprice);
+                k.removeBalance(l.getUsername(), tprice);
                 out.println("<!DOCTYPE html>");
                 out.println("<html>");
                 out.println("<head>");
