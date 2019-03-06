@@ -47,7 +47,16 @@ public class RegistrationNlogin extends HttpServlet {
             out.println("<link rel=\"stylesheet\" type=\"text/css\" href=\"cupcakebackgroun.css\">");
             out.println("</head>");
             out.println("<body>");
+            
+            out.println("<div name=\"topmenu\">");
+            out.println("<select>");
+            out.println("<option value = \"hello\"> Hello </option>");
+            out.println("<option value = \"hello1\"> Hello </option>");
+            out.println("<option value = \"hello2\"> Hello1 </option>");
+            out.println("</select>");
+            out.println("</div>");
 
+            
             out.println("<h1> Login </h1>");
             out.println("<form action=/Cupcake/RegistrationNlogin method=POST> "
                      + "Username: <br> <input type=text name=username> <br> "
