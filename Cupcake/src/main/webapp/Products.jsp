@@ -15,7 +15,7 @@
         <title>JSP Page</title>
     </head>
     <body>
-        <form >
+        <form action="Finalization" >
             <%
                 ShoppingCart cart = (ShoppingCart) request.getSession().getAttribute("ShoppingCart");
                 double tprice = 0;
@@ -31,8 +31,10 @@
                     tprice = tprice + price;
                 }
                 out.print("<h1>" + "Total Price= " + tprice + "</h1>");
+                out.print("<input type='hidden' name=tprice value="+tprice+">" );
             %>
             <input type='submit' value="Finalize the purchase">
+            
         </form>
     </body>
 </html>

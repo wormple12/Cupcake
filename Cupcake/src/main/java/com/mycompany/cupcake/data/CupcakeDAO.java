@@ -7,6 +7,7 @@ import com.mycompany.cupcake.data.cc_help_classes.Topping;
 import com.mycompany.cupcake.data.order_help_classes.Order;
 import com.mycompany.cupcake.data.user_help_classes.User;
 import com.mycompany.cupcake.logic.LineItem;
+import com.mycompany.cupcake.logic.ShoppingCart;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -14,13 +15,13 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 
 /**
  * @author Simon Asholt Norup
  */
 public class CupcakeDAO {
-    
-    
+
     final static boolean DEBUG = true;
 
     //Return user object based on username
@@ -129,7 +130,7 @@ public class CupcakeDAO {
         return null;
     }
 
-    private double getBalance(String username) throws Exception {
+    public double getBalance(String username) throws Exception {
         double balance = -1.0;
 
         DBConnector connector = new DBConnector();
@@ -208,9 +209,8 @@ public class CupcakeDAO {
         preparedStmt.close();
         c.close();
     }
-    
-    public void deleteOrder(String column, String identifier) throws Exception 
-    {
+
+    public void deleteOrder(String column, String identifier) throws Exception {
         PreparedStatement preparedStmt;
         DBConnector connector = new DBConnector();
         Connection c = connector.getConnection();
@@ -222,28 +222,62 @@ public class CupcakeDAO {
         preparedStmt.execute();
         c.close();
     }
-    
-    public Bottom getBottom(int id) throws Exception{
-         DBConnector connector = new DBConnector();
-            Connection c = connector.getConnection();
-            Statement stmt = c.createStatement();
-            ResultSet rs = stmt.executeQuery("select * from bottoms WHERE bottom_id= "+id+" ;");
-            rs.next();
-            int bottom_id = rs.getInt("bottom_id");
-            String bottom_name = rs.getString("bottom_name");
-            double price = rs.getDouble("price");
-            return new Bottom(bottom_id,bottom_name,price);
+
+    public Bottom getBottom(int id) throws Exception {
+        DBConnector connector = new DBConnector();
+        Connection c = connector.getConnection();
+        Statement stmt = c.createStatement();
+        ResultSet rs = stmt.executeQuery("select * from bottoms WHERE bottom_id= " + id + " ;");
+        rs.next();
+        int bottom_id = rs.getInt("bottom_id");
+        String bottom_name = rs.getString("bottom_name");
+        double price = rs.getDouble("price");
+        return new Bottom(bottom_id, bottom_name, price);
     }
-    
-    public Topping getTopping(int id) throws Exception{
-           DBConnector connector = new DBConnector();
-            Connection c = connector.getConnection();
-            Statement stmt = c.createStatement();
-            ResultSet rs = stmt.executeQuery("select * from toppings Where topping_id= "+id+ " ;");
-            rs.next();
-            int topping_id = rs.getInt("topping_id");
-            String topping_name = rs.getString("topping_name");
-            double price = rs.getDouble("price");
-            return new Topping(topping_id, topping_name, price);
+
+    public Topping getTopping(int id) throws Exception {
+        DBConnector connector = new DBConnector();
+        Connection c = connector.getConnection();
+        Statement stmt = c.createStatement();
+        ResultSet rs = stmt.executeQuery("select * from toppings Where topping_id= " + id + " ;");
+        rs.next();
+        int topping_id = rs.getInt("topping_id");
+        String topping_name = rs.getString("topping_name");
+        double price = rs.getDouble("price");
+        return new Topping(topping_id, topping_name, price);
+    }
+
+    public void addCarttoDB(ShoppingCart cart, String username) throws Exception {
+        PreparedStatement preparedStmt;
+        DBConnector connector = new DBConnector();
+        Connection c = connector.getConnection();
+        Random rng = new Random();
+        int id = rng.nextInt(500);
+        String query
+                = " insert into shoppingcart (idshoppingcart, username) VALUES(?,?)";
+        preparedStmt = c.prepareStatement(query);
+        preparedStmt.setInt(1, id);
+        preparedStmt.setString(2, username);
+        preparedStmt.execute();
+        for(LineItem p : cart.getCart()){
+        int itid = rng.nextInt(500);
+        query
+                = " insert into lineitem (idlineitem, cupcake, price, quantity) VALUES(?,?,?,?)";
+        preparedStmt = c.prepareStatement(query);
+        preparedStmt.setInt(1, itid);
+        preparedStmt.setString(2, (p.getCupcake().getTopping().getTopping_name()+"_bottom_"+p.getCupcake().getBottom().getBottom_Name()+"_topping"));
+        preparedStmt.setDouble(3, p.getPrice());
+        preparedStmt.setInt(4, p.getQty());
+        preparedStmt.execute();
+        
+        query
+                = " insert into has_lineitem (cartid, lineid) VALUES(?,?)";
+        preparedStmt = c.prepareStatement(query);
+        preparedStmt.setInt(1, id);
+        preparedStmt.setInt(2, itid);
+        preparedStmt.execute();
+        }
+        preparedStmt.close();
+        c.close();
     }
 }
