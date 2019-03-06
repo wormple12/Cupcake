@@ -55,8 +55,11 @@ public class Finalization extends HttpServlet {
                 out.println("</head>");
                 out.println("<body>");
                 out.println("<h1>Thank you for your purchase " + l.getUsername() + "</h1>");
+                 out.println("<form action=\"c/shopping\"><input type=submit value=\"Home\"> </form>");
                 out.println("</body>");
                 out.println("</html>");
+                
+               
             } else {
                 
                 out.println("<!DOCTYPE html>");
