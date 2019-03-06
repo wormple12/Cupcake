@@ -150,13 +150,29 @@ public class CupcakeDAO {
         return balance;
     }
 
-    public void editBalance(String username, double amount) throws Exception {
+    public void addBalance(String username, double amount) throws Exception {
         double balance = getBalance(username) + amount;
         PreparedStatement preparedStmt;
         DBConnector connector = new DBConnector();
         Connection c = connector.getConnection();
         String query
-                = " insert into users (balance) VALUES(?) "
+                = " update users set balance =? "
+                + "where username = ?;";
+        preparedStmt = c.prepareStatement(query);
+        preparedStmt.setDouble(1, balance);
+        preparedStmt.setString(2, username);
+        preparedStmt.execute();
+
+        preparedStmt.close();
+        c.close();
+    }
+    public void removeBalance(String username, double amount) throws Exception {
+        double balance = getBalance(username) - amount;
+        PreparedStatement preparedStmt;
+        DBConnector connector = new DBConnector();
+        Connection c = connector.getConnection();
+        String query
+                = " update users set balance =? "
                 + "where username = ?;";
         preparedStmt = c.prepareStatement(query);
         preparedStmt.setDouble(1, balance);
@@ -255,7 +271,7 @@ public class CupcakeDAO {
         Random rng = new Random();
         int id = rng.nextInt(500);
         String query
-                = " insert into shoppingcart (idshoppingcart, username) VALUES(?,?)";
+                = " insert into shoppingcart (idshoppingcart, customer) VALUES(?,?)";
         preparedStmt = c.prepareStatement(query);
         preparedStmt.setInt(1, id);
         preparedStmt.setString(2, username);
@@ -263,7 +279,7 @@ public class CupcakeDAO {
         for(LineItem p : cart.getCart()){
         int itid = rng.nextInt(500);
         query
-                = " insert into lineitem (idlineitem, cupcake, price, quantity) VALUES(?,?,?,?)";
+                = " insert into lineitems (idlineitems, cupcake, price, quantity) VALUES(?,?,?,?)";
         preparedStmt = c.prepareStatement(query);
         preparedStmt.setInt(1, itid);
         preparedStmt.setString(2, (p.getCupcake().getTopping().getTopping_name()+"_bottom_"+p.getCupcake().getBottom().getBottom_Name()+"_topping"));
