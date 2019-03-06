@@ -159,7 +159,7 @@ insert into toppings (topping_id, topping_name, price)
 values (57,'Lemon',8.00);
 
 insert into toppings (topping_id, topping_name, price)
-values (58,'Crispy',9.00);
+values (58,'Blue cheese',9.00);
 
 
 
