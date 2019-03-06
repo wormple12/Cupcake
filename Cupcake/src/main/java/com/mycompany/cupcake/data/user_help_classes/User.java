@@ -3,6 +3,8 @@
 
 package com.mycompany.cupcake.data.user_help_classes;
 
+import com.mycompany.cupcake.data.CupcakeDAO;
+
 /**
  * @author Simon Asholt Norup
  */
@@ -26,7 +28,7 @@ public class User {
         this.admin = admin;
     }
 
-    public Boolean getAdmin() {
+    public Boolean getAdmin() throws Exception {
         return admin;
     }
 

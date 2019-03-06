@@ -5,9 +5,6 @@
  */
 package com.mycompany.cupcake.presentation.commands;
 
-import com.mycompany.cupcake.data.CupcakeDAO;
-import com.mycompany.cupcake.data.user_help_classes.User;
-import com.mycompany.cupcake.presentation.Command;
 import java.io.IOException;
 import java.io.PrintWriter;
 import javax.servlet.ServletException;
@@ -15,14 +12,13 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
 /**
  *
- * @author Lukas Bjørnvad
+ * @author Henning
  */
-@WebServlet(name = "RegistrationNlogin", urlPatterns = {"/RegistrationNlogin"})
-public class RegistrationNlogin extends HttpServlet {
+@WebServlet(name = "Admin", urlPatterns = {"/Admin"})
+public class Admin extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -37,48 +33,16 @@ public class RegistrationNlogin extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
-            final CupcakeDAO dao = new CupcakeDAO();
+            /* TODO output your page here. You may use following sample code. */
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet RegistrationNlogin</title>");
-            out.println("<link rel=\"stylesheet\" href=\"https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css\">");
-            out.println("<link rel=\"stylesheet\" type=\"text/css\" href=\"css.css\">");
+            out.println("<title>Servlet admin</title>");            
             out.println("</head>");
             out.println("<body>");
-            /*
-            Change the form action as it needs context with the database
-
-             */
-
-            out.println("<h1> Login </h1>");
-            out.println("<form action=/Cupcake/RegistrationNlogin method=POST> "
-                    + "Username: <br> <input type=text name=username> <br> "
-                    + "Password: <br> <input type= password name=password> <br> "
-                    //+ "Email: <br> <input type= text name=email> <br>"
-                    + "<br> <input type=submit>"
-                    + "<p><a href=\"c/registration\"> Create New User </a></p>"
-                    + "</form>");
+            out.println("<h1>Servlet admin at " + request.getContextPath() + "</h1>");
             out.println("</body>");
             out.println("</html>");
-
-            String username = request.getParameter("username");
-            String password = request.getParameter("password");
-
-            if (username != null && password != null) {// && email != null) {    
-                User user = dao.getUser(username);
-                
-                if (user == null) {
-                    redirectJSP.redirectFailedLogin(response);
-                } else {
-                    HttpSession session = request.getSession();
-                    session.removeAttribute("User");
-                    session.setAttribute("User", dao.getUser(username));
-                    redirectJSP.redirectShopping(response);
-                }
-            }
-        } catch (Exception x) {
-            x.printStackTrace();
         }
     }
 

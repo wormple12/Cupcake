@@ -39,15 +39,20 @@ public class CupcakeDAO {
 
         DBConnector connector = new DBConnector();
         Connection c = connector.getConnection();
-        String query = "select `password`, email from users where username = '" + username + "';";
+        String query = "select * from users where username = '" + username + "';";
         c = connector.getConnection();
         Statement stmt = c.createStatement();
         ResultSet rs = stmt.executeQuery(query);
+        
+        String password = "";
+        String email = "";
+        Boolean admin = false;
         while (rs.next()) {
-            String password = rs.getString("password");
-            String email = rs.getString("email");
-            user = new User(username, password, email);
+            password = rs.getString("password");
+            email = rs.getString("email");
+            admin = rs.getBoolean("is_admin");
         }
+        user = new User(username, password, email, admin);
         stmt.close();
         rs.close();
         c.close();
@@ -243,30 +248,5 @@ public class CupcakeDAO {
         String topping_name = rs.getString("topping_name");
         double price = rs.getDouble("price");
         return new Topping(topping_id, topping_name, price);
-    }
-
-    public Boolean getAdminValue(User user) throws Exception {
-
-        DBConnector connector = new DBConnector();
-        Connection c = connector.getConnection();
-        Statement stmt = c.createStatement();
-        try {
-            String query
-                    = "SELECT is_admin FROM users WHERE username";
-            ResultSet rs = stmt.executeQuery(query);
-            int preConversion = rs.getInt("is_admin");
-            Boolean conversion = false;
-           
-            if (preConversion == 1)
-            {
-                conversion = true;
-            }
-            return conversion;
-        }
-        catch (Exception e) {
-            System.out.println("Error occured is getAdminValue");
-            System.out.println("admin status possibly null");
-        }
-        return null;
     }
 }
