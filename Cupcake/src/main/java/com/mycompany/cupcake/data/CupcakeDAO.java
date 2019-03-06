@@ -267,8 +267,7 @@ public class CupcakeDAO {
         double price = rs.getDouble("price");
         return new Topping(topping_id, topping_name, price);
     }
-<<<<<<< HEAD
-=======
+
 
 
     public void addCarttoDB(ShoppingCart cart, String username) throws Exception {
@@ -304,30 +303,4 @@ public class CupcakeDAO {
         preparedStmt.close();
         c.close();
     }
-    public Boolean getAdminValue(User user) throws Exception {
-
-        DBConnector connector = new DBConnector();
-        Connection c = connector.getConnection();
-        Statement stmt = c.createStatement();
-        try {
-            String query
-                    = "SELECT is_admin FROM users WHERE username";
-            ResultSet rs = stmt.executeQuery(query);
-            int preConversion = rs.getInt("is_admin");
-            Boolean conversion = false;
-           
-            if (preConversion == 1)
-            {
-                conversion = true;
-            }
-            return conversion;
-        }
-        catch (Exception e) {
-            System.out.println("Error occured is getAdminValue");
-            System.out.println("admin status possibly null");
-        }
-        return null;
-
-    }
->>>>>>> 65b32f913b412ffc639e96649ecde251c7d3f65a
 }
