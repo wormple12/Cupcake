@@ -1,4 +1,4 @@
-    /*
+/*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
@@ -56,9 +56,9 @@ public class RegistrationNlogin extends HttpServlet {
             out.println("</select>");
             out.println("</div>");
 
-            
             out.println("<h1> Login </h1>");
             out.println("<form action=/Cupcake/RegistrationNlogin method=POST> "
+<<<<<<< HEAD
                      + "Username: <br> <input type=text name=username> <br> "
                      + "Password: <br> <input type= password name=password> <br> "
                      //+ "Email: <br> <input type= text name=email> <br>"
@@ -66,23 +66,29 @@ public class RegistrationNlogin extends HttpServlet {
                      + "<p><a href=\"c/registration\"> Create New User </a></p>"
                      + "</form>");
             
+=======
+                    + "Username: <br> <input type=text name=username> <br> "
+                    + "Password: <br> <input type= password name=password> <br> "
+                    //+ "Email: <br> <input type= text name=email> <br>"
+                    + "<br> <input type=submit>"
+                    + "<p><a href=\"c/registration\"> Create New User </a></p>"
+                    + "</form>");
+>>>>>>> bbb8dbe6f6bd2e49b17ddf54ca431e4c3383cd84
             out.println("</body>");
-            out.println("</html>");            
-            
+            out.println("</html>");
+
             String username = request.getParameter("username");
             String password = request.getParameter("password");
-            String email = request.getParameter("email");
 
-            
-            
-            if (username != null && password != null){// && email != null) {    
+            if (username != null && password != null) {// && email != null) {    
                 User user = dao.getUser(username);
+                
                 if (user == null) {
                     redirectJSP.redirectFailedLogin(response);
                 } else {
                     HttpSession session = request.getSession();
                     session.removeAttribute("User");
-                    session.setAttribute("User",new User(username,password,email));
+                    session.setAttribute("User", dao.getUser(username));
                     redirectJSP.redirectShopping(response);
                 }
             }

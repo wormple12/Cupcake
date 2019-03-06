@@ -41,15 +41,20 @@ public class CupcakeDAO {
 
         DBConnector connector = new DBConnector();
         Connection c = connector.getConnection();
-        String query = "select `password`, email from users where username = '" + username + "';";
+        String query = "select * from users where username = '" + username + "';";
         c = connector.getConnection();
         Statement stmt = c.createStatement();
         ResultSet rs = stmt.executeQuery(query);
+        
+        String password = "";
+        String email = "";
+        Boolean admin = false;
         while (rs.next()) {
-            String password = rs.getString("password");
-            String email = rs.getString("email");
-            user = new User(username, password, email);
+            password = rs.getString("password");
+            email = rs.getString("email");
+            admin = rs.getBoolean("is_admin");
         }
+        user = new User(username, password, email, admin);
         stmt.close();
         rs.close();
         c.close();
@@ -262,6 +267,8 @@ public class CupcakeDAO {
         double price = rs.getDouble("price");
         return new Topping(topping_id, topping_name, price);
     }
+<<<<<<< HEAD
+=======
 
 
     public void addCarttoDB(ShoppingCart cart, String username) throws Exception {
@@ -322,4 +329,5 @@ public class CupcakeDAO {
         return null;
 
     }
+>>>>>>> 65b32f913b412ffc639e96649ecde251c7d3f65a
 }
