@@ -5,6 +5,9 @@
  */
 package com.mycompany.cupcake.presentation.commands;
 
+import com.mycompany.cupcake.data.CupcakeDAO;
+import com.mycompany.cupcake.data.user_help_classes.User;
+import static com.mycompany.cupcake.presentation.commands.redirectJSP.redirectFailedLogin;
 import java.io.IOException;
 import java.io.PrintWriter;
 import javax.servlet.ServletException;
@@ -12,6 +15,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 /**
  *
@@ -32,15 +36,45 @@ public class CustomerPage extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
+
+        HttpSession session = request.getSession();
+
+        
+        //Failed
+        
+        try {
+            User user = (User) session.getAttribute("User");
+            System.out.println("user in customerPage: " + user);
+            String username = user.getUsername();
+            String password = user.getPassword();
+            String email = user.getEmail();
+            System.out.println("email in customerPage: " + email);
+            if (username == null) {
+                request.setAttribute("errormessage", "User not logged in...");
+                request.getRequestDispatcher("UserLoginCheck.jsp").forward(request, response);
+            }
+        } catch (Exception e) {
+            System.out.println("Error occured in CustomerPage");
+            request.getRequestDispatcher("RegistrationNlogin").forward(request, response);
+        }
+
+        
         try (PrintWriter out = response.getWriter()) {
+            User user = (User) session.getAttribute("User");
+            System.out.println("user in customerPage: " + user);
+            String username = user.getUsername();
+            String password = user.getPassword();
+            String email = user.getEmail();
+            System.out.println("email in customerPage: " + email);
             /* TODO output your page here. You may use following sample code. */
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet CustomerPage</title>");            
+            out.println("<title>Servlet CustomerPage" + "username: " + username + " email: " + email + "<h1>" + "</title>");
             out.println("</head>");
             out.println("<body>");
             out.println("<h1>Servlet CustomerPage at " + request.getContextPath() + "</h1>");
+            request.getRequestDispatcher("UserShow.jsp").forward(request, response);
             out.println("</body>");
             out.println("</html>");
         }

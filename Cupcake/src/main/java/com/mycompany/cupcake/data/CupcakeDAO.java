@@ -19,8 +19,7 @@ import java.util.List;
  * @author Simon Asholt Norup
  */
 public class CupcakeDAO {
-    
-    
+
     final static boolean DEBUG = true;
 
     //Return user object based on username
@@ -208,9 +207,8 @@ public class CupcakeDAO {
         preparedStmt.close();
         c.close();
     }
-    
-    public void deleteOrder(String column, String identifier) throws Exception 
-    {
+
+    public void deleteOrder(String column, String identifier) throws Exception {
         PreparedStatement preparedStmt;
         DBConnector connector = new DBConnector();
         Connection c = connector.getConnection();
@@ -222,27 +220,53 @@ public class CupcakeDAO {
         preparedStmt.execute();
         c.close();
     }
-    
-    public Bottom getBottom(String bottom) throws Exception{
-         DBConnector connector = new DBConnector();
-            Connection c = connector.getConnection();
-            Statement stmt = c.createStatement();
-            ResultSet rs = stmt.executeQuery("select * from toppings WHERE bottom_name= '"+bottom+"' ;");
-            int bottom_id = rs.getInt("bottom_id");
-            String bottom_name = rs.getString("bottom_name");
-            double price = rs.getDouble("price");
-            return new Bottom(bottom_id,bottom_name,price);
+
+    public Bottom getBottom(int id) throws Exception {
+        DBConnector connector = new DBConnector();
+        Connection c = connector.getConnection();
+        Statement stmt = c.createStatement();
+        ResultSet rs = stmt.executeQuery("select * from bottoms WHERE bottom_id= " + id + " ;");
+        rs.next();
+        int bottom_id = rs.getInt("bottom_id");
+        String bottom_name = rs.getString("bottom_name");
+        double price = rs.getDouble("price");
+        return new Bottom(bottom_id, bottom_name, price);
     }
-    
-    public Topping getTopping(String top) throws Exception{
-           DBConnector connector = new DBConnector();
-            Connection c = connector.getConnection();
-            Statement stmt = c.createStatement();
-            ResultSet rs = stmt.executeQuery("select * from toppings Where topping_name= '"+top+ "' ;");
-            
-            int topping_id = rs.getInt("topping_id");
-            String topping_name = rs.getString("topping_name");
-            double price = rs.getDouble("price");
-            return new Topping(topping_id, topping_name, price);
+
+    public Topping getTopping(int id) throws Exception {
+        DBConnector connector = new DBConnector();
+        Connection c = connector.getConnection();
+        Statement stmt = c.createStatement();
+        ResultSet rs = stmt.executeQuery("select * from toppings Where topping_id= " + id + " ;");
+        rs.next();
+        int topping_id = rs.getInt("topping_id");
+        String topping_name = rs.getString("topping_name");
+        double price = rs.getDouble("price");
+        return new Topping(topping_id, topping_name, price);
+    }
+
+    public Boolean getAdminValue(User user) throws Exception {
+
+        DBConnector connector = new DBConnector();
+        Connection c = connector.getConnection();
+        Statement stmt = c.createStatement();
+        try {
+            String query
+                    = "SELECT is_admin FROM users WHERE username";
+            ResultSet rs = stmt.executeQuery(query);
+            int preConversion = rs.getInt("is_admin");
+            Boolean conversion = false;
+           
+            if (preConversion == 1)
+            {
+                conversion = true;
+            }
+            return conversion;
+        }
+        catch (Exception e) {
+            System.out.println("Error occured is getAdminValue");
+            System.out.println("admin status possibly null");
+        }
+        return null;
     }
 }
