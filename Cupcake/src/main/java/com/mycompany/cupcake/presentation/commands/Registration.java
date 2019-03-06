@@ -57,6 +57,7 @@ public class Registration extends HttpServlet {
                      + "Create new user<br> <input type=submit>"
                      //+ "<p><a href=\"CreateNewUser.jsp\"> Create New User </a></p>"
                      + "</form>");
+            out.println("<p><a href=\"/Cupcake/RegistrationNlogin\"> Go back </a></p>");
             out.println("</body>");
             out.println("</html>");            
             

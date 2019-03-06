@@ -42,16 +42,12 @@ public class RegistrationNlogin extends HttpServlet {
             out.println("<html>");
             out.println("<head>");
             out.println("<title>Servlet RegistrationNlogin</title>");
-            out.println("<link rel=\"stylesheet\" href=\"https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css\">");
+            //out.println("<link rel=\"stylesheet\" href=\"https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css\">");
             out.println("<link rel=\"stylesheet\" type=\"text/css\" href=\"css.css\">");
+            out.println("<link rel=\"stylesheet\" type=\"text/css\" href=\"cupcakebackgroun.css\">");
             out.println("</head>");
             out.println("<body>");
-            /*
-            Change the form action as it needs context with the database
 
-             */
-
-            
             out.println("<h1> Login </h1>");
             out.println("<form action=/Cupcake/RegistrationNlogin method=POST> "
                      + "Username: <br> <input type=text name=username> <br> "
@@ -60,6 +56,7 @@ public class RegistrationNlogin extends HttpServlet {
                      + "<br> <input type=submit>"
                      + "<p><a href=\"c/registration\"> Create New User </a></p>"
                      + "</form>");
+            
             out.println("</body>");
             out.println("</html>");            
             

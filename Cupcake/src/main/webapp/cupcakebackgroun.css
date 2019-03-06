@@ -4,27 +4,11 @@ To change this template file, choose Tools | Templates
 and open the template in the editor.
 */
 /* 
-    Created on : 05-03-2019, 11:43:37
+    Created on : 06-03-2019, 11:56:10
     Author     : Emil PC
 */
 
 body
 {
-    background-color: #E5E4E2;
+    background-image: url("cupcake.jpg");
 }
-
-h1
-{
-    text-align: center;
-}
-
-p
-{
-    text-align: center;
-}
-
-form
-{
-    text-align: center;
-}
-
