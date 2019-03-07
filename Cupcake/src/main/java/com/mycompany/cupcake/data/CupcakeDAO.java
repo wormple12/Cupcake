@@ -50,10 +50,12 @@ public class CupcakeDAO {
         String password = "";
         String email = "";
         Boolean admin = false;
+        username = "";
         while (rs.next()) {
             password = rs.getString("password");
             email = rs.getString("email");
             admin = rs.getBoolean("is_admin");
+            username = rs.getString("username");
         }
         user = new User(username, password, email, admin);
         stmt.close();

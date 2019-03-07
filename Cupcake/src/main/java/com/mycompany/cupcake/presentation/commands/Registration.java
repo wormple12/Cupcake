@@ -71,7 +71,7 @@ public class Registration extends HttpServlet {
             
             if (username != null && password != null && email != null){// && email != null) {    
                 User user = dao.getUser(username);
-                if (user == null) {
+                if (user.getUsername().length() ==0 && user.getPassword().length() ==0 && user.getEmail().length() ==0) {
                     dao.createUser(new User(username,password,email));
                     redirectJSP.redirectUserCreated(response);
                 } else {
