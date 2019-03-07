@@ -215,6 +215,34 @@ public class CupcakeDAO {
         c.close();
         return order;
     }
+    
+    // Unfinished
+      public ArrayList<Order> getAllOrders () throws Exception {
+        try {
+            DBConnector connector = new DBConnector();
+            Connection c = connector.getConnection();
+            Statement stmt = c.createStatement();
+            ResultSet rs = stmt.executeQuery("select * from toppings;");
+
+            ArrayList<Order> allOrders = new ArrayList();
+            while (rs.next()) {
+                int topping_id = rs.getInt("topping_id");
+                String topping_name = rs.getString("topping_name");
+                double price = rs.getDouble("price");
+                allOrders.add(new Order(topping_id, topping_name));
+            }
+            stmt.close();
+            rs.close();
+            c.close();
+            return allOrders;
+
+        } catch (SQLException ex) {
+            if (DEBUG) {
+                ex.printStackTrace();
+            }
+        }
+        return null;
+    }
 
     public void createOrder(int orderNumber, String username) throws Exception {
         PreparedStatement preparedStmt;

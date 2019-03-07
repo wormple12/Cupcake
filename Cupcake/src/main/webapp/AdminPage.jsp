@@ -3,6 +3,11 @@
     Created on : 06-Mar-2019, 13:04:39
     Author     : Henning
 --%>
+<%@page import="java.sql.Statement"%>
+<%@page import="java.sql.ResultSet"%>
+<%@page import="java.sql.Connection"%>
+<%@page import="com.mycompany.cupcake.data.order_help_classes.Order"%>
+<%@page import="com.mycompany.cupcake.data.DBConnector"%>
 <!--
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -37,13 +42,9 @@
                 user = dao.getUser(username);
                 String email = user.getEmail();
                 Boolean admin = user.getAdmin();
-                
-                
-                Order order
 
-                out.print("<tr><td>" )
-                
-                
+//                out.print("<tr><td>" + dao.getOrder(1) + "</tr></td>");
+//                out.print("<tr><td>" + dao.getAllBottoms() + "</tr></td>");
                 out.print("<div align= \"right\">");
                 out.print("<p>username: " + username + "</p>");
                 out.print("<p>email: " + email + "</p>");
@@ -52,79 +53,47 @@
                 out.print("</div>");
             %>
         </form>
+
+
     </body>
+
+    <form method="post">
+        <table border = "1">
+            <tr>
+                <td>order_number</td>
+                <td>username</td>
+            </tr>
+            <%
+                try {
+                    DBConnector connector = new DBConnector();
+                    Connection c = connector.getConnection();
+                    Statement stmt = c.createStatement();
+                    ResultSet rs = stmt.executeQuery("SELECT * FROM orders");
+                    //Order order = (Order) request.getSession().getAttribute("Order");
+
+                    while (rs.next()) {
+            %>
+            <tr>
+                <td><%=rs.getInt("order_number")%></td>
+                <td><%=rs.getString("username")%></td>
+            </tr>
+            <%
+                }
+            %>
+        </table>
+        <%
+                rs.close();
+                stmt.close();
+                c.close();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+
+        %>
+    </form>
 </html>
 
 
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<%@ page import="java.sql.ResultSet" %>
-<%@ page import="java.sql.Statement" %>
-<%@ page import="java.sql.Connection" %>
-<%@ page import="java.sql.DriverManager" %>
-
-<form method="post">
-
-<table border="2">
-   <tr>
-        <td>user ID</td>
-        <td>Birthday</td>
-        <td>Gender</td>
-        <td>First Name</td>
-        <td>Last Name</td>
-   </tr>
-   <%
-   try
-   {
-       Class.forName("com.mysql.jdbc.Driver");
-       String url="jdbc:mysql://localhost:3306/eyetracker";
-       String username="root";
-       String password="root";
-       String query="select * from eyetracker";
-       Connection conn=DriverManager.getConnection(url, username, password);
-       Statement stmt=conn.createStatement();
-       ResultSet rs=stmt.executeQuery(query);
-       while(rs.next())
-       {
-   %>
-           <tr><td><%rs.getInt("userID"); %></td></tr>
-           <tr><td><%rs.getDate("dob"); %></td></tr>
-           <tr><td><%rs.getString("gender"); %></td></tr>
-           <tr><td><%rs.getString("firstName"); %></td></tr>
-           <tr><td><%rs.getString("lastName"); %></td></tr>
-
-   <%
-       }
-   %>
-   </table>
-   <%
-        rs.close();
-        stmt.close();
-        conn.close();
-   }
-   catch(Exception e)
-   {
-        e.printStackTrace();
-   }
-   %>
-</form>`

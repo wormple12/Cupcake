@@ -47,7 +47,7 @@ public class ShopCommand extends Command{
             out.println("<h1>Welcome back : " + username + "</h1>");
             out.println("<p><a href=\"possibilities\"> Check out the menu! </a></p>");
             out.println("<p><a href=\"../CustomerPage\"> Customer page </a></p>");
-            out.println("<p><a href=\"../Admin\"> Admin </a></p>");
+            out.println("<p><a href=\"/Cupcake/AdminPage.jsp\"> Admin </a></p>");
             out.println("<p><a href=\"/Cupcake/SessionExit.jsp\"> Logout</a></p>");
             out.println("</body>");
             out.println("</html>");
