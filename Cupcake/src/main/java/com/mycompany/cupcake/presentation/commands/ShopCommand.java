@@ -17,6 +17,10 @@ import javax.servlet.http.HttpSession;
 /**
  *
  * @author Emil PC
+ * 
+ * Note mute: As of 07-03, printHTML now uses the constructor that includes admin.
+ * This might cause issues.
+ * 
  */
 public class ShopCommand extends Command{
 
@@ -28,13 +32,16 @@ public class ShopCommand extends Command{
             String username = user.getUsername();
             String password = user.getPassword();
             String email = user.getEmail();
-            printHTML(new User(username,password,email),response);
+            Boolean admin = user.getAdmin();
+                     
+            printHTML(new User(username,password,email, admin),response);
     }
     
     private void printHTML(User user, HttpServletResponse response) throws IOException{
     response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
             String username = user.getUsername();
+            Boolean admin = user.getAdmin();
             /* TODO output your page here. You may use following sample code. */
             out.println("<!DOCTYPE html>");
             out.println("<html>");
@@ -47,7 +54,10 @@ public class ShopCommand extends Command{
             out.println("<h1>Welcome back : " + username + "</h1>");
             out.println("<p><a href=\"possibilities\"> Check out the menu! </a></p>");
             out.println("<p><a href=\"../CustomerPage\"> Customer page </a></p>");
+            if(admin==true)
+            {
             out.println("<p><a href=\"/Cupcake/AdminPage.jsp\"> Admin </a></p>");
+            }
             out.println("<p><a href=\"/Cupcake/SessionExit.jsp\"> Logout</a></p>");
             out.println("</body>");
             out.println("</html>");

@@ -28,7 +28,7 @@ public class User {
         this.admin = admin;
     }
 
-    public Boolean getAdmin() throws Exception {
+    public Boolean getAdmin() {
         return admin;
     }
 

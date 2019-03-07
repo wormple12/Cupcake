@@ -48,7 +48,7 @@
                 out.print("<div align= \"right\">");
                 out.print("<p>username: " + username + "</p>");
                 out.print("<p>email: " + email + "</p>");
-                out.print("<p>admin: " + admin + "</p>");
+               // out.print("<p>admin: " + admin + "</p>");
                 out.print("<br>");
                 out.print("</div>");
             %>
