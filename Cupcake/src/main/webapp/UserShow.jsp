@@ -58,13 +58,13 @@
                     <td><%=rs.getInt("idshoppingcart")%></td>
                     <td><%=rs.getString("customer")%></td>
                     <td>
-                     
-                       <a href="/Cupcake/InvoiceDetails.jsp?idshoppingcart=<%=rs.getInt("idshoppingcart")%>" >
-                           <div style="height:100%;width:100%">
-                               <!--<input type="radio" name="radio1" onclick="handleClick(this.id);" id="customerId" />-->
-                               view
-                           </td>
-                       </a>
+
+                        <a href="/Cupcake/InvoiceDetails.jsp?idshoppingcart=<%=rs.getInt("idshoppingcart")%>" >
+                            <div style="height:100%;width:100%">
+                                <!--<input type="radio" name="radio1" onclick="handleClick(this.id);" id="customerId" />-->
+                                view
+                                </td>
+                        </a>
                 </tr>
                 <%
                     }

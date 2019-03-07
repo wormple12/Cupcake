@@ -62,6 +62,7 @@
             <tr>
                 <td>order_number</td>
                 <td>username</td>
+                <td>view</td>
             </tr>
             <%
                 try {
@@ -76,6 +77,14 @@
             <tr>
                 <td><%=rs.getInt("order_number")%></td>
                 <td><%=rs.getString("username")%></td>
+                 <td>
+
+                        <a href="/Cupcake/AdminPageOrderDetails.jsp?ordernumber=<%=rs.getInt("order_number")%>" >
+                            <div style="height:100%;width:100%">
+                                <!--<input type="radio" name="radio1" onclick="handleClick(this.id);" id="customerId" />-->
+                                view
+                                </td>
+                        </a>
             </tr>
             <%
                 }
@@ -92,45 +101,6 @@
         %>
     </form>
     
-     <form method="post">
-        <table border = "1">
-            <tr>
-                <td>order_number</td>
-                <td>topping id</td>
-                <td>bottom id</td>
-                <td>quantity id</td>
-            </tr>
-            <%
-                try {
-                    DBConnector connector = new DBConnector();
-                    Connection c = connector.getConnection();
-                    Statement stmt = c.createStatement();
-                    ResultSet rs = stmt.executeQuery("SELECT * FROM ordered_cupcakes");
-                    //Order order = (Order) request.getSession().getAttribute("Order");
-
-                    while (rs.next()) {
-            %>
-            <tr>
-                <td><%=rs.getInt("order_number")%></td>
-                <td><%=rs.getInt("topping_id")%></td>
-                <td><%=rs.getInt("bottom_id")%></td>
-                <td><%=rs.getInt("amount")%></td>
-                
-            </tr>
-            <%
-                }
-            %>
-        </table>
-        <%
-                rs.close();
-                stmt.close();
-                c.close();
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-
-        %>
-    </form>
 </html>
 
 
