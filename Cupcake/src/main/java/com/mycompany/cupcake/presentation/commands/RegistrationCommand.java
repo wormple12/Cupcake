@@ -42,22 +42,27 @@ public class RegistrationCommand extends Command {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
+            out.println("<title>Servlet Registration</title>");
             out.println("<link rel=\"stylesheet\" href=\"https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css\">");
             out.println("<link rel=\"stylesheet\" type=\"text/css\" href=\"css.css\">");
-            out.println("<title>Servlet RegistrationNlogin</title>");
+            out.println("<link rel=\"stylesheet\" type=\"text/css\" href=\"cupcakebackgroun.css\">");            
             out.println("</head>");
+            
             out.println("<body>");
-            /*
-            Change the form action as it needs context with the database
-
-             */
-            out.println("<h1> Create new user</h1>");
+            
+            out.println("<div name=\"topmenu\">");
+            out.println("<select onChange=\"window.location.href=this.value\">");   
+            out.println("<option value = \"c/registration\"> Create new user </option>");
+            out.println("<option value = \"/Cupcake/SessionExit.jsp\"> Login </option>");
+            out.println("</select>");
+            out.println("</div>");
+            
+            out.println("<h1> Create new user </h1>");
             out.println("<form action=/Cupcake/Registration> "
                      + "Username: <br> <input type=text name=username> <br> "
                      + "Password: <br> <input type= password name=password> <br> "
                      + "Email: <br> <input type= text name=email> <br>"
-                     + "Create new user<br> <input type=submit>"
-                     //+ "<p><a href=\"CreateNewUser.jsp\"> Create New User </a></p>"
+                     + "Create <br> <input type=submit>"
                      + "</form>");
             out.println("</body>");
             out.println("</html>");            
