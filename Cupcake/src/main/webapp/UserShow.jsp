@@ -42,13 +42,14 @@
                 <tr>
                     <td>order_number</td>
                     <td>username</td>
+                    <td>view</td>
                 </tr>
                 <%
                     try {
                         DBConnector connector = new DBConnector();
                         Connection c = connector.getConnection();
                         Statement stmt = c.createStatement();
-                        ResultSet rs = stmt.executeQuery("SELECT * FROM shoppingcart WHERE customer = '"+username+"';");
+                        ResultSet rs = stmt.executeQuery("SELECT * FROM shoppingcart WHERE customer = '" + username + "';");
                         //Order order = (Order) request.getSession().getAttribute("Order");
 
                         while (rs.next()) {
@@ -56,6 +57,14 @@
                 <tr>
                     <td><%=rs.getInt("idshoppingcart")%></td>
                     <td><%=rs.getString("customer")%></td>
+                    <td>
+                     
+                       <a href="/Cupcake/InvoiceDetails.jsp?idshoppingcart=<%=rs.getInt("idshoppingcart")%>" >
+                           <div style="height:100%;width:100%">
+                               <!--<input type="radio" name="radio1" onclick="handleClick(this.id);" id="customerId" />-->
+                               view
+                           </td>
+                       </a>
                 </tr>
                 <%
                     }
