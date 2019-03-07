@@ -37,7 +37,7 @@
             </body>
             </html>    
             
-            <%
+            <%/*
             String username = request.getParameter("username");
             String password = request.getParameter("password");
             String email = request.getParameter("email");
@@ -50,5 +50,5 @@
                 } else {
                     redirectJSP.redirectUserCreationFail(response);
                 }
-            }  
+            }  */
             %>
