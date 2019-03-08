@@ -39,58 +39,32 @@
                 $("#includedContent").load("b.html");
             });
         </script> 
-        
+
         <link rel="stylesheet" type="text/css" href="altcss.css">
         <meta name="viewport" content="width=device-width, initial-scale=1">       
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
-        
+
     </head>
     <body>
-         <nav class="navbar navbar-inverse">
-            <div class="container-fluid">
-                <div class="navbar-header">
-                    <a class="navbar-brand" href="/Cupcake/c/shopping">Cupcakes</a>
-                </div>
-                <ul class="nav navbar-nav">
-                    <li class="active"><a href="/Cupcake/c/shopping">Home</a></li>
-                    <li><a href="/Cupcake/c/possibilities">Menu</a></li>
-                </ul>
-                <ul class="nav navbar-nav navbar-right">
-                    <li><a href="/Cupcake/CustomerPage"><span class="glyphicon glyphicon-user"></span> Customer Page</a></li>
-                    <li><a href="/Cupcake/SessionExit.jsp"><span class="glyphicon glyphicon-log-out"></span> Log out</a></li>
-                </ul>
-            </div>
-        </nav>
-        <form id="topmenu">
-            <%
-                User user = (User) request.getSession().getAttribute("User");
-                String username = user.getUsername();
-                CupcakeDAO dao = new CupcakeDAO();
-                user = dao.getUser(username);
-                String email = user.getEmail();
-                Boolean admin = user.getAdmin();
 
-//                out.print("<tr><td>" + dao.getOrder(1) + "</tr></td>");
-//                out.print("<tr><td>" + dao.getAllBottoms() + "</tr></td>");
-                out.print("<div align= \"right\">");
-                out.print("<p>username: " + username + "</p>");
-                out.print("<p>email: " + email + "</p>");
-                // out.print("<p>admin: " + admin + "</p>");
-                out.print("<br>");
-                out.print("</div>");
-            %>
-        </form>
-
+        <jsp:include page="siteheader.jsp" />
+        <jsp:include page="UserInfoBox.jsp" />
+        
+        <%
+            User user = (User) request.getSession().getAttribute("User");
+            String username = user.getUsername();
+        %>
 
     </body>
 
     <form method="post">
-        <table border = "1">
+        <table id ="uglytable" border = "1">
             <tr>
-                <td>order_number</td>
-                <td>username</td>
+
+                <td>cartid</td>
+                <td>customer</td>
                 <td>view</td>
             </tr>
             <%
@@ -98,17 +72,17 @@
                     DBConnector connector = new DBConnector();
                     Connection c = connector.getConnection();
                     Statement stmt = c.createStatement();
-                    ResultSet rs = stmt.executeQuery("SELECT * FROM orders");
+                    ResultSet rs = stmt.executeQuery("SELECT * FROM shoppingcart");
                     //Order order = (Order) request.getSession().getAttribute("Order");
 
                     while (rs.next()) {
             %>
             <tr>
-                <td><%=rs.getInt("order_number")%></td>
-                <td><%=rs.getString("username")%></td>
+                <td><%=rs.getInt("idshoppingcart")%></td>
+                <td><%=rs.getString("customer")%></td>
                 <td>
 
-                    <a href="/Cupcake/AdminPageOrderDetails.jsp?ordernumber=<%=rs.getInt("order_number")%>" >
+                    <a href="/Cupcake/AdminPageOrderDetails.jsp?idshoppingcart=<%=rs.getInt("idshoppingcart")%>" >
                         <div style="height:100%;width:100%">
                             <!--<input type="radio" name="radio1" onclick="handleClick(this.id);" id="customerId" />-->
                             view

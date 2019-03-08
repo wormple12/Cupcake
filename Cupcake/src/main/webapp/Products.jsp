@@ -21,6 +21,7 @@
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
     </head>
     <body>
+<<<<<<< HEAD
         <nav class="navbar navbar-inverse">
             <div class="container-fluid">
                 <div class="navbar-header">
@@ -36,6 +37,10 @@
                 </ul>
             </div>
         </nav>
+=======
+        <jsp:include page="siteheader.jsp" />
+
+>>>>>>> 45499cfff27b94fe2c731024c8bedbb286853ccf
         <form action="Finalization" >
             <%
                 ShoppingCart cart = (ShoppingCart) request.getSession().getAttribute("ShoppingCart");
@@ -62,13 +67,16 @@
                     out.print("<div align= \"left\">");
                     out.print("<p>Cupcake: " + cupcake.getTopping().getTopping_name() + " frosting with " + cupcake.getBottom().getBottom_Name()
                             + " bottom, Quantity: " + qty + ", Price: <span class=\"price\">" + price + "</span></p>");
+
                     out.print("<button type='submit'name=\"remove\" value="+i+" formaction= \"Products.jsp"+"\">"+"Remove</button>");
+
                     out.print("<br>");
                     out.print("</div>");
                     tprice += price;
                 }
                 out.print("<h1>" + "Total Price= " + tprice + "</h1>");
                 out.print("<input type='hidden' name=tprice value=" + tprice + ">");
+
                 if (tprice < dao.getBalance(user.getUsername())) {
                     out.print("<input type='submit' value=\"Finalize the purchase\">");
 
@@ -78,7 +86,7 @@
                 }
             %>
 
-           
+          
 
         </form>
     </body>
