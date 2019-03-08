@@ -63,7 +63,7 @@
                 </ul>
             </div>
         </nav>
-        <form id="topmenu">
+        <form id="topmenu" id = "headerx">
             <%
                 User user = (User) request.getSession().getAttribute("User");
                 String username = user.getUsername();
