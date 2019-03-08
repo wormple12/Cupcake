@@ -35,28 +35,44 @@
     </body>
 
     <form method="post">
-        <table border = "1">
+        <table id ="uglytable" border = "1">
             <tr>
-                <td>order_number</td>
-                <td>topping id</td>
-                <td>bottom id</td>
-                <td>quantity id</td>
+                <td>idlineitems</td>
+                <td>cupcake</td>
+                <td>price</td>
+                <td>quantity</td>
+                <td>cartid</td>
+                <td>lineid</td>
+                <td>idshoppingcart</td>
+                <td>customer</td>
             </tr>
             <%
                 try {
                     DBConnector connector = new DBConnector();
                     Connection c = connector.getConnection();
                     Statement stmt = c.createStatement();
-                    ResultSet rs = stmt.executeQuery("SELECT * FROM ordered_cupcakes WHERE order_number=" + request.getParameter("ordernumber") + ";");
+                    ResultSet rs = stmt.executeQuery(
+                             "SELECT *"
+                            + " FROM lineitems ls "
+                            + "LEFT JOIN has_lineitem hs "
+                            + "ON ls.idlineitems = hs.lineid "
+                            + "LEFT JOIN shoppingcart sc "
+                            + "ON sc.idshoppingcart = hs.cartid "
+                            + "WHERE sc.idshoppingcart =" + request.getParameter("idshoppingcart") + ";");
                     //Order order = (Order) request.getSession().getAttribute("Order");
 
                     while (rs.next()) {
             %>
             <tr>
-                <td><%=rs.getInt("order_number")%></td>
-                <td><%=rs.getInt("topping_id")%></td>
-                <td><%=rs.getInt("bottom_id")%></td>
-                <td><%=rs.getInt("amount")%></td>
+                <td><%=rs.getInt("idlineitems")%></td>
+                <td><%=rs.getString("cupcake")%></td>
+                <td><%=rs.getInt("price")%></td>
+                <td><%=rs.getInt("quantity")%></td>
+                <td><%=rs.getInt("cartid")%></td>
+                <td><%=rs.getInt("lineid")%></td>
+                <td><%=rs.getInt("idshoppingcart")%></td>
+                <td><%=rs.getString("customer")%></td>
+
 
             </tr>
             <%
