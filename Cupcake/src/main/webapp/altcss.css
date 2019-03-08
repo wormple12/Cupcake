@@ -55,7 +55,11 @@ and open the template in the editor.
     padding: 10px, 10px, 10px, 10px;
     border: 5px solid black;
 }
-
+#headerx{
+    clear:both;
+    width:100%;
+    margin-bottom:12px;
+}
 
 
 /*
@@ -290,3 +294,748 @@ span#captionText{
     font-weight:normal;
 }
 */
+/*
+@charset "UTF-8";
+
+Theme Name: shichigoro Theme
+Author: shichigoro-CHR
+Author URI: http://www.shichigoro.com
+Description: The Theme of shichigoro's Website
+Version: 1.0
+
+
+ Reset
+******************************************************
+html{
+	font-family:sans-serif;
+	font-size:100%;
+	overflow-y:scroll;
+	-webkit-text-size-adjust:100%;
+    -moz-text-size-adjust:100%;
+    -ms-text-size-adjust:100%;
+    -o-text-size-adjust:100%;
+    text-size-adjust:100%;
+}
+body,div,dl,dt,dd,ul,ol,li,h1,h2,h3,h4,h5,h6,img,a,p,caption,blockquote,pre,table,tbody,th,tr,td,hr,address{
+	margin:0;
+	padding:0;
+	border:0;
+	vertical-align:baseline;
+	font-weight:normal;
+	line-height:1;
+	text-indent:0;
+}
+article,aside,details,figcaption,figure,footer,header,hgroup,main,nav,section,summary{
+	display:block;
+}
+table{
+	border-collapse:collapse;
+	border-spacing:0;
+}
+ol,ul,li{
+	list-style:none;
+}
+audio,canvas,video{
+	display:inline-block;
+	max-width:100%;
+}
+strong,b{
+	font-weight:bold;
+}
+address{
+	font-style:normal;
+}
+blockquote,q{
+	quotes:none;
+}
+blockquote:before,blockquote:after,
+q:before,q:after{
+	content:'';
+	content:none;
+}
+img{
+	-ms-interpolation-mode:bicubic;
+	vertical-align:middle;
+}
+img.link-img{
+	padding-bottom:6px;
+}
+a img.link-img,.article-content img.link-img{
+	border:none;
+}
+a:hover img.link-img{
+	-webkit-transform:  rotate(360deg);
+	transform: rotate(360deg);
+}
+
+ Basic
+******************************************************
+body{
+	background:#FCFCFC;
+	color:#999;
+	font-family:'小塚ゴシック Pro', 'Kozuka Gothic Pro', 'ヒラギノ角ゴ ProN', 'Hiragino Kaku Gothic ProN', '游ゴシック', YuGothic, 'メイリオ', Meiryo, sans-serif;
+	font-size:14px;
+}
+.font2{
+	font-family:'Josefin Sans', 'Century Gothic', '小塚ゴシック Pro', 'Kozuka Gothic Pro', 'ヒラギノ角ゴ ProN', 'Hiragino Kaku Gothic ProN', Verdana, sans-serif;
+	letter-spacing:1px;
+}
+a{
+	color:#9CC0CC;
+	text-decoration:none;
+}
+a:focus{
+	outline:thin dotted #9CC0CC;
+}
+a:hover{
+	color:#70AABB;
+}
+a:active{
+	position:relative;
+	top:1px;
+}
+blockquote{
+    border: 1px solid #DDD;
+    padding: 12px 32px 0;
+    position: relative;
+    margin: 8px 0;
+} 
+blockquote:before{
+    content: "“";
+    font-size: 400%;
+    line-height: 1;
+    font-family: Times New Roman, Century, sans-serif;
+    color: #CCC;
+    position: absolute;
+    left: 0;
+    top: 0;
+}
+blockquote:after{
+    content: "”";
+    font-size: 400%;
+    line-height: 0;
+    font-family: Times New Roman, Century, sans-serif;
+    color: #CCC;
+    position: absolute;
+    right: 0;
+    bottom: 0;
+}
+hr{
+	border-bottom:1px solid #DDD;
+	margin-bottom: 8px;
+}
+.sticky {
+}
+.aligncenter,
+div.aligncenter {
+   display: block;
+   margin-left: auto;
+   margin-right: auto;
+}
+
+.alignleft {
+   float: left;
+}
+
+.alignright {
+   float: right;
+}
+.wp-caption {
+	max-width: 100%;
+	height: auto;
+}
+p.wp-caption-text {
+	font-size: 13px;
+	font-weight: normal;
+	line-height: 1.3;
+	color: #BBB;
+	margin: 0;
+	padding: 0;
+	margin-bottom: 16px;
+}
+.wp-caption img {
+   margin: 0;
+   padding: 0;
+   border: 0 none;
+}
+ Images 
+img{
+	max-width:100%;
+	height:auto;
+}
+img{
+	margin-top:2px;
+}
+a:hover img{
+	opacity: 0.7;  
+    filter: alpha(opacity=70);
+}
+ ClearFix 
+.clearfix:after{
+	content:"";
+	clear:both;
+	display:block;
+}
+
+ Main
+******************************************************
+#page{
+	min-width:264px;
+	max-width:936px;
+	margin:0 auto;
+	padding:0 12px;
+}
+#language{
+	width:100%;
+	height:32px;
+	padding:2px 0;
+}
+#header{
+	clear:both;
+	width:100%;
+	margin-bottom:12px;
+}
+#navigation{
+	width:100%;
+	margin-bottom:12px;
+}
+#content{
+	clear:both;
+	width:100%;
+	margin-bottom:12px;
+}
+#footer{
+	clear:both;
+	border-top:1px solid #CCC;
+	padding:8px 0;
+	margin-bottom:12px;
+}
+
+ Language
+******************************************************
+#language a{
+	float:right;
+	display:block;
+	width:90px;
+	padding-top:2px;
+	line-height:24px;
+	border:1px solid #CCC;
+	background:#CCC;
+	color:#FFF;
+	text-align:center;
+	font-size:12px;
+}
+#language a:hover{
+	border:1px solid #9CC0CC;
+	background:#9CC0CC;
+	color:#FFF;
+}
+
+ Header
+******************************************************
+#logo a{
+	display:block;
+	width:264px;
+	height:66px;
+	margin:0 auto;
+	background:url('images/logo-shichigoro-off.gif') no-repeat top left;
+}
+#logo a:hover{
+	background:url('images/logo-shichigoro-on.gif') no-repeat top left;
+}
+ Navigation
+******************************************************
+ Header Navigation 
+#main-navigation:after{
+	clear:both;
+}
+#main-navigation ul,#lang-navigation ul,#artwork-navigation ul{
+	letter-spacing:-0.4em;
+	text-align:left;
+	width:264px;
+	margin:0 auto;
+}
+#main-navigation li,#lang-navigation li,#artwork-navigation li{
+	display:inline-block;
+	text-align:center;
+	letter-spacing:1px;
+}
+#main-navigation li,#lang-navigation li{
+	width:50%;
+}
+#artwork-navigation li{
+	width:100%;
+}
+#main-navigation li a,#lang-navigation li a,#artwork-navigation li a{
+	display:block;
+	margin:1px;
+	padding-top:4px;
+	line-height:28px;
+	border:1px solid #CCC;
+	color:#BBB;
+}
+#main-navigation li a:hover,#lang-navigation li a:hover,#artwork-navigation li a:hover{
+	background:#CCC;
+	color:#FFF;
+}
+#main-navigation .current-menu-item > a,
+#main-navigation .current-menu-ancestor > a,
+#main-navigation .current-page-item > a,
+#main-navigation .current-page-ancestor > a{
+	border:1px solid #9CC0CC;
+	background:#9CC0CC;
+	color:#FFF;
+}
+#main-navigation .current-menu-item > a:hover,
+#main-navigation .current-menu-ancestor > a:hover,
+#main-navigation .current-page-item > a:hover,
+#main-navigation .current-page-ancestor > a:hover{
+	border:1px solid #CCC;
+	background:#CCC;
+	color:#FFF;
+}
+ Footer Navigation 
+#footer-navigation ul,#lang-footer-navigation ul,#artwork-footer-navigation ul{
+	letter-spacing:-0.4em;
+	text-align:left;
+	width:264px;
+	margin:0 auto;
+	margin-bottom:12px;
+}
+#footer-navigation li,#lang-footer-navigation li,#artwork-footer-navigation li{
+	display:inline-block;
+	text-align:center;
+	letter-spacing:1px;
+}
+#footer-navigation li,#lang-footer-navigation li{
+	width:50%;
+}
+#artwork-footer-navigation li{
+	width:100%;
+}
+#footer-navigation li a,#lang-footer-navigation li a,#artwork-footer-navigation li a{
+	display:block;
+	margin:1px;
+	padding-top:4px;
+	line-height:28px;
+	border:1px solid #CCC;
+	color:#BBB;
+	font-size:14px;
+}
+#footer-navigation li a:hover,#lang-footer-navigation li a:hover,#artwork-footer-navigation li a:hover{
+	background:#CCC;
+	color:#FFF;
+}
+#footer-navigation .current-menu-item > a,
+#footer-navigation .current-menu-ancestor > a,
+#footer-navigation .current-page-item > a,
+#footer-navigation .current-page-ancestor > a{
+	border:1px solid #9CC0CC;
+	background:#9CC0CC;
+	color:#FFF;
+}
+#footer-navigation .current-menu-item > a:hover,
+#footer-navigation .current-menu-ancestor > a:hover,
+#footer-navigation .current-page-item > a:hover,
+#footer-navigation .current-page-ancestor > a:hover{
+	border:1px solid #CCC;
+	background:#CCC;
+	color:#FFF;
+}
+
+ Footer
+******************************************************
+#copyrights{
+	padding:8px 0;
+	color:#CCC;
+	text-align:center;
+	font-size:13px;
+}
+
+ Common
+******************************************************
+.page-content{
+	padding:0 8px;
+}
+.page-content p{
+	margin-bottom:12px;
+	line-height:1.6;
+}
+#menu-list a{
+	width:264px;
+	display:block;
+	border:1px solid #CCC;
+	color:#BBB;
+	padding:8px;
+	margin:0 auto;
+	margin-bottom:12px;
+	text-align:center;
+}
+#menu-list a:hover{
+	border:1px solid #9CC0CC;
+	background:#9CC0CC;
+	color:#FFF;
+}
+h2#head-title{
+	clear:both;
+	display:block;
+	margin-bottom:6px;
+	padding:0 4px 2px;
+    color:#888;
+	text-align:center;
+	line-height:1.2;
+	font-size:16px;
+}
+h3.content-title{
+	clear:both;
+	display:block;
+	margin-bottom:6px;
+	border-bottom:1px solid #CCC;
+    color:#888;
+	text-align:center;
+	line-height:1.2;
+	font-size:18px;
+}
+h4.list-title{
+	display:block;
+	margin-bottom:10px;
+	border-bottom:1px solid #DDD;
+	color:#999;
+	text-align:center;
+	letter-spacing:1px;
+	font-size:16px;
+}
+
+.waku {
+	border: 1px solid #DDD;
+	padding-top: 8px;
+	padding-right: 12px;
+	padding-left: 12px;
+	margin-bottom: 12px;
+}
+
+.deadlink {
+	display:none
+}
+
+ Pager
+******************************************************
+ Pager 
+#pager{
+	clear:both;
+	display:block;
+	padding:12px 0;
+	color: #BBB;
+	text-align:center;
+	font-size: 14px;
+}
+.page-numbers{
+	display:inline-block;
+	width:28px;
+	margin-bottom:6px;
+	padding-top:4px;
+	line-height:28px;
+	border:1px solid #CCC;
+	color:#BBB;
+}
+#pager .prev{
+	margin-right:8px;
+	width:64px;
+
+}
+#pager .next{
+	margin-left:8px;
+	width:64px;
+}
+#pager .dots{
+	border:none;
+}
+a:hover.page-numbers{
+	border:1px solid #CCC;
+	background: #CCC;
+	color:#FFF;
+}
+#pager .current{
+	border:1px solid #9CC0CC;
+	background: #9CC0CC;
+	color:#FFF;
+}
+ nextpage 
+.nextpage-navi{
+	clear:both;
+	display:block;
+	padding:12px 0;
+	color: #BBB;
+	text-align:center;
+	font-size: 14px;
+}
+.nextpage-next,
+.nextpage-prev,
+.nextpage-num {
+	display:inline-block;
+    letter-spacing:0;
+	width:28px;
+	padding-top:4px;
+	line-height:28px;
+	border:1px solid #9CC0CC;
+	background: #9CC0CC;
+	color:#FFF;
+}
+.nextpage-prev{
+	margin-right:8px;
+	width:66px;
+}
+.nextpage-next{
+	margin-left:8px;
+	width:66px;
+}
+.nextpage-navi a span.nextpage-next,
+.nextpage-navi a span.nextpage-prev,
+.nextpage-navi a span.nextpage-num{
+	border: 1px solid #CCC;
+	background: none;
+	color: #BBB;
+}
+.nextpage-navi a:hover span.nextpage-next,
+.nextpage-navi a:hover span.nextpage-prev,
+.nextpage-navi a:hover span.nextpage-num {
+	color: #FFF;
+	border: 1px solid #CCC;
+	background: #CCC;
+}
+
+ Back to Top
+******************************************************
+#back-top{
+	position:fixed;
+	bottom:12px;
+	right:12px;
+}
+#back-top a{
+	display:block;
+	padding:6px;
+	background:#9CC0CC;
+	-webkit-box-shadow:0 0 16px #FFF;
+	-moz-box-shadow:0 0 16px #FFF;
+	box-shadow:0 0 16px #FFF;
+	color:#FFF;
+	text-align:center;
+	text-decoration:none;
+	line-height:1.2;
+	font-size:13px;
+}
+#back-top a:hover{
+	background:#70AABB;
+}
+
+ Add this
+******************************************************
+#share-buttons{
+	clear:both;
+	width:184px;
+	height:54px;
+	margin:0 auto;
+	padding:8px;
+	text-align:center;
+}
+#share-buttons p{
+	margin-bottom:4px;
+	color:#CCC;
+	font-size:13px;
+}
+
+ LightBox
+******************************************************
+#imageDetails, #helpDisplay {
+	margin-bottom:4px;
+	font-family:'Josefin Sans', 'Century Gothic', '小塚ゴシック Pro', 'Kozuka Gothic Pro', 'ヒラギノ角ゴ ProN', 'Hiragino Kaku Gothic ProN', Verdana, sans-serif;
+}
+#titleText {
+	letter-spacing: 1px;
+	font-weight: normal;
+	line-height:1.4;
+	font-size: 16px;
+	color:#CCC;
+	padding-bottom:12px;
+}
+p#controls{
+	margin-top:4px;
+	text-align:right;
+	font-size:16px;
+}
+span#helpDisplay{
+	font-size:18px;
+}
+span.lightbox-dl{
+	font-size:13px;
+}
+span#captionText{
+	font-size:14px;
+	font-weight:normal;
+}
+
+****************************************************
+ Media queries
+******************************************************
+@-ms-viewport {width: device-width;}
+@viewport {width: device-width;}
+
+@media screen and (min-width: 480px) {
+#main-navigation ul,#footer-navigation ul{
+	text-align:left;
+	width:100%;
+}
+#main-navigation li,#footer-navigation li{
+	width:33.33333333%;
+}
+#back-top{
+	bottom:20px;
+}
+#back-top a{
+	padding:8px 10px;
+}
+}
+
+@media screen and (min-width: 600px) {
+#language{
+	margin-bottom:4px;
+	height:20px;
+}
+#language a{
+	line-height:16px;
+}
+
+#header{
+	float:left;
+	width:264px;
+	height:72px;
+}
+#navigation{
+	float:right;
+	width:auto;
+}
+#main-navigation ul{
+	width:280px;
+	float:right;
+}
+#lang-navigation ul{
+	padding-top:14px;
+	width:200px;
+	float:right;
+}
+#artwork-navigation ul{
+	width:180px;
+	float:right;
+}
+#main-navigation li a,#lang-navigation li a,#artwork-navigation li a{
+	margin-right:0;
+	margin-left:2px;
+}
+#footer-navigation ul,#lang-footer-navigation ul,#artwork-footer-navigation ul{
+	width:100%;
+}
+#footer-navigation li,#lang-footer-navigation li,#artwork-footer-navigation li{
+	display:inline;
+}
+#footer-navigation li,#lang-footer-navigation li{
+	width:auto;
+}
+#artwork-footer-navigation li{
+	width:auto;
+}
+#footer-navigation li a,#lang-footer-navigation li a,#artwork-footer-navigation li a{
+	display:inline;
+	margin:0;
+	margin-right:20px;
+	padding-top:0;
+	line-height:1.4;
+	border:none;
+}
+#footer-navigation li a:hover,#lang-footer-navigation li a:hover,#artwork-footer-navigation li a:hover{
+	background:none;
+	color:#70AABB;
+}
+#footer-navigation .current-menu-item > a,
+#footer-navigation .current-menu-ancestor > a,
+#footer-navigation .current-page-item > a,
+#footer-navigation .current-page-ancestor > a{
+	border:none;
+	background:none;
+	color:#9CC0CC;
+}
+#footer-navigation .current-menu-item > a:hover,
+#footer-navigation .current-menu-ancestor > a:hover,
+#footer-navigation .current-page-item > a:hover,
+#footer-navigation .current-page-ancestor > a:hover{
+	border:none;
+	background:none;
+	color:#70AABB;
+}
+#menu-list, #menu-list a{
+	display:none;
+}
+h2#head-title{
+	text-align:left;
+}
+h3.content-title,h4.list-title{
+	text-align:left;
+	padding: 0 4px;
+}
+}
+
+@media screen and (min-width: 720px) {
+body{
+	background:url('images/background.jpg') repeat top left;
+}
+#artwork-navigation ul{
+	width:360px;
+	padding-top:14px;
+}
+#artwork-navigation li{
+	width:180px;
+}
+#copyrights{
+	text-align:right;
+}
+#back-top{
+	right:30px;
+	bottom:50px;
+}
+}
+@media screen and (min-width: 840px) {
+#language{
+	margin-bottom:0;
+}
+#language a{
+	width:86px;
+}
+#header{
+	height:66px;
+}
+#main-navigation ul,#lang-navigation ul,#artwork-navigation ul{
+	padding-top:16px;
+}
+#main-navigation ul{
+	width:451px;
+}
+#main-navigation li{
+	width:90px;
+}
+#main-navigation li a,#lang-navigation li a,#artwork-navigation li a{
+	line-height:24px;
+}
+}
+@media screen and (min-width: 960px) {
+a{
+	-webkit-transition: 0.3s ease-in-out;  
+    -moz-transition: 0.3s ease-in-out;  
+    -o-transition: 0.3s ease-in-out;  
+    transition: 0.3s ease-in-out;
+}
+img{
+	-webkit-transition: 0.3s ease-in-out;  
+    -moz-transition: 0.3s ease-in-out;  
+    -o-transition: 0.3s ease-in-out;  
+    transition: 0.3s ease-in-out;
+}
+}*/

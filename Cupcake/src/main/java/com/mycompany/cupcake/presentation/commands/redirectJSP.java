@@ -18,6 +18,9 @@ public class redirectJSP {
     public static void redirectUserCreationFail  (HttpServletResponse response) throws IOException {
         response.sendRedirect("FailedCreation.jsp");
     }
+    public static void redirectRegisterUse  (HttpServletResponse response) throws IOException {
+        response.sendRedirect("RegisterUser.jsp");
+    }
    /* public static void redirectShopping (HttpServletResponse response) throws IOException {
         response.sendRedirect("c/shopping");
     }*/
