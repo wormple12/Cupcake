@@ -19,21 +19,8 @@
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
     </head>
     <body>
-         <nav class="navbar navbar-inverse">
-            <div class="container-fluid">
-                <div class="navbar-header">
-                    <a class="navbar-brand" href="/Cupcake/c/shopping">Cupcakes</a>
-                </div>
-                <ul class="nav navbar-nav">
-                    <li class="active"><a href="/Cupcake/c/shopping">Home</a></li>
-                    <li><a href="/Cupcake/c/possibilities">Menu</a></li>
-                </ul>
-                <ul class="nav navbar-nav navbar-right">
-                    <li><a href="/Cupcake/CustomerPage"><span class="glyphicon glyphicon-user"></span> Customer Page</a></li>
-                    <li><a href="/Cupcake/SessionExit.jsp"><span class="glyphicon glyphicon-log-out"></span> Log out</a></li>
-                </ul>
-            </div>
-        </nav>
+        <jsp:include page="siteheader.jsp" />
+
         <form action="Finalization" >
             <%
                 ShoppingCart cart = (ShoppingCart) request.getSession().getAttribute("ShoppingCart");
@@ -44,17 +31,17 @@
                     double price = item.getPrice();
 
                     out.print("<div align= \"left\">");
-                    out.print("<p>Cupcake: " +   cupcake.getTopping().getTopping_name() + " frosting with " +cupcake.getBottom().getBottom_Name() 
-                              + " bottom, Quantity: " + qty + ", Price: <span class=\"price\">"+price+ "</span></p>");
+                    out.print("<p>Cupcake: " + cupcake.getTopping().getTopping_name() + " frosting with " + cupcake.getBottom().getBottom_Name()
+                            + " bottom, Quantity: " + qty + ", Price: <span class=\"price\">" + price + "</span></p>");
                     out.print("<br>");
                     out.print("</div>");
                     tprice += price;
                 }
                 out.print("<h1>" + "Total Price= " + tprice + "</h1>");
-                out.print("<input type='hidden' name=tprice value="+tprice+">" );
+                out.print("<input type='hidden' name=tprice value=" + tprice + ">");
             %>
             <input type='submit' value="Finalize the purchase">
-            
+
         </form>
     </body>
 </html>
