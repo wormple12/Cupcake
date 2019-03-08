@@ -51,7 +51,7 @@ public class RegistrationNlogin extends HttpServlet {
             out.println("<div name=\"topmenu\">");
             out.println("<select onChange=\"window.location.href=this.value\">");   
             out.println("<option value = \"RegistrationNlogin\"> Login </option>");
-            out.println("<option value = \"c/registration\"> Create new user </option>");
+            out.println("<option value = \"RegisterUser.jsp\"> Create new user </option>");
             out.println("</select>");
             out.println("</div>");
 
