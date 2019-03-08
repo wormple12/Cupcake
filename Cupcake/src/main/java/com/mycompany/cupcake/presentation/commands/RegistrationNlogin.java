@@ -59,10 +59,8 @@ public class RegistrationNlogin extends HttpServlet {
             out.println("<form action=/Cupcake/RegistrationNlogin method=POST> "
                     + "Username: <br> <input type=text name=username> <br> "
                     + "Password: <br> <input type= password name=password> <br> "
-                    + "<br> <input type=submit>"
-                    + "</form>");
-            out.println("</body>");
-            out.println("</html>");
+                    + "<br> <input type=submit>");
+          
 
             String username = request.getParameter("username");
             String password = request.getParameter("password");
@@ -70,8 +68,11 @@ public class RegistrationNlogin extends HttpServlet {
             if (username != null && password != null) {// && email != null) {    
                 User user = dao.getUser(username);
                 
-                if (user == null) {
-                    redirectJSP.redirectFailedLogin(response);
+                if (user.getUsername().length() ==0){
+                     out.println("<p style=\"color:red\">Incorrect username/passwords</p>");;
+                }else if(!user.getPassword().equals(password)) {
+                    out.println("<p style=\"color:red\">Incorrect password</p>");
+                                      
                 } else {
                     HttpSession session = request.getSession();
                     session.removeAttribute("User");
@@ -79,6 +80,10 @@ public class RegistrationNlogin extends HttpServlet {
                     redirectJSP.redirectShopping(response);
                 }
             }
+            
+            out.println("</form>");
+            out.println("</body>");
+            out.println("</html>");
         } catch (Exception x) {
             x.printStackTrace();
         }

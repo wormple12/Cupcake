@@ -25,10 +25,10 @@
                     double price = item.getPrice();
 
                     out.print("<div align= \"left\">");
-                    out.print("<p>Cupcake: " + cupcake.getBottom().getBottom_Name() + " frosting with " + cupcake.getTopping().getTopping_name() + " bottom, Quantity: " + qty + "</p>");
+                    out.print("<p>Cupcake: " +   cupcake.getTopping().getTopping_name() + " frosting with " +cupcake.getBottom().getBottom_Name() + " bottom, Quantity: " + qty + "</p>");
                     out.print("<br>");
                     out.print("</div>");
-                    tprice = tprice + price;
+                    tprice += price;
                 }
                 out.print("<h1>" + "Total Price= " + tprice + "</h1>");
                 out.print("<input type='hidden' name=tprice value="+tprice+">" );
