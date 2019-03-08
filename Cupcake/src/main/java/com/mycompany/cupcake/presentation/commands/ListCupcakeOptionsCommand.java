@@ -57,7 +57,7 @@ public class ListCupcakeOptionsCommand extends Command {
             
             out.println("</select><select name = bottom>Bottoms:");
             for (Bottom bottom : bottoms) {
-                out.println("<option value=\"" + bottom.getBottom_id()+/**/"\">"+  bottom.getBottom_Name() + ", " + bottom.getPrice() + ",- DKK</option>");
+                out.println("<option value=\"" + bottom.getBottom_id()+"\">"+  bottom.getBottom_Name() + ", " + bottom.getPrice() + ",- DKK</option>");
             }
             out.println("<input name=\"quantity\">"+"Quantity"+"</input>");
             out.println("<input type= submit>");

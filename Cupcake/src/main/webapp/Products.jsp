@@ -40,7 +40,8 @@
                     double price = item.getPrice();
 
                     out.print("<div align= \"left\">");
-                    out.print("<p>Cupcake: " +   cupcake.getTopping().getTopping_name() + " frosting with " +cupcake.getBottom().getBottom_Name() + " bottom, Quantity: " + qty + "</p>");
+                    out.print("<p>Cupcake: " +   cupcake.getTopping().getTopping_name() + " frosting with " +cupcake.getBottom().getBottom_Name() 
+                              + " bottom, Quantity: " + qty + ", Price: <span class=\"price\">"+price+ "</span></p>");
                     out.print("<br>");
                     out.print("</div>");
                     tprice += price;
