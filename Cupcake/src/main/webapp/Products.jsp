@@ -21,26 +21,7 @@
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
     </head>
     <body>
-<<<<<<< HEAD
-        <nav class="navbar navbar-inverse">
-            <div class="container-fluid">
-                <div class="navbar-header">
-                    <a class="navbar-brand" href="/Cupcake/c/shopping">Cupcakes</a>
-                </div>
-                <ul class="nav navbar-nav">
-                    <li class="active"><a href="/Cupcake/c/shopping">Home</a></li>
-                    <li><a href="/Cupcake/c/possibilities">Menu</a></li>
-                </ul>
-                <ul class="nav navbar-nav navbar-right">
-                    <li><a href="/Cupcake/CustomerPage"><span class="glyphicon glyphicon-user"></span> Customer Page</a></li>
-                    <li><a href="/Cupcake/SessionExit.jsp"><span class="glyphicon glyphicon-log-out"></span> Log out</a></li>
-                </ul>
-            </div>
-        </nav>
-=======
         <jsp:include page="siteheader.jsp" />
-
->>>>>>> 45499cfff27b94fe2c731024c8bedbb286853ccf
         <form action="Finalization" >
             <%
                 ShoppingCart cart = (ShoppingCart) request.getSession().getAttribute("ShoppingCart");
@@ -85,7 +66,7 @@
                     out.print("<p style=\"color:red\">Insufficient funds</p>");
                 }
             %>
-
+<input type=submit value="Order more" formaction=c/possibilities>
           
 
         </form>
