@@ -11,7 +11,11 @@
 <%@page import="com.mycompany.cupcake.data.DBConnector"%>
 <%@page import="java.sql.Connection"%>
 <%@page import="java.sql.Connection"%>
+<%--<%@page import="-Dorg.apache.jasper.compiler.Parser.STRICT_QUOTE_ESCAPING=false"%>--%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%--<jsp:include page= "<%= "includes/" + "Cupcake/navbarTest.jsp"
+%>" /> --%>     
+<!---Dorg.apache.jasper.compiler.Parser.STRICT_QUOTE_ESCAPING=false-->
 <!DOCTYPE html>
 <html>
     <head>
@@ -23,8 +27,23 @@
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
     </head>
     <body>
-        <%= "/includes/" + p %>
-        <jsp:include page="<%="/includes/"+"/Cupcake/navbarTest.jsp"%>" />
+         <nav class="navbar navbar-inverse">
+            <div class="container-fluid">
+                <div class="navbar-header">
+                    <a class="navbar-brand" href="/Cupcake/c/shopping">Cupcakes</a>
+                </div>
+                <ul class="nav navbar-nav">
+                    <li class="active"><a href="/Cupcake/c/shopping">Home</a></li>
+                    <li><a href="/Cupcake/c/possibilities">Menu</a></li>
+                </ul>
+                <ul class="nav navbar-nav navbar-right">
+                    <li><a href="/Cupcake/CustomerPage"><span class="glyphicon glyphicon-user"></span> Customer Page</a></li>
+                    <li><a href="/Cupcake/SessionExit.jsp"><span class="glyphicon glyphicon-log-out"></span> Log out</a></li>
+                </ul>
+            </div>
+        </nav>
+        <%--<%= // "/includes/" + p %>--%>
+
         <%--<%@include file="includes/Cupcake/navbarTest.jsp" %>--%>
         <form>
             <%
@@ -66,12 +85,12 @@
                     // ResultSet rs = stmt.executeQuery("SELECT * FROM shoppingcart WHERE customer = '" + username + "';");
                     ResultSet rs = stmt.executeQuery(
                             "SELECT *"
-                                    + " FROM lineitems ls "
-                                    + "LEFT JOIN has_lineitem hs "
-                                    + "ON ls.idlineitems = hs.lineid "
-                                    + "LEFT JOIN shoppingcart sc "
-                                    + "ON sc.idshoppingcart = hs.cartid "
-                                    + "WHERE sc.idshoppingcart ="+ request.getParameter("idshoppingcart") + ";");
+                            + " FROM lineitems ls "
+                            + "LEFT JOIN has_lineitem hs "
+                            + "ON ls.idlineitems = hs.lineid "
+                            + "LEFT JOIN shoppingcart sc "
+                            + "ON sc.idshoppingcart = hs.cartid "
+                            + "WHERE sc.idshoppingcart =" + request.getParameter("idshoppingcart") + ";");
 
                     //Order order = (Order) request.getSession().getAttribute("Order");
                     while (rs.next()) {
