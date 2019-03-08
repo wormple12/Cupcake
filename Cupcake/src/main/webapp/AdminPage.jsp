@@ -48,6 +48,7 @@
 
     </head>
     <body>
+<<<<<<< HEAD
         <nav class="navbar navbar-inverse">
             <div class="container-fluid">
                 <div class="navbar-header">
@@ -82,7 +83,16 @@
                 out.print("</div>");
             %>
         </form>
+=======
+>>>>>>> 8419e32ffacc6160f6c92e7cd9878ba336774c1b
 
+        <jsp:include page="siteheader.jsp" />
+        <jsp:include page="UserInfoBox.jsp" />
+        
+        <%
+            User user = (User) request.getSession().getAttribute("User");
+            String username = user.getUsername();
+        %>
 
     </body>
 
