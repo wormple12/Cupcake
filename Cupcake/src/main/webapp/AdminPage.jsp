@@ -51,7 +51,7 @@
 
         <jsp:include page="siteheader.jsp" />
         <jsp:include page="UserInfoBox.jsp" />
-        
+
         <%
             User user = (User) request.getSession().getAttribute("User");
             String username = user.getUsername();
