@@ -6,7 +6,6 @@
 <%@page import="java.sql.Statement"%>
 <%@page import="java.sql.ResultSet"%>
 <%@page import="java.sql.Connection"%>
-<%@page import="com.mycompany.cupcake.data.order_help_classes.Order"%>
 <%@page import="com.mycompany.cupcake.data.DBConnector"%>
 <!--
 <%@page contentType="text/html" pageEncoding="UTF-8"%>

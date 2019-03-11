@@ -4,8 +4,6 @@ package com.mycompany.cupcake.data;
 
 import com.mycompany.cupcake.data.cc_help_classes.Bottom;
 import com.mycompany.cupcake.data.cc_help_classes.Topping;
-import com.mycompany.cupcake.data.order_help_classes.Order;
-import com.mycompany.cupcake.data.order_help_classes.OrderedCupcakes;
 import com.mycompany.cupcake.data.user_help_classes.User;
 import com.mycompany.cupcake.logic.LineItem;
 import com.mycompany.cupcake.logic.ShoppingCart;
@@ -15,7 +13,6 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
-import java.util.List;
 import java.util.Random;
 
 /**
@@ -188,123 +185,6 @@ public class CupcakeDAO {
         preparedStmt.execute();
 
         preparedStmt.close();
-        c.close();
-    }
-
-    public Order getOrder(int orderNumber) throws Exception {
-        Order order = null;
-        try {
-            order = getOrderInfo(orderNumber);
-        } catch (SQLException ex) {
-            ex.printStackTrace();
-        }
-        return order;
-    }
-
-    private Order getOrderInfo(int orderNumber) throws Exception {
-        Order order = null;
-
-        DBConnector connector = new DBConnector();
-        Connection c = connector.getConnection();
-        String query = "select `username` from orders where order_number = '" + orderNumber + "';";
-        Statement stmt = c.createStatement();
-        ResultSet rs = stmt.executeQuery(query);
-        while (rs.next()) {
-            String username = rs.getString("username");
-            order = new Order(orderNumber, username);
-        }
-        stmt.close();
-        rs.close();
-        c.close();
-        return order;
-    }
-    public OrderedCupcakes getOrderedCupcakes(int orderNumber) throws Exception {
-        OrderedCupcakes oc = null;
-        try {
-            oc = getOrderedCupcakesInfo(orderNumber);
-        } catch (SQLException ex) {
-            ex.printStackTrace();
-        }
-        return oc;
-    }
-
-    private OrderedCupcakes getOrderedCupcakesInfo(int orderNumber) throws Exception {
-        OrderedCupcakes oc = null;
-
-        DBConnector connector = new DBConnector();
-        Connection c = connector.getConnection();
-        String query = "select * from ordered_oupcakes where order_number = '" + orderNumber + "';";
-        Statement stmt = c.createStatement();
-        ResultSet rs = stmt.executeQuery(query);
-        while (rs.next()) {
-            
-          //  int order_number = rs.getInt("order_number");
-            int topId = rs.getInt("topping_id");
-            int botId = rs.getInt("bottom_id");
-            int qty = rs.getInt("amount");
-            
-            
-            oc = new OrderedCupcakes(orderNumber, topId, botId, qty);
-        }
-        stmt.close();
-        rs.close();
-        c.close();
-        return oc;
-    }
-    
-    // vvvvvvv incomplete vvvvvvv
-      public ArrayList<Order> getAllOrders () throws Exception {
-        try {
-            DBConnector connector = new DBConnector();
-            Connection c = connector.getConnection();
-            Statement stmt = c.createStatement();
-            ResultSet rs = stmt.executeQuery("select * from toppings;");
-
-            ArrayList<Order> allOrders = new ArrayList();
-            while (rs.next()) {
-                int topping_id = rs.getInt("topping_id");
-                String topping_name = rs.getString("topping_name");
-                double price = rs.getDouble("price");
-                allOrders.add(new Order(topping_id, topping_name));
-            }
-            stmt.close();
-            rs.close();
-            c.close();
-            return allOrders;
-
-        } catch (SQLException ex) {
-            if (DEBUG) {
-                ex.printStackTrace();
-            }
-        }
-        return null;
-    }
-
-    public void createOrder(int orderNumber, String username) throws Exception {
-        PreparedStatement preparedStmt;
-        DBConnector connector = new DBConnector();
-        Connection c = connector.getConnection();
-        String query
-                = " insert into users (orderNumber, username) VALUES(?,?)";
-        preparedStmt = c.prepareStatement(query);
-        preparedStmt.setInt(1, orderNumber);
-        preparedStmt.setString(2, username);
-        preparedStmt.execute();
-
-        preparedStmt.close();
-        c.close();
-    }
-
-    public void deleteOrder(String column, String identifier) throws Exception {
-        PreparedStatement preparedStmt;
-        DBConnector connector = new DBConnector();
-        Connection c = connector.getConnection();
-        String query
-                = "DELETE FROM orders WHERE ? = ?";
-        preparedStmt = c.prepareStatement(query);
-        preparedStmt.setString(1, column);
-        preparedStmt.setString(2, identifier);
-        preparedStmt.execute();
         c.close();
     }
 

@@ -5,9 +5,7 @@
  */
 package com.mycompany.cupcake.presentation.commands;
 
-import com.mycompany.cupcake.data.CupcakeDAO;
 import com.mycompany.cupcake.data.user_help_classes.User;
-import static com.mycompany.cupcake.presentation.commands.redirectJSP.redirectFailedLogin;
 import java.io.IOException;
 import java.io.PrintWriter;
 import javax.servlet.ServletException;
