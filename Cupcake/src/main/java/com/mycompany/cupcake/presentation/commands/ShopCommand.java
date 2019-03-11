@@ -69,7 +69,7 @@ public class ShopCommand extends Command {
                     + "                    <li><a href=\"/Cupcake/c/possibilities\">Menu</a></li>\n"
                     + "                </ul>\n"
                     + "                <ul class=\"nav navbar-nav navbar-right\">\n"
-                    + "                    <li><a href=\"/Cupcake/CustomerPage\"><span class=\"glyphicon glyphicon-user\"></span> Customer Page</a></li>\n"
+                    + "                    <li><a href=\"/Cupcake/c/showuser\"><span class=\"glyphicon glyphicon-user\"></span> Customer Page</a></li>\n"
                     + "                    <li><a href=\"/Cupcake/SessionExit.jsp\"><span class=\"glyphicon glyphicon-log-out\"></span> Log out</a></li>\n"
                     + "                </ul>\n"
                     + "            </div>\n"
@@ -77,7 +77,7 @@ public class ShopCommand extends Command {
             out.println("<h1>Welcome back    : " + username + "</h1>");
             out.println("<h2>Current balance : " + dao.getBalance(username) + "</h2>");
             out.println("<p><a href=\"possibilities\"> Check out the menu! </a></p>");
-            out.println("<p><a href=\"../CustomerPage\"> Customer page </a></p>");
+            out.println("<p><a href=\"../c/showuser\"> Customer page </a></p>");
             if (admin == true) {
                 out.println("<p><a href=\"/Cupcake/AdminPage.jsp\"> Admin </a></p>");
             }

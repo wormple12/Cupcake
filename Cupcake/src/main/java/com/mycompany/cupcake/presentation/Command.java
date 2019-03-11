@@ -31,6 +31,9 @@ public abstract class Command {
             case "shopping":
                 command = new ShopCommand();
                 break;
+            case "showuser":
+                command = new ShowCustomerCommand();
+                break;
             default:
                 command = new UnknownCommand();
                 break;
