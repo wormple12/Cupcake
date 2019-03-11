@@ -26,7 +26,7 @@
         <jsp:include page="siteheader.jsp" />
 
         <jsp:include page="UserInfoBox.jsp" />
-        
+
         <%
             User user = (User) request.getSession().getAttribute("User");
             String username = user.getUsername();
@@ -47,12 +47,13 @@
                 <td>customer</td>
             </tr>
             <%
+                byte checkSort = 0;
                 try {
                     DBConnector connector = new DBConnector();
                     Connection c = connector.getConnection();
                     Statement stmt = c.createStatement();
                     ResultSet rs = stmt.executeQuery(
-                             "SELECT *"
+                            "SELECT *"
                             + " FROM lineitems ls "
                             + "LEFT JOIN has_lineitem hs "
                             + "ON ls.idlineitems = hs.lineid "
@@ -62,6 +63,7 @@
                     //Order order = (Order) request.getSession().getAttribute("Order");
 
                     while (rs.next()) {
+                        if (checkSort == 0) {
             %>
             <tr>
                 <td><%=rs.getInt("idlineitems")%></td>
@@ -76,6 +78,7 @@
 
             </tr>
             <%
+                    }
                 }
             %>
         </table>
