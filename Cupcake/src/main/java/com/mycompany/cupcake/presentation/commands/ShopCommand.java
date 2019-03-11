@@ -5,6 +5,7 @@
  */
 package com.mycompany.cupcake.presentation.commands;
 
+import com.mycompany.cupcake.data.CupcakeDAO;
 import com.mycompany.cupcake.data.user_help_classes.User;
 import com.mycompany.cupcake.presentation.Command;
 import java.io.IOException;
@@ -24,6 +25,8 @@ import javax.servlet.http.HttpSession;
  */
 public class ShopCommand extends Command {
 
+    CupcakeDAO dao = new CupcakeDAO();
+    
     @Override
     public void execute(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
@@ -71,7 +74,8 @@ public class ShopCommand extends Command {
                     + "                </ul>\n"
                     + "            </div>\n"
                     + "        </nav>");
-            out.println("<h1>Welcome back : " + username + "</h1>");
+            out.println("<h1>Welcome back    : " + username + "</h1>");
+            out.println("<h2>Current balance : " + dao.getBalance(username) + "</h2>");
             out.println("<p><a href=\"possibilities\"> Check out the menu! </a></p>");
             out.println("<p><a href=\"../CustomerPage\"> Customer page </a></p>");
             if (admin == true) {
@@ -80,6 +84,9 @@ public class ShopCommand extends Command {
             out.println("<p><a href=\"/Cupcake/SessionExit.jsp\"> Logout</a></p>");
             out.println("</body>");
             out.println("</html>");
+        }
+        catch (Exception e) {
+            e.printStackTrace();
         }
     }
 

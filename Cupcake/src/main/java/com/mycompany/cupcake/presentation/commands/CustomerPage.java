@@ -45,8 +45,6 @@ public class CustomerPage extends HttpServlet {
         try {
             User user = (User) session.getAttribute("User");
             String username = user.getUsername();
-            String password = user.getPassword();
-            String email = user.getEmail();
             if (username == null) {
                 request.setAttribute("errormessage", "User not logged in...");
                 request.getRequestDispatcher("UserLoginCheck.jsp").forward(request, response);
