@@ -1,5 +1,5 @@
 
-package com.mycompany.cupcake.presentation.commands;
+package com.mycompany.cupcake.presentation;
 
 import java.io.IOException;
 import javax.servlet.http.HttpServletResponse;
@@ -7,7 +7,7 @@ import javax.servlet.http.HttpServletResponse;
 public class redirectJSP {
     
     public static void redirectShopping (HttpServletResponse response) throws IOException {
-        response.sendRedirect("c/shopping");
+        response.sendRedirect("shopping");
     }
     public static void redirectFailedLogin (HttpServletResponse response) throws IOException {
         response.sendRedirect("FailedLogin.jsp");

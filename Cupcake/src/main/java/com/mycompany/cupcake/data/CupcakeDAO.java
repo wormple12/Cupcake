@@ -45,7 +45,9 @@ public class CupcakeDAO {
             admin = rs.getBoolean("is_admin");
             username = rs.getString("username");
         }
-        user = new User(username, password, email, admin);
+        if (username != null && !username.isEmpty()) {
+            user = new User(username, password, email, admin);
+        }
         stmt.close();
         rs.close();
         c.close();
@@ -248,8 +250,8 @@ public class CupcakeDAO {
         Connection c = connector.getConnection();
         Statement stmt = c.createStatement();
         StringBuilder query = new StringBuilder("SELECT * FROM orders");
-        if (username != null){
-            query.append(" WHERE customer = '"+username+"'");
+        if (username != null) {
+            query.append(" WHERE customer = '" + username + "'");
         }
         query.append(";");
         ResultSet rs = stmt.executeQuery(query.toString());
@@ -300,5 +302,4 @@ public class CupcakeDAO {
 //        c.close();
 //        return order;
 //    }
-
 }

@@ -22,7 +22,7 @@
     <body>
         <jsp:include page="siteheader.jsp" />
         
-        <form action="/Cupcake/ProductControl" method = POST>
+        <form action="/Cupcake/c/addtocart" method = POST>
             <select name = top><!--Toppings:-->
             <%
                 ArrayList<Topping> toppings = (ArrayList<Topping>) request.getAttribute("toppings");

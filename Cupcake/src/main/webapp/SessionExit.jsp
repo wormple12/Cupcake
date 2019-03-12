@@ -9,7 +9,7 @@
 <div id="SessionExit">
     <%     
         session.invalidate();
-        RequestDispatcher rd = request.getRequestDispatcher("RegistrationNlogin");        
+        RequestDispatcher rd = request.getRequestDispatcher("/c/login");        
         rd.forward(request, response);  
     %>
 </div>
