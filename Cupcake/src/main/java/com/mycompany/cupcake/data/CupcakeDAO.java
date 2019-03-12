@@ -2,20 +2,19 @@
  */
 package com.mycompany.cupcake.data;
 
+import com.mycompany.cupcake.logic.DBConnector;
 import com.mycompany.cupcake.data.cc_help_classes.Bottom;
 import com.mycompany.cupcake.data.cc_help_classes.Topping;
-import com.mycompany.cupcake.data.order_help_classes.Order;
-import com.mycompany.cupcake.data.order_help_classes.OrderedCupcakes;
 import com.mycompany.cupcake.data.user_help_classes.User;
-import com.mycompany.cupcake.logic.LineItem;
-import com.mycompany.cupcake.logic.ShoppingCart;
+import com.mycompany.cupcake.data.cc_help_classes.LineItem;
+import com.mycompany.cupcake.data.cc_help_classes.ShoppingCart;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
-import java.util.List;
+import java.util.HashMap;
 import java.util.Random;
 
 /**
@@ -46,7 +45,7 @@ public class CupcakeDAO {
         c = connector.getConnection();
         Statement stmt = c.createStatement();
         ResultSet rs = stmt.executeQuery(query);
-        
+
         String password = "";
         String email = "";
         Boolean admin = false;
@@ -174,6 +173,7 @@ public class CupcakeDAO {
         preparedStmt.close();
         c.close();
     }
+
     public void removeBalance(String username, double amount) throws Exception {
         double balance = getBalance(username) - amount;
         PreparedStatement preparedStmt;
@@ -188,123 +188,6 @@ public class CupcakeDAO {
         preparedStmt.execute();
 
         preparedStmt.close();
-        c.close();
-    }
-
-    public Order getOrder(int orderNumber) throws Exception {
-        Order order = null;
-        try {
-            order = getOrderInfo(orderNumber);
-        } catch (SQLException ex) {
-            ex.printStackTrace();
-        }
-        return order;
-    }
-
-    private Order getOrderInfo(int orderNumber) throws Exception {
-        Order order = null;
-
-        DBConnector connector = new DBConnector();
-        Connection c = connector.getConnection();
-        String query = "select `username` from orders where order_number = '" + orderNumber + "';";
-        Statement stmt = c.createStatement();
-        ResultSet rs = stmt.executeQuery(query);
-        while (rs.next()) {
-            String username = rs.getString("username");
-            order = new Order(orderNumber, username);
-        }
-        stmt.close();
-        rs.close();
-        c.close();
-        return order;
-    }
-    public OrderedCupcakes getOrderedCupcakes(int orderNumber) throws Exception {
-        OrderedCupcakes oc = null;
-        try {
-            oc = getOrderedCupcakesInfo(orderNumber);
-        } catch (SQLException ex) {
-            ex.printStackTrace();
-        }
-        return oc;
-    }
-
-    private OrderedCupcakes getOrderedCupcakesInfo(int orderNumber) throws Exception {
-        OrderedCupcakes oc = null;
-
-        DBConnector connector = new DBConnector();
-        Connection c = connector.getConnection();
-        String query = "select * from ordered_oupcakes where order_number = '" + orderNumber + "';";
-        Statement stmt = c.createStatement();
-        ResultSet rs = stmt.executeQuery(query);
-        while (rs.next()) {
-            
-          //  int order_number = rs.getInt("order_number");
-            int topId = rs.getInt("topping_id");
-            int botId = rs.getInt("bottom_id");
-            int qty = rs.getInt("amount");
-            
-            
-            oc = new OrderedCupcakes(orderNumber, topId, botId, qty);
-        }
-        stmt.close();
-        rs.close();
-        c.close();
-        return oc;
-    }
-    
-    // vvvvvvv incomplete vvvvvvv
-      public ArrayList<Order> getAllOrders () throws Exception {
-        try {
-            DBConnector connector = new DBConnector();
-            Connection c = connector.getConnection();
-            Statement stmt = c.createStatement();
-            ResultSet rs = stmt.executeQuery("select * from toppings;");
-
-            ArrayList<Order> allOrders = new ArrayList();
-            while (rs.next()) {
-                int topping_id = rs.getInt("topping_id");
-                String topping_name = rs.getString("topping_name");
-                double price = rs.getDouble("price");
-                allOrders.add(new Order(topping_id, topping_name));
-            }
-            stmt.close();
-            rs.close();
-            c.close();
-            return allOrders;
-
-        } catch (SQLException ex) {
-            if (DEBUG) {
-                ex.printStackTrace();
-            }
-        }
-        return null;
-    }
-
-    public void createOrder(int orderNumber, String username) throws Exception {
-        PreparedStatement preparedStmt;
-        DBConnector connector = new DBConnector();
-        Connection c = connector.getConnection();
-        String query
-                = " insert into users (orderNumber, username) VALUES(?,?)";
-        preparedStmt = c.prepareStatement(query);
-        preparedStmt.setInt(1, orderNumber);
-        preparedStmt.setString(2, username);
-        preparedStmt.execute();
-
-        preparedStmt.close();
-        c.close();
-    }
-
-    public void deleteOrder(String column, String identifier) throws Exception {
-        PreparedStatement preparedStmt;
-        DBConnector connector = new DBConnector();
-        Connection c = connector.getConnection();
-        String query
-                = "DELETE FROM orders WHERE ? = ?";
-        preparedStmt = c.prepareStatement(query);
-        preparedStmt.setString(1, column);
-        preparedStmt.setString(2, identifier);
-        preparedStmt.execute();
         c.close();
     }
 
@@ -332,9 +215,8 @@ public class CupcakeDAO {
         return new Topping(topping_id, topping_name, price);
     }
 
-
-
-    public void addCarttoDB(ShoppingCart cart, String username) throws Exception {
+    // earlier called "addCartToDB"
+    public void addOrder(ShoppingCart cart, String username) throws Exception {
         PreparedStatement preparedStmt;
         DBConnector connector = new DBConnector();
         Connection c = connector.getConnection();
@@ -346,25 +228,87 @@ public class CupcakeDAO {
         preparedStmt.setInt(1, id);
         preparedStmt.setString(2, username);
         preparedStmt.execute();
-        for(LineItem p : cart.getCart()){
-        int itid = rng.nextInt(500);
-        query
-                = " insert into lineitems (idlineitems, cupcake, price, quantity) VALUES(?,?,?,?)";
-        preparedStmt = c.prepareStatement(query);
-        preparedStmt.setInt(1, itid);
-        preparedStmt.setString(2, (p.getCupcake().getTopping().getTopping_name()+"_bottom_"+p.getCupcake().getBottom().getBottom_Name()+"_topping"));
-        preparedStmt.setDouble(3, p.getPrice());
-        preparedStmt.setInt(4, p.getQty());
-        preparedStmt.execute();
-        
-        query
-                = " insert into has_lineitem (cartid, lineid) VALUES(?,?)";
-        preparedStmt = c.prepareStatement(query);
-        preparedStmt.setInt(1, id);
-        preparedStmt.setInt(2, itid);
-        preparedStmt.execute();
+        for (LineItem p : cart.getCart()) {
+            int itid = rng.nextInt(500);
+            query
+                    = " insert into lineitems (idlineitems, cupcake, price, quantity) VALUES(?,?,?,?)";
+            preparedStmt = c.prepareStatement(query);
+            preparedStmt.setInt(1, itid);
+            preparedStmt.setString(2, (p.getCupcake().getTopping().getTopping_name() + "_bottom_" + p.getCupcake().getBottom().getBottom_Name() + "_topping"));
+            preparedStmt.setDouble(3, p.getPrice());
+            preparedStmt.setInt(4, p.getQty());
+            preparedStmt.execute();
+
+            query
+                    = " insert into has_lineitem (cartid, lineid) VALUES(?,?)";
+            preparedStmt = c.prepareStatement(query);
+            preparedStmt.setInt(1, id);
+            preparedStmt.setInt(2, itid);
+            preparedStmt.execute();
         }
         preparedStmt.close();
         c.close();
     }
+
+    // gets ordernumber + customer name
+    public HashMap<Integer, String> getAllOrdersSimple(String username) throws Exception {
+        HashMap<Integer, String> result = new HashMap<>();
+
+        DBConnector connector = new DBConnector();
+        Connection c = connector.getConnection();
+        Statement stmt = c.createStatement();
+        StringBuilder query = new StringBuilder("SELECT * FROM shoppingcart");
+        if (username != null){
+            query.append(" WHERE customer = '"+username+"'");
+        }
+        query.append(";");
+        ResultSet rs = stmt.executeQuery(query.toString());
+
+        while (rs.next()) {
+            int no = rs.getInt("idshoppingcart");
+            String customer = rs.getString("customer");
+            result.put(no, customer);
+        }
+
+        rs.close();
+        stmt.close();
+        c.close();
+        return result;
+    }
+
+    // AdminPageOrderDetails.jsp SHOULD USE AN ORDER CLASS AND A METHOD LIKE THE ONE BELOW, INSTEAD OF THE CURRENT SOLUTION
+    // InvoiceDetails.jsp HAS THE SAME ISSUE
+    // ==========================================================================================================
+//    public ArrayList<LineItem> getOrder(int id) throws Exception {
+//        DBConnector connector = new DBConnector();
+//        Connection c = connector.getConnection();
+//        Statement stmt = c.createStatement();
+//        ResultSet rs = stmt.executeQuery(
+//                "SELECT *"
+//                + " FROM lineitems ls "
+//                + "LEFT JOIN has_lineitem hs "
+//                + "ON ls.idlineitems = hs.lineid "
+//                + "LEFT JOIN shoppingcart sc "
+//                + "ON sc.idshoppingcart = hs.cartid "
+//                + "WHERE sc.idshoppingcart =" + id + ";");
+//        
+//        ArrayList<LineItem> order = new ArrayList<>();
+//        while (rs.next()) {
+//            order.addLineItem(
+//                    rs.getInt("idlineitems"),
+//                    rs.getString("cupcake"),
+//                    rs.getInt("price"),
+//                    rs.getInt("quantity"),
+//                    rs.getInt("cartid"),
+//                    rs.getInt("lineid"),
+//                    rs.getInt("idshoppingcart"),
+//                    rs.getString("customer")
+//            );
+//        }
+//        rs.close();
+//        stmt.close();
+//        c.close();
+//        return order;
+//    }
+
 }

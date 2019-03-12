@@ -6,15 +6,11 @@
 package com.mycompany.cupcake.presentation.commands;
 
 import com.mycompany.cupcake.data.CupcakeDAO;
-import com.mycompany.cupcake.data.cc_help_classes.Bottom;
 import com.mycompany.cupcake.data.cc_help_classes.Cupcake;
-import com.mycompany.cupcake.data.user_help_classes.User;
-import com.mycompany.cupcake.logic.LineItem;
-import com.mycompany.cupcake.logic.ShoppingCart;
+import com.mycompany.cupcake.data.cc_help_classes.LineItem;
+import com.mycompany.cupcake.data.cc_help_classes.ShoppingCart;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -74,7 +70,7 @@ public class ProductControl extends HttpServlet {
             }
             cart.addToCart(item);
             request.getSession().setAttribute("ShoppingCart", cart);
-            out.println("<form  action="+"Products.jsp"+"><input value=\"Go to Checkout\" type=submit>"
+            out.println("<form  action="+"c/cart"+"><input value=\"Go to Checkout\" type=submit>"
                     + "<input type=submit value=\"Order more\" formaction=c/possibilities>"
                     + "</form>");
             out.println("</body>");

@@ -8,14 +8,14 @@
 <%@page import="java.sql.ResultSet"%>
 <%@page import="java.sql.Statement"%>
 <%@page import="java.sql.Connection"%>
-<%@page import="com.mycompany.cupcake.data.DBConnector"%>
+<%@page import="com.mycompany.cupcake.logic.DBConnector"%>
 <%@page import="com.mycompany.cupcake.data.user_help_classes.User"%>
 <%@page import="com.mycompany.cupcake.data.CupcakeDAO"%>
 <!DOCTYPE html>
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>JSP Page</title>
+        <title>User Info Box</title>
         <link rel="stylesheet" type="text/css" href="altcss.css">
         <meta name="viewport" content="width=device-width, initial-scale=1">       
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">

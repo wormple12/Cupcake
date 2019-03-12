@@ -23,7 +23,7 @@
                     <li><a href="/Cupcake/c/possibilities">Menu</a></li>
                 </ul>
                 <ul class="nav navbar-nav navbar-right">
-                    <li><a href="/Cupcake/CustomerPage"><span class="glyphicon glyphicon-user"></span> Customer Page</a></li>
+                    <li><a href="/Cupcake/c/showuser"><span class="glyphicon glyphicon-user"></span> Customer Page</a></li>
                     <li><a href="/Cupcake/SessionExit.jsp"><span class="glyphicon glyphicon-log-out"></span> Log out</a></li>
                 </ul>
             </div>

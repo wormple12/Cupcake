@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.mycompany.cupcake.logic;
+package com.mycompany.cupcake.data.cc_help_classes;
 
 import com.mycompany.cupcake.data.cc_help_classes.Cupcake;
 
