@@ -1,0 +1,7 @@
+Shopping Cart button should be in menu or in pageheader
+
+/showuser info box is not like the other info boxes
+
+image cleanup
+
+all commands and jsp-pages: rename and put into folders for better overview

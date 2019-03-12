@@ -34,6 +34,12 @@ public abstract class Command {
             case "showuser":
                 command = new ShowCustomerCommand();
                 break;
+            case "cart":
+                command = new ShoppingCartCommand();
+                break;
+            case "finalize":
+                command = new FinalizationCommand();
+                break;
             default:
                 command = new UnknownCommand();
                 break;

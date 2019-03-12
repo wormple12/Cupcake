@@ -9,13 +9,13 @@
 <%@page import="java.sql.ResultSet"%>
 <%@page import="java.sql.Statement"%>
 <%@page import="java.sql.Connection"%>
-<%@page import="com.mycompany.cupcake.data.DBConnector"%>
+<%@page import="com.mycompany.cupcake.logic.DBConnector"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>JSP Page</title>    
+        <title>Order Details</title>    
         <link rel="stylesheet" type="text/css" href="altcss.css">
         <meta name="viewport" content="width=device-width, initial-scale=1">       
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
@@ -24,74 +24,67 @@
     </head>
     <body>
         <jsp:include page="siteheader.jsp" />
-
         <jsp:include page="UserInfoBox.jsp" />
 
-        <%
-            User user = (User) request.getSession().getAttribute("User");
-            String username = user.getUsername();
-        %>
+        <form method="post">
+            <table id ="uglytable" border = "1">
+                <tr>
+                    <td>idlineitems</td>
+                    <td>cupcake</td>
+                    <td>price</td>
+                    <td>quantity</td>
+                    <td>cartid</td>
+                    <td>lineid</td>
+                    <td>idshoppingcart</td>
+                    <td>customer</td>
+                </tr>
+                <%
+                    byte checkSort = 0;
+                    try {
+                        DBConnector connector = new DBConnector();
+                        Connection c = connector.getConnection();
+                        Statement stmt = c.createStatement();
+                        ResultSet rs = stmt.executeQuery(
+                                "SELECT *"
+                                + " FROM lineitems ls "
+                                + "LEFT JOIN has_lineitem hs "
+                                + "ON ls.idlineitems = hs.lineid "
+                                + "LEFT JOIN shoppingcart sc "
+                                + "ON sc.idshoppingcart = hs.cartid "
+                                + "WHERE sc.idshoppingcart =" + request.getParameter("idshoppingcart") + ";");
+                        //Order order = (Order) request.getSession().getAttribute("Order");
 
-    </body>
-
-    <form method="post">
-        <table id ="uglytable" border = "1">
-            <tr>
-                <td>idlineitems</td>
-                <td>cupcake</td>
-                <td>price</td>
-                <td>quantity</td>
-                <td>cartid</td>
-                <td>lineid</td>
-                <td>idshoppingcart</td>
-                <td>customer</td>
-            </tr>
-            <%
-                byte checkSort = 0;
-                try {
-                    DBConnector connector = new DBConnector();
-                    Connection c = connector.getConnection();
-                    Statement stmt = c.createStatement();
-                    ResultSet rs = stmt.executeQuery(
-                            "SELECT *"
-                            + " FROM lineitems ls "
-                            + "LEFT JOIN has_lineitem hs "
-                            + "ON ls.idlineitems = hs.lineid "
-                            + "LEFT JOIN shoppingcart sc "
-                            + "ON sc.idshoppingcart = hs.cartid "
-                            + "WHERE sc.idshoppingcart =" + request.getParameter("idshoppingcart") + ";");
-                    //Order order = (Order) request.getSession().getAttribute("Order");
-
-                    while (rs.next()) {
-                        if (checkSort == 0) {
-            %>
-            <tr>
-                <td><%=rs.getInt("idlineitems")%></td>
-                <td><%=rs.getString("cupcake")%></td>
-                <td><%=rs.getInt("price")%></td>
-                <td><%=rs.getInt("quantity")%></td>
-                <td><%=rs.getInt("cartid")%></td>
-                <td><%=rs.getInt("lineid")%></td>
-                <td><%=rs.getInt("idshoppingcart")%></td>
-                <td><%=rs.getString("customer")%></td>
+                        while (rs.next()) {
+                            if (checkSort == 0) {
+                %>
+                <tr>
+                    <td><%=rs.getInt("idlineitems")%></td>
+                    <td><%=rs.getString("cupcake")%></td>
+                    <td><%=rs.getInt("price")%></td>
+                    <td><%=rs.getInt("quantity")%></td>
+                    <td><%=rs.getInt("cartid")%></td>
+                    <td><%=rs.getInt("lineid")%></td>
+                    <td><%=rs.getInt("idshoppingcart")%></td>
+                    <td><%=rs.getString("customer")%></td>
 
 
-            </tr>
-            <%
+                </tr>
+                <%
+                        }
                     }
+                %>
+            </table>
+            <%
+                    rs.close();
+                    stmt.close();
+                    c.close();
+                } catch (Exception e) {
+                    e.printStackTrace();
                 }
-            %>
-        </table>
-        <%
-                rs.close();
-                stmt.close();
-                c.close();
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
 
-        %>
-    </form>
+            %>
+        </form>
+    </body>
 </html>
 
 

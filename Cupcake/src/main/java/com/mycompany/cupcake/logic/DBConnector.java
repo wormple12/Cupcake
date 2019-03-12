@@ -1,4 +1,4 @@
-package com.mycompany.cupcake.data;
+package com.mycompany.cupcake.logic;
 
 import java.sql.Connection;
 import java.sql.DriverManager;

@@ -2,17 +2,19 @@
  */
 package com.mycompany.cupcake.data;
 
+import com.mycompany.cupcake.logic.DBConnector;
 import com.mycompany.cupcake.data.cc_help_classes.Bottom;
 import com.mycompany.cupcake.data.cc_help_classes.Topping;
 import com.mycompany.cupcake.data.user_help_classes.User;
-import com.mycompany.cupcake.logic.LineItem;
-import com.mycompany.cupcake.logic.ShoppingCart;
+import com.mycompany.cupcake.data.cc_help_classes.LineItem;
+import com.mycompany.cupcake.data.cc_help_classes.ShoppingCart;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Random;
 
 /**
@@ -43,7 +45,7 @@ public class CupcakeDAO {
         c = connector.getConnection();
         Statement stmt = c.createStatement();
         ResultSet rs = stmt.executeQuery(query);
-        
+
         String password = "";
         String email = "";
         Boolean admin = false;
@@ -171,6 +173,7 @@ public class CupcakeDAO {
         preparedStmt.close();
         c.close();
     }
+
     public void removeBalance(String username, double amount) throws Exception {
         double balance = getBalance(username) - amount;
         PreparedStatement preparedStmt;
@@ -212,9 +215,8 @@ public class CupcakeDAO {
         return new Topping(topping_id, topping_name, price);
     }
 
-
-
-    public void addCarttoDB(ShoppingCart cart, String username) throws Exception {
+    // earlier called "addCartToDB"
+    public void addOrder(ShoppingCart cart, String username) throws Exception {
         PreparedStatement preparedStmt;
         DBConnector connector = new DBConnector();
         Connection c = connector.getConnection();
@@ -226,25 +228,87 @@ public class CupcakeDAO {
         preparedStmt.setInt(1, id);
         preparedStmt.setString(2, username);
         preparedStmt.execute();
-        for(LineItem p : cart.getCart()){
-        int itid = rng.nextInt(500);
-        query
-                = " insert into lineitems (idlineitems, cupcake, price, quantity) VALUES(?,?,?,?)";
-        preparedStmt = c.prepareStatement(query);
-        preparedStmt.setInt(1, itid);
-        preparedStmt.setString(2, (p.getCupcake().getTopping().getTopping_name()+"_bottom_"+p.getCupcake().getBottom().getBottom_Name()+"_topping"));
-        preparedStmt.setDouble(3, p.getPrice());
-        preparedStmt.setInt(4, p.getQty());
-        preparedStmt.execute();
-        
-        query
-                = " insert into has_lineitem (cartid, lineid) VALUES(?,?)";
-        preparedStmt = c.prepareStatement(query);
-        preparedStmt.setInt(1, id);
-        preparedStmt.setInt(2, itid);
-        preparedStmt.execute();
+        for (LineItem p : cart.getCart()) {
+            int itid = rng.nextInt(500);
+            query
+                    = " insert into lineitems (idlineitems, cupcake, price, quantity) VALUES(?,?,?,?)";
+            preparedStmt = c.prepareStatement(query);
+            preparedStmt.setInt(1, itid);
+            preparedStmt.setString(2, (p.getCupcake().getTopping().getTopping_name() + "_bottom_" + p.getCupcake().getBottom().getBottom_Name() + "_topping"));
+            preparedStmt.setDouble(3, p.getPrice());
+            preparedStmt.setInt(4, p.getQty());
+            preparedStmt.execute();
+
+            query
+                    = " insert into has_lineitem (cartid, lineid) VALUES(?,?)";
+            preparedStmt = c.prepareStatement(query);
+            preparedStmt.setInt(1, id);
+            preparedStmt.setInt(2, itid);
+            preparedStmt.execute();
         }
         preparedStmt.close();
         c.close();
     }
+
+    // gets ordernumber + customer name
+    public HashMap<Integer, String> getAllOrdersSimple(String username) throws Exception {
+        HashMap<Integer, String> result = new HashMap<>();
+
+        DBConnector connector = new DBConnector();
+        Connection c = connector.getConnection();
+        Statement stmt = c.createStatement();
+        StringBuilder query = new StringBuilder("SELECT * FROM shoppingcart");
+        if (username != null){
+            query.append(" WHERE customer = '"+username+"'");
+        }
+        query.append(";");
+        ResultSet rs = stmt.executeQuery(query.toString());
+
+        while (rs.next()) {
+            int no = rs.getInt("idshoppingcart");
+            String customer = rs.getString("customer");
+            result.put(no, customer);
+        }
+
+        rs.close();
+        stmt.close();
+        c.close();
+        return result;
+    }
+
+    // AdminPageOrderDetails.jsp SHOULD USE AN ORDER CLASS AND A METHOD LIKE THE ONE BELOW, INSTEAD OF THE CURRENT SOLUTION
+    // InvoiceDetails.jsp HAS THE SAME ISSUE
+    // ==========================================================================================================
+//    public ArrayList<LineItem> getOrder(int id) throws Exception {
+//        DBConnector connector = new DBConnector();
+//        Connection c = connector.getConnection();
+//        Statement stmt = c.createStatement();
+//        ResultSet rs = stmt.executeQuery(
+//                "SELECT *"
+//                + " FROM lineitems ls "
+//                + "LEFT JOIN has_lineitem hs "
+//                + "ON ls.idlineitems = hs.lineid "
+//                + "LEFT JOIN shoppingcart sc "
+//                + "ON sc.idshoppingcart = hs.cartid "
+//                + "WHERE sc.idshoppingcart =" + id + ";");
+//        
+//        ArrayList<LineItem> order = new ArrayList<>();
+//        while (rs.next()) {
+//            order.addLineItem(
+//                    rs.getInt("idlineitems"),
+//                    rs.getString("cupcake"),
+//                    rs.getInt("price"),
+//                    rs.getInt("quantity"),
+//                    rs.getInt("cartid"),
+//                    rs.getInt("lineid"),
+//                    rs.getInt("idshoppingcart"),
+//                    rs.getString("customer")
+//            );
+//        }
+//        rs.close();
+//        stmt.close();
+//        c.close();
+//        return order;
+//    }
+
 }
