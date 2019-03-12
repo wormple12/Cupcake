@@ -24,19 +24,8 @@ public class CupcakeDAO {
 
     final static boolean DEBUG = true;
 
-    //Return user object based on username
-    public User getUser(String username) throws Exception {
-        User user = null;
-        try {
-            user = getLoginInfo(username);
-        } catch (SQLException ex) {
-            ex.printStackTrace();
-        }
-        return user;
-    }
-
     // DOES NOT USE PREPARESTATEMENT YET
-    private User getLoginInfo(String username) throws Exception {
+    public User getUser(String username) throws Exception {
         User user = null;
 
         DBConnector connector = new DBConnector();
@@ -221,26 +210,27 @@ public class CupcakeDAO {
         DBConnector connector = new DBConnector();
         Connection c = connector.getConnection();
         Random rng = new Random();
-        int id = rng.nextInt(500);
+        int id = rng.nextInt(99999);
         String query
-                = " insert into shoppingcart (idshoppingcart, customer) VALUES(?,?)";
+                = " insert into orders (idorder, customer) VALUES(?,?)";
         preparedStmt = c.prepareStatement(query);
         preparedStmt.setInt(1, id);
         preparedStmt.setString(2, username);
         preparedStmt.execute();
         for (LineItem p : cart.getCart()) {
-            int itid = rng.nextInt(500);
+            int itid = rng.nextInt(99999);
             query
-                    = " insert into lineitems (idlineitems, cupcake, price, quantity) VALUES(?,?,?,?)";
+                    = " insert into lineitems (idlineitems, bottom, topping, price, quantity) VALUES(?,?,?,?,?)";
             preparedStmt = c.prepareStatement(query);
             preparedStmt.setInt(1, itid);
-            preparedStmt.setString(2, (p.getCupcake().getTopping().getTopping_name() + "_bottom_" + p.getCupcake().getBottom().getBottom_Name() + "_topping"));
-            preparedStmt.setDouble(3, p.getPrice());
-            preparedStmt.setInt(4, p.getQty());
+            preparedStmt.setInt(2, p.getCupcake().getBottom().getBottom_id());
+            preparedStmt.setInt(3, p.getCupcake().getTopping().getTopping_id());
+            preparedStmt.setDouble(4, p.getPrice());
+            preparedStmt.setInt(5, p.getQty());
             preparedStmt.execute();
 
             query
-                    = " insert into has_lineitem (cartid, lineid) VALUES(?,?)";
+                    = " insert into has_lineitem (orderid, lineid) VALUES(?,?)";
             preparedStmt = c.prepareStatement(query);
             preparedStmt.setInt(1, id);
             preparedStmt.setInt(2, itid);
@@ -257,7 +247,7 @@ public class CupcakeDAO {
         DBConnector connector = new DBConnector();
         Connection c = connector.getConnection();
         Statement stmt = c.createStatement();
-        StringBuilder query = new StringBuilder("SELECT * FROM shoppingcart");
+        StringBuilder query = new StringBuilder("SELECT * FROM orders");
         if (username != null){
             query.append(" WHERE customer = '"+username+"'");
         }
@@ -265,7 +255,7 @@ public class CupcakeDAO {
         ResultSet rs = stmt.executeQuery(query.toString());
 
         while (rs.next()) {
-            int no = rs.getInt("idshoppingcart");
+            int no = rs.getInt("idorder");
             String customer = rs.getString("customer");
             result.put(no, customer);
         }
@@ -288,9 +278,9 @@ public class CupcakeDAO {
 //                + " FROM lineitems ls "
 //                + "LEFT JOIN has_lineitem hs "
 //                + "ON ls.idlineitems = hs.lineid "
-//                + "LEFT JOIN shoppingcart sc "
-//                + "ON sc.idshoppingcart = hs.cartid "
-//                + "WHERE sc.idshoppingcart =" + id + ";");
+//                + "LEFT JOIN orders sc "
+//                + "ON sc.idorder = hs.orderid "
+//                + "WHERE sc.idorder =" + id + ";");
 //        
 //        ArrayList<LineItem> order = new ArrayList<>();
 //        while (rs.next()) {
@@ -299,9 +289,9 @@ public class CupcakeDAO {
 //                    rs.getString("cupcake"),
 //                    rs.getInt("price"),
 //                    rs.getInt("quantity"),
-//                    rs.getInt("cartid"),
+//                    rs.getInt("orderid"),
 //                    rs.getInt("lineid"),
-//                    rs.getInt("idshoppingcart"),
+//                    rs.getInt("idorder"),
 //                    rs.getString("customer")
 //            );
 //        }

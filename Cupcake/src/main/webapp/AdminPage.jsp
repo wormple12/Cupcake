@@ -40,7 +40,7 @@
             <table id ="uglytable" border = "1">
                 <tr>
 
-                    <td>cartid</td>
+                    <td>orderid</td>
                     <td>customer</td>
                     <td>...</td>
                 </tr>
@@ -56,7 +56,7 @@
                     <td><%=entry.getValue()%></td>
                     <td>
 
-                        <a href="/Cupcake/AdminPageOrderDetails.jsp?idshoppingcart=<%=entry.getKey()%>" >
+                        <a href="/Cupcake/AdminPageOrderDetails.jsp?idorder=<%=entry.getKey()%>" >
                             <div style="height:100%;width:100%">
                                 <!--<input type="radio" name="radio1" onclick="handleClick(this.id);" id="customerId" />-->
                                 view

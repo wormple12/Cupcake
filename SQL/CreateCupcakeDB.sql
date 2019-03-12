@@ -51,14 +51,23 @@ DROP TABLE IF EXISTS `has_lineitem`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
  SET character_set_client = utf8mb4 ;
 CREATE TABLE `has_lineitem` (
-  `cartid` int(11) NOT NULL,
+  `orderid` int(11) NOT NULL,
   `lineid` int(11) NOT NULL,
-  PRIMARY KEY (`cartid`,`lineid`),
+  PRIMARY KEY (`orderid`,`lineid`),
   KEY `lineitemid_idx` (`lineid`),
   CONSTRAINT `lineitemid` FOREIGN KEY (`lineid`) REFERENCES `lineitems` (`idlineitems`),
-  CONSTRAINT `shoppingcartid` FOREIGN KEY (`cartid`) REFERENCES `shoppingcart` (`idshoppingcart`)
+  CONSTRAINT `shoppingcartid` FOREIGN KEY (`orderid`) REFERENCES `orders` (`idorder`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `has_lineitem`
+--
+
+LOCK TABLES `has_lineitem` WRITE;
+/*!40000 ALTER TABLE `has_lineitem` DISABLE KEYS */;
+/*!40000 ALTER TABLE `has_lineitem` ENABLE KEYS */;
+UNLOCK TABLES;
 
 --
 -- Table structure for table `lineitems`
@@ -69,26 +78,51 @@ DROP TABLE IF EXISTS `lineitems`;
  SET character_set_client = utf8mb4 ;
 CREATE TABLE `lineitems` (
   `idlineitems` int(11) NOT NULL,
-  `cupcake` varchar(45) DEFAULT NULL,
+  `bottom` int(11) NOT NULL,
+  `topping` int(11) NOT NULL,
   `price` double DEFAULT NULL,
   `quantity` int(11) DEFAULT NULL,
-  PRIMARY KEY (`idlineitems`)
+  PRIMARY KEY (`idlineitems`),
+  KEY `lineitem_bottom_fk_idx` (`bottom`),
+  KEY `lineitem_topping_fk_idx` (`topping`),
+  CONSTRAINT `lineitem_bottom_fk` FOREIGN KEY (`bottom`) REFERENCES `bottoms` (`bottom_id`) ON DELETE RESTRICT ON UPDATE RESTRICT,
+  CONSTRAINT `lineitem_topping_fk` FOREIGN KEY (`topping`) REFERENCES `toppings` (`topping_id`) ON DELETE RESTRICT ON UPDATE RESTRICT
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Table structure for table `shoppingcart`
+-- Dumping data for table `lineitems`
 --
 
-DROP TABLE IF EXISTS `shoppingcart`;
+LOCK TABLES `lineitems` WRITE;
+/*!40000 ALTER TABLE `lineitems` DISABLE KEYS */;
+/*!40000 ALTER TABLE `lineitems` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `orders`
+--
+
+DROP TABLE IF EXISTS `orders`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
  SET character_set_client = utf8mb4 ;
-CREATE TABLE `shoppingcart` (
-  `idshoppingcart` int(11) NOT NULL,
-  `customer` varchar(45) DEFAULT NULL,
-  PRIMARY KEY (`idshoppingcart`)
+CREATE TABLE `orders` (
+  `idorder` int(11) NOT NULL,
+  `customer` varchar(12) NOT NULL,
+  PRIMARY KEY (`idorder`),
+  KEY `cart_user_fk_idx` (`customer`),
+  CONSTRAINT `order_user_fk` FOREIGN KEY (`customer`) REFERENCES `users` (`username`) ON DELETE RESTRICT ON UPDATE RESTRICT
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `orders`
+--
+
+LOCK TABLES `orders` WRITE;
+/*!40000 ALTER TABLE `orders` DISABLE KEYS */;
+/*!40000 ALTER TABLE `orders` ENABLE KEYS */;
+UNLOCK TABLES;
 
 --
 -- Table structure for table `toppings`
@@ -139,7 +173,7 @@ CREATE TABLE `users` (
 
 LOCK TABLES `users` WRITE;
 /*!40000 ALTER TABLE `users` DISABLE KEYS */;
-INSERT INTO `users` VALUES ('pinky','66654321',506,'Redroom4hire@blackmail.onion',1);
+INSERT INTO `users` VALUES ('pinky','66654321',444,'Redroom4hire@blackmail.onion',1);
 /*!40000 ALTER TABLE `users` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -152,4 +186,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2019-03-11 11:05:12
+-- Dump completed on 2019-03-12 13:29:42

@@ -1,0 +1,45 @@
+|User|
+start
+:register as user;
+|#AntiqueWhite|System|
+:confirm;
+stop
+
+
+|User|
+start
+:attempt login;
+|System|
+:validate login;
+:save user on session;
+stop
+
+
+|User|
+start
+:check out menu;
+|System|
+:retrieve and return all cupcake information from database;
+|User|
+:put cupcakes into shoppingcart;
+|System|
+:save line items on session;
+|User|
+:confirm order;
+|System|
+:withdraw total price of order from user's balance if possible;
+:prevent transaction if not possible;
+:place order in database;
+stop
+
+
+|User|
+start
+:see all orders;
+|System|
+:retrieve and return orders from database;
+|User|
+:select order;
+|System|
+:show line items of order;
+stop

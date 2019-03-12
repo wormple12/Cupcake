@@ -1,3 +1,5 @@
+Færdiggør extreme overhaul: Alt html skal være i jsp-filer. Al logik skal være i java-klasser. Alle requests skal gå igennem front controlleren ved hjælp af en konvertering af vores servlets til commands.
+
 Shopping Cart button should be in menu or in pageheader
 
 /showuser info box is not like the other info boxes
@@ -5,3 +7,7 @@ Shopping Cart button should be in menu or in pageheader
 image cleanup
 
 all commands and jsp-pages: rename and put into folders for better overview
+
+registration og login - javascript input validering
+
+DAO.addOrder(): lineitemID og orderID skal være auto-incrementing i databasen. Random.nextInt kan i princippet ramme de samme tal igen, og id'erne er dermed ikke garanteret unikke.
