@@ -22,6 +22,9 @@ public abstract class Command {
 //        String path = request.getParameter("path");
 
         switch (path) {
+            case "login":
+                command = new LoginCommand();
+                break;
             case "possibilities":
                 command = new ListCupcakeOptionsCommand();
                 break;
@@ -29,10 +32,13 @@ public abstract class Command {
                 command = new RegistrationCommand();
                 break;
             case "shopping":
-                command = new ShopCommand();
+                command = new MainPageCommand();
                 break;
             case "showuser":
                 command = new ShowCustomerCommand();
+                break;
+            case "addtocart":
+                command = new CupcakeAddedCommand();
                 break;
             case "cart":
                 command = new ShoppingCartCommand();

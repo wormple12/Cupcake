@@ -30,12 +30,11 @@
             <table id ="uglytable" border = "1">
                 <tr>
                     <td>idlineitems</td>
-                    <td>cupcake</td>
+                    <td>bottom</td>
+                    <td>topping</td>
                     <td>price</td>
                     <td>quantity</td>
-                    <td>cartid</td>
-                    <td>lineid</td>
-                    <td>idshoppingcart</td>
+                    <td>idorder</td>
                     <td>customer</td>
                 </tr>
                 <%
@@ -49,22 +48,22 @@
                                 + " FROM lineitems ls "
                                 + "LEFT JOIN has_lineitem hs "
                                 + "ON ls.idlineitems = hs.lineid "
-                                + "LEFT JOIN shoppingcart sc "
-                                + "ON sc.idshoppingcart = hs.cartid "
-                                + "WHERE sc.idshoppingcart =" + request.getParameter("idshoppingcart") + ";");
-                        //Order order = (Order) request.getSession().getAttribute("Order");
+                                + "LEFT JOIN orders sc "
+                                + "ON sc.idorder = hs.orderid "
+                                + "LEFT JOIN bottoms bot ON ls.bottom=bot.bottom_id "
+                                + "LEFT JOIN toppings top ON ls.topping=top.topping_id "        
+                                + "WHERE sc.idorder =" + request.getParameter("idorder") + ";");
 
                         while (rs.next()) {
                             if (checkSort == 0) {
                 %>
                 <tr>
                     <td><%=rs.getInt("idlineitems")%></td>
-                    <td><%=rs.getString("cupcake")%></td>
+                    <td><%=rs.getString("bottom_name")%></td>
+                    <td><%=rs.getString("topping_name")%></td>
                     <td><%=rs.getInt("price")%></td>
                     <td><%=rs.getInt("quantity")%></td>
-                    <td><%=rs.getInt("cartid")%></td>
-                    <td><%=rs.getInt("lineid")%></td>
-                    <td><%=rs.getInt("idshoppingcart")%></td>
+                    <td><%=rs.getInt("idorder")%></td>
                     <td><%=rs.getString("customer")%></td>
 
 

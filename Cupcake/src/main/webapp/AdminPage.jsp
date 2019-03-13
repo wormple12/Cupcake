@@ -25,12 +25,10 @@
         <link rel="stylesheet" type="text/css" href="altcss.css">
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Admin Page</title>
-        <link rel="stylesheet" type="text/css" href="altcss.css">
         <meta name="viewport" content="width=device-width, initial-scale=1">       
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
-
     </head>
     <body>
         <jsp:include page="siteheader.jsp" />
@@ -40,7 +38,7 @@
             <table id ="uglytable" border = "1">
                 <tr>
 
-                    <td>cartid</td>
+                    <td>orderid</td>
                     <td>customer</td>
                     <td>...</td>
                 </tr>
@@ -56,7 +54,7 @@
                     <td><%=entry.getValue()%></td>
                     <td>
 
-                        <a href="/Cupcake/AdminPageOrderDetails.jsp?idshoppingcart=<%=entry.getKey()%>" >
+                        <a href="/Cupcake/AdminPageOrderDetails.jsp?idorder=<%=entry.getKey()%>" >
                             <div style="height:100%;width:100%">
                                 <!--<input type="radio" name="radio1" onclick="handleClick(this.id);" id="customerId" />-->
                                 view

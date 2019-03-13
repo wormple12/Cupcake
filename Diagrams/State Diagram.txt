@@ -1,0 +1,25 @@
+@startuml State Login : check username and passwordState
+Register : adds user to database
+State Finalize : finalize purchase and go back to home
+State CustomerPage : looks at the orders that this particular user has made
+State Adminpage : looks at all orders
+State COrder: specific order details from one of the Customers order
+State AOrder: specific order details from one of all the orders
+State Home: go to the different main sites
+State Menu: list of all options for purchase of cupcakes
+State Shoppingcart: remove item or continue
+[*] --> Login
+[*] --> Register
+Register --> [*]
+Login--> Home
+Home --> CustomerPage
+Home --> Adminpage
+CustomerPage --> COrder
+Adminpage --> AOrder
+Home --> Menu
+Menu --> Shoppingcart
+Shoppingcart -> Finalize
+Finalize --> [*]
+AOrder --> [*]
+COrder --> [*]
+@enduml

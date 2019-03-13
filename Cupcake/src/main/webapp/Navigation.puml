@@ -1,0 +1,14 @@
+@startuml
+
+boundary Login.jsp
+boundary "Error Login.jsp" as error
+entity user
+
+
+
+user -> Login.jsp
+Login.jsp --> LoggedIn : user and pw OK
+Login.jsp --> Login.jsp : user or pw not OK
+LoggedIn --> user
+
+@enduml

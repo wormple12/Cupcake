@@ -3,22 +3,6 @@
     Created on : 05-Mar-2019, 11:10:53
     Author     : Henning
     Note       : Possibly deprecated.
-
-
-    ====================================================
-    SHOULD THIS BE DELETED???
-    SHOULD THIS BE DELETED???
-    SHOULD THIS BE DELETED???
-    SHOULD THIS BE DELETED???
-    SHOULD THIS BE DELETED???
-    SHOULD THIS BE DELETED???
-    SHOULD THIS BE DELETED???
-    SHOULD THIS BE DELETED???
-    SHOULD THIS BE DELETED???
-    SHOULD THIS BE DELETED???
-    SHOULD THIS BE DELETED???
-    SHOULD THIS BE DELETED???
-    ====================================================
 --%>
 
 <%@page import="com.mycompany.cupcake.data.user_help_classes.User"%>

@@ -30,7 +30,7 @@ public class ShowCustomerCommand extends Command {
             }
         } catch (Exception e) {
             System.out.println("Error occured in CustomerPage");
-            request.getRequestDispatcher("/RegistrationNlogin").forward(request, response);
+            request.getRequestDispatcher("/Cupcake/c/login").forward(request, response);
         }
 
         System.out.println("user in customerPage: " + user);

@@ -49,7 +49,7 @@
                                 <td><%=entry.getValue()%></td>
                                 <td>
 
-                                    <a href="/Cupcake/InvoiceDetails.jsp?idshoppingcart=<%=entry.getKey()%>" >
+                                    <a href="/Cupcake/InvoiceDetails.jsp?idorder=<%=entry.getKey()%>" >
                                         <div style="height:100%;width:100%">
                                             <!--<input type="radio" name="radio1" onclick="handleClick(this.id);" id="customerId" />-->
                                             view

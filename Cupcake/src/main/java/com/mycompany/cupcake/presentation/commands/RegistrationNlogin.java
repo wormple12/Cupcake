@@ -77,7 +77,6 @@ public class RegistrationNlogin extends HttpServlet {
                     HttpSession session = request.getSession();
                     session.removeAttribute("User");
                     session.setAttribute("User", dao.getUser(username));
-                    redirectJSP.redirectShopping(response);
                 }
             }
             
