@@ -4,6 +4,7 @@ package com.mycompany.cupcake.presentation;
 
 import com.mycompany.cupcake.presentation.commands.*;
 import java.io.IOException;
+import java.util.HashMap;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -17,39 +18,20 @@ public abstract class Command {
             throws ServletException, IOException;
 
     public static Command from(HttpServletRequest request) {
-        Command command;
         String path = request.getPathInfo().substring(1); // substrings "/" out of the path
 //        String path = request.getParameter("path");
 
-        switch (path) {
-            case "login":
-                command = new LoginCommand();
-                break;
-            case "possibilities":
-                command = new ListCupcakeOptionsCommand();
-                break;
-            case "registration":
-                command = new RegistrationCommand();
-                break;
-            case "shopping":
-                command = new MainPageCommand();
-                break;
-            case "showuser":
-                command = new ShowCustomerCommand();
-                break;
-            case "addtocart":
-                command = new CupcakeAddedCommand();
-                break;
-            case "cart":
-                command = new ShoppingCartCommand();
-                break;
-            case "finalize":
-                command = new FinalizationCommand();
-                break;
-            default:
-                command = new UnknownCommand();
-                break;
-        }
-        return command;
+        HashMap<String, Command> actions = new HashMap<String, Command>(){{
+            put("registration", new RegistrationCommand());
+            put("login", new LoginCommand());
+            put("shopping", new MainPageCommand());
+            put("possibilities", new ListCupcakeOptionsCommand());
+            put("showuser", new ShowCustomerCommand());
+            put("addtocart", new CupcakeAddedCommand());
+            put("cart", new ShoppingCartCommand());
+            put("finalize", new FinalizationCommand());
+        }};
+
+        return actions.getOrDefault(path, new UnknownCommand());
     }
 }

@@ -4,7 +4,6 @@
     Author     : Emil PC
 --%>
 
-<%@page import="com.mycompany.cupcake.presentation.redirectJSP"%>
 <%@page import="com.mycompany.cupcake.data.CupcakeDAO"%>
 <%@page import="com.mycompany.cupcake.data.user_help_classes.User"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>

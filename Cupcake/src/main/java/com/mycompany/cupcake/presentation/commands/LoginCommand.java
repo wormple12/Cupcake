@@ -2,7 +2,6 @@
  */
 package com.mycompany.cupcake.presentation.commands;
 
-import com.mycompany.cupcake.presentation.redirectJSP;
 import com.mycompany.cupcake.data.CupcakeDAO;
 import com.mycompany.cupcake.data.user_help_classes.User;
 import com.mycompany.cupcake.presentation.Command;
@@ -28,8 +27,8 @@ public class LoginCommand extends Command {
             if (username != null && password != null) {
                 User user = dao.getUser(username);
                 
-                if (user.getUsername().length() == 0) {
-                    request.setAttribute("errormessage", "<p style=\"color:red\">Incorrect username/passwords</p>");
+                if (user == null) {
+                    request.setAttribute("errormessage", "<p style=\"color:red\">User doesn't exist.</p>");
                     loadJSP(request, response);
                 } else if (!user.getPassword().equals(password)) {
                     request.setAttribute("errormessage", "<p style=\"color:red\">Incorrect password</p>");
@@ -39,7 +38,7 @@ public class LoginCommand extends Command {
                     HttpSession session = request.getSession();
                     session.removeAttribute("User");
                     session.setAttribute("User", dao.getUser(username));
-                    redirectJSP.redirectShopping(response);
+                    response.sendRedirect("shopping");
                 }
             } else {
                 loadJSP(request, response);

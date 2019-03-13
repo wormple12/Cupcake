@@ -5,7 +5,6 @@ package com.mycompany.cupcake.presentation.commands;
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-import com.mycompany.cupcake.presentation.redirectJSP;
 import com.mycompany.cupcake.data.CupcakeDAO;
 import com.mycompany.cupcake.data.user_help_classes.User;
 import com.mycompany.cupcake.presentation.Command;
@@ -34,10 +33,8 @@ public class RegistrationCommand extends Command {
                 if (user == null) {
                     dao.createUser(new User(username, password, email));
                     request.getRequestDispatcher("/NewUser.jsp").forward(request, response);
-//                    redirectJSP.redirectUserCreated(response);
                 } else {
                     request.getRequestDispatcher("/FailedCreation.jsp").forward(request, response);
-//                    redirectJSP.redirectUserCreationFail(response);
                 }
             } else {
                 request.getRequestDispatcher("/RegisterUser.jsp").forward(request, response);
