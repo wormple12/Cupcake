@@ -11,11 +11,16 @@ import com.mycompany.cupcake.data.cc_help_classes.Cupcake;
  *
  * @author Lukas Bjørnvad
  */
+
 public class LineItem {
     private final Cupcake cupcake;
     private int qty;
     private final double price;
-    
+    /**
+     * 
+     * @param cupcake
+     * @param qty 
+     */
     public LineItem(Cupcake cupcake, int qty) {
         this.cupcake = cupcake;
         this.qty = qty;
@@ -29,9 +34,12 @@ public class LineItem {
     public int getQty() {
         return qty;
     }
-
-    public void addQty(int l) {
-        this.qty = qty+l;
+/**
+ * 
+ * @param aqty
+ */
+    public void addQty(int aqty) {
+        this.qty = qty+aqty;
     }
     
     public double getPrice() {
