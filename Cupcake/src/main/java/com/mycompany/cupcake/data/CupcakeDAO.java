@@ -18,6 +18,8 @@ import java.util.HashMap;
 import java.util.Random;
 
 /**
+ * This class handles all communication with the "cupcakedb" MySQL database. It fetches information as well as inserts into the database.
+ * All methods requiring user input uses PreparedStatements to avoid SQLInjection issues.
  * @author Simon Asholt Norup
  */
 public class CupcakeDAO {

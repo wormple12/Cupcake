@@ -11,7 +11,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 /**
- *
+ * This servlet handles all major requests from the browser, finding the appropiate Command class and executing that Command.
+ * The Command classes will then handle the logic and redirect to any relevant web pages.
+ * The front controller forces all Commands to use the urlPattern "/Cupcake/c/*" where * is any valid String used by the Command parent class to redirect to any of its children.
  * @author Simon Asholt Norup
  */
 @WebServlet(name = "FrontController", urlPatterns = {"/c/*"})
@@ -88,7 +90,7 @@ public class FrontController extends HttpServlet {
      */
     @Override
     public String getServletInfo() {
-        return "Short description";
+        return "This is a front controller servlet redirecting all requests to the appropiate Command class and executing that command.";
     }// </editor-fold>
 
 }
