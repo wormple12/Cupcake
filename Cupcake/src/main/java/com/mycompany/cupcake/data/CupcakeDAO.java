@@ -208,7 +208,13 @@ public class CupcakeDAO {
         return new Topping(topping_id, topping_name, price);
     }
 
-    // earlier called "addCartToDB"
+     
+     /**
+      * Adds order from shoppingcart
+      * @param cart
+      * @param username
+      * @throws Exception 
+      */
     public void addOrder(ShoppingCart cart, String username) throws Exception {
         PreparedStatement preparedStmt;
         DBConnector connector = new DBConnector();
@@ -244,7 +250,13 @@ public class CupcakeDAO {
         c.close();
     }
 
-    // gets ordernumber + customer name
+      
+              /**
+               *
+               * @param username
+               * @return ordernumber + customer name
+               * @throws Exception 
+               */
     public HashMap<Integer, String> getAllOrdersSimple(String username) throws Exception {
         HashMap<Integer, String> result = new HashMap<>();
 
