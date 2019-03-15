@@ -15,20 +15,38 @@ public class Topping {
     private String topping_name;
     private double price;
 
+    /**
+     *
+     * @param topping_id
+     * @param topping_name
+     * @param price
+     */
     public Topping(int topping_id, String topping_name, double price) {
         this.topping_id = topping_id;
         this.topping_name = topping_name;
         this.price = price;
     }
 
+    /**
+     *
+     * @return
+     */
     public int getTopping_id() {
         return topping_id;
     }
 
+    /**
+     *
+     * @return
+     */
     public String getTopping_name() {
         return topping_name;
     }
 
+    /**
+     *
+     * @return
+     */
     public double getPrice() {
         return price;
     }

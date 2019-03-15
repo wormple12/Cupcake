@@ -15,6 +15,10 @@ public class DBConnector {
     //Constants
     private static final String IP	 = "165.227.148.141"; //;
     private static final String PORT     = "3306";
+
+    /**
+     *
+     */
     public static final String DATABASE  = "cupcakedb";
     private static final String USERNAME = "mute"; 
     private static final String PASSWORD = "Toor";	     	

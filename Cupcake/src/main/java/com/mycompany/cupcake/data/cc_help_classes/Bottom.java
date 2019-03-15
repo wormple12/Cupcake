@@ -15,20 +15,38 @@ public class Bottom {
     private String bottom_name;
     private double price;
 
+    /**
+     *
+     * @param bottom_id
+     * @param bottom_name
+     * @param price
+     */
     public Bottom(int bottom_id, String bottom_name, double price) {
         this.bottom_id = bottom_id;
         this.bottom_name = bottom_name;
         this.price = price;
     }
 
+    /**
+     *
+     * @return
+     */
     public int getBottom_id() {
         return bottom_id;
     }
 
+    /**
+     *
+     * @return
+     */
     public String getBottom_Name() {
         return bottom_name;
     }
 
+    /**
+     *
+     * @return
+     */
     public double getPrice() {
         return price;
     }

@@ -27,6 +27,13 @@ public class CupcakeDAO {
     final static boolean DEBUG = true;
 
     // DOES NOT USE PREPARESTATEMENT YET
+
+    /**
+     *
+     * @param username
+     * @return
+     * @throws Exception
+     */
     public User getUser(String username) throws Exception {
         User user = null;
 
@@ -57,6 +64,12 @@ public class CupcakeDAO {
     }
 
     //Creates new user object
+
+    /**
+     *
+     * @param user
+     * @throws Exception
+     */
     public void createUser(User user) throws Exception {
         PreparedStatement preparedStmt;
         DBConnector connector = new DBConnector();
@@ -75,6 +88,12 @@ public class CupcakeDAO {
     }
 
     //Returns an ArrayList with all Bottoms from the database
+
+    /**
+     *
+     * @return
+     * @throws Exception
+     */
     public ArrayList<Bottom> getAllBottoms() throws Exception {
         try {
             DBConnector connector = new DBConnector();
@@ -103,6 +122,12 @@ public class CupcakeDAO {
     }
 
     //Returns an ArrayList with all Toppings from the database
+
+    /**
+     *
+     * @return
+     * @throws Exception
+     */
     public ArrayList<Topping> getAllToppings() throws Exception {
         try {
             DBConnector connector = new DBConnector();
@@ -130,6 +155,12 @@ public class CupcakeDAO {
         return null;
     }
 
+    /**
+     *
+     * @param username
+     * @return
+     * @throws Exception
+     */
     public double getBalance(String username) throws Exception {
         double balance = -1.0;
 
@@ -150,6 +181,12 @@ public class CupcakeDAO {
         return balance;
     }
 
+    /**
+     *
+     * @param username
+     * @param amount
+     * @throws Exception
+     */
     public void addBalance(String username, double amount) throws Exception {
         double balance = getBalance(username) + amount;
         PreparedStatement preparedStmt;
@@ -167,6 +204,12 @@ public class CupcakeDAO {
         c.close();
     }
 
+    /**
+     *
+     * @param username
+     * @param amount
+     * @throws Exception
+     */
     public void removeBalance(String username, double amount) throws Exception {
         double balance = getBalance(username) - amount;
         PreparedStatement preparedStmt;
@@ -184,6 +227,12 @@ public class CupcakeDAO {
         c.close();
     }
 
+    /**
+     *
+     * @param id
+     * @return
+     * @throws Exception
+     */
     public Bottom getBottom(int id) throws Exception {
         DBConnector connector = new DBConnector();
         Connection c = connector.getConnection();
@@ -196,6 +245,12 @@ public class CupcakeDAO {
         return new Bottom(bottom_id, bottom_name, price);
     }
 
+    /**
+     *
+     * @param id
+     * @return
+     * @throws Exception
+     */
     public Topping getTopping(int id) throws Exception {
         DBConnector connector = new DBConnector();
         Connection c = connector.getConnection();
