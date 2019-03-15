@@ -19,22 +19,35 @@ public class ShoppingCart {
 
     ArrayList<LineItem> items = new ArrayList<>();
 
-
-    public void addToCart(LineItem x) throws DataException {
-        int check = checkIf(x.getCupcake());
+    /**
+     *Adds an LineItem to the items ArrayList, if the cupcake type already is in the shoppingcart, then it adds to the quantity instead
+     * of making a new LineItem
+     * @param item
+     * @throws DataException
+     */
+    public void addToCart(LineItem item) throws DataException {
+        int check = checkIf(item.getCupcake());
         if (check >= 0) {
-            items.get(check).addQty(check);
+            items.get(check).addQty(item.getQty());
         } else {
-            items.add(x);
+            items.add(item);
 
         }
         
     }
 
+    /**
+     *
+     * @return ArrayList items
+     */
     public ArrayList<LineItem> getCart() {
         return items;
     }
 
+    /**
+     *
+     * @return returns total price
+     */
     public double getTPrice() {
         double price = 0;
         for (int i = 0; i < items.size(); i++) {
@@ -42,7 +55,11 @@ public class ShoppingCart {
         }
         return price;
     }
-
+/**
+ * checks if there is already such an cupcake in the ArrayList
+ * @param cupcake
+ * @return 
+ */
     private int checkIf(Cupcake cupcake) {
         for (int i = 0; i < items.size(); i++) {
             if (items.get(i).getCupcake().equals(cupcake)) {

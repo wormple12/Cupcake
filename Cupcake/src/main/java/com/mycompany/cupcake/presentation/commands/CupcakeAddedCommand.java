@@ -16,7 +16,13 @@ import javax.servlet.http.HttpServletResponse;
  * @author Simon Asholt Norup
  */
 public class CupcakeAddedCommand extends Command { // EARLIER CALLED PRODUCTCONTROL.java
-
+/**
+ * Adds item to the shoppingcart, links to the shopping cart overview.
+ * @param request
+ * @param response
+ * @throws ServletException
+ * @throws IOException 
+ */
     @Override
     public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String top = request.getParameter("top");

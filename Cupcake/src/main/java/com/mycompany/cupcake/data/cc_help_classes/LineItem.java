@@ -17,7 +17,7 @@ public class LineItem {
     private int qty;
     private final double price;
     /**
-     * 
+     * Gets a Cupcake and quantity paramate, the price is calculated based on the inherent price of the cupcake object
      * @param cupcake
      * @param qty 
      */
@@ -27,21 +27,33 @@ public class LineItem {
         this.price = cupcake.getPrice()*qty;
     }
 
+    /**
+     *
+     * @return cupcake
+     */
     public Cupcake getCupcake() {
         return cupcake;
     }
 
+    /**
+     *
+     * @return quantity
+     */
     public int getQty() {
         return qty;
     }
 /**
- * 
+ * Adds more to quantity
  * @param aqty
  */
     public void addQty(int aqty) {
         this.qty = qty+aqty;
     }
     
+    /**
+     *
+     * @return price
+     */
     public double getPrice() {
         return price;
     }

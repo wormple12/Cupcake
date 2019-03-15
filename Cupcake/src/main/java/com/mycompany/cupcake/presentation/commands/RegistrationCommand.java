@@ -18,7 +18,15 @@ import javax.servlet.http.HttpServletResponse;
  * @author Emil PC
  */
 public class RegistrationCommand extends Command {
-
+/**
+ * Registration command, needs username, password and email which it then tries to use
+ * to create a new user in the database.
+ * It then forwards you based on wether the creation was succesful or not.
+ * @param request
+ * @param response
+ * @throws ServletException
+ * @throws IOException 
+ */
     @Override
     public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         final CupcakeDAO dao = new CupcakeDAO();

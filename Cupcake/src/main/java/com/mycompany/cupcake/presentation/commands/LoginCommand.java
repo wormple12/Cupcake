@@ -15,7 +15,14 @@ import javax.servlet.http.HttpSession;
  * @author Simon Asholt Norup
  */
 public class LoginCommand extends Command {
-    
+    /**
+     * Basic login functionality, checks the username and password. 
+     * Prints out erromessages if either username or password is wrong.
+     * @param request
+     * @param response
+     * @throws ServletException
+     * @throws IOException 
+     */
     @Override
     public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         final CupcakeDAO dao = new CupcakeDAO();

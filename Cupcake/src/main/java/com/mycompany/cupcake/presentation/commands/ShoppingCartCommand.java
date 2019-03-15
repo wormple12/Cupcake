@@ -14,8 +14,16 @@ import javax.servlet.http.HttpServletResponse;
 /**
  * @author Lukas Bjørnvad (converted to command by Simon Asholt Norup)
  */
-public class ShoppingCartCommand extends Command {
 
+public class ShoppingCartCommand extends Command {
+/**
+ * This is the ShoppingCart Command. Handles removing items from the shopping cart
+ * and let's the costumer get an overview of what they have in the shopping cart. 
+ * @param request
+ * @param response
+ * @throws ServletException
+ * @throws IOException 
+ */
     @Override
     public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         ShoppingCart cart = (ShoppingCart) request.getSession().getAttribute("ShoppingCart");
