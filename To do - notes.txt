@@ -1,6 +1,4 @@
-Færdiggør extreme overhaul: Alt html skal være i jsp-filer. Al logik skal være i java-klasser. Alle requests skal gå igennem front controlleren ved hjælp af en konvertering af vores servlets til commands.
-
-redirectJSP.java: Skal den bruges til alt, eller skal den slettes?
+AdminPageOrderDetails.jsp og InvoiceDetails.jsp bruger stadig SQL statements, som burde være i CupcakeDAO-klassen
 
 Shopping Cart button should be in menu or in pageheader
 
