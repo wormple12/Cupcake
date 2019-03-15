@@ -12,6 +12,9 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 /**
+ * Command Class for redirecting to "UserShow".jsp and several error .jsp pages
+ * Necessary when showing basic user info and showing error messages.
+ * Used by Front Controller.
  * @author Simon Asholt Norup
  */
 public class ShowCustomerCommand extends Command {

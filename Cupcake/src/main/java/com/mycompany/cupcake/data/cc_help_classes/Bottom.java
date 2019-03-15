@@ -6,7 +6,8 @@
 package com.mycompany.cupcake.data.cc_help_classes;
 
 /**
- *
+ *Helper class for the bottom of a cupcake.
+ *Holds relevance for functions where the SQL "bottoms" table is used and when constucting a Cupcake object.
  * @author Emil PC
  */
 public class Bottom {

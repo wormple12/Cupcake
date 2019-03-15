@@ -13,6 +13,10 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 /**
+ * Command class for redirecting to the "CupcakeAdded".jsp.
+ * Necessary when adding objects to the shoppingcart.
+ * Carries parameters on session to the .jsp.
+ * Used by Front Controller.
  * @author Simon Asholt Norup
  */
 public class CupcakeAddedCommand extends Command { // EARLIER CALLED PRODUCTCONTROL.java

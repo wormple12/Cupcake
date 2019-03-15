@@ -2,6 +2,8 @@
 package com.mycompany.cupcake.data.cc_help_classes;
 
 /**
+ *Help class for the entire Cupcake.
+ *Implements both the "Bottom" and the "Topping" objects.
  *
  * @author Henning
  */
@@ -22,26 +24,15 @@ public class Cupcake {
         this.price = bottom.getPrice()+topping.getPrice();
     }
 
-    /**
-     *
-     * @return
-     */
+ 
     public Bottom getBottom() {
         return bottom;
     }
 
-    /**
-     *
-     * @return
-     */
     public Topping getTopping() {
         return topping;
     }
-   
-    /**
-     *
-     * @return
-     */
+
     public double getPrice() {
         return price;
     }
@@ -49,9 +40,5 @@ public class Cupcake {
     @Override
     public String toString() {
         return "Cupcake{" + "bottom=" + bottom + ", topping=" + topping + ", price=" + price + '}';
-    }
-    
-    
-    
-    
+    }   
 }

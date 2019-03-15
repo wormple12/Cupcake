@@ -12,12 +12,17 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 /**
+ * Command class for logging into your account.
+ * Necessary redirecting to the main menu.
+ * Retrieves username and password parameters from the current session.
+ * Grants access to the other pages of the webpage.
+ * Used by Front Controller.
  * @author Simon Asholt Norup
  */
 public class LoginCommand extends Command {
     /**
      * Basic login functionality, checks the username and password. 
-     * Prints out erromessages if either username or password is wrong.
+     * Prints out errormessages if either username or password is wrong.
      * @param request
      * @param response
      * @throws ServletException

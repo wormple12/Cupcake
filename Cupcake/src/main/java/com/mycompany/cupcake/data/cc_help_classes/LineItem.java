@@ -17,7 +17,7 @@ public class LineItem {
     private int qty;
     private final double price;
     /**
-     * Gets a Cupcake and quantity paramate, the price is calculated based on the inherent price of the cupcake object
+     * Gets a Cupcake and quantity parameters, the price is calculated based on the inherent price of the cupcake object
      * @param cupcake
      * @param qty 
      */

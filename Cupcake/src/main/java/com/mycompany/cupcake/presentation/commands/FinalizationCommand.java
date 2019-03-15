@@ -12,6 +12,10 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 /**
+ * Command class for redirecting to the finalization .jsp. 
+ * Necessary for completing the users purchase.
+ * Used by Front Controller.
+ * Retrieves attributes from the shopping cart.
  * @author Simon Asholt Norup
  */
 public class FinalizationCommand extends Command {

@@ -12,6 +12,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 /**
+ * Command class for redirecting to the "products".jsp.
+ * Controlls overview and removal of current items in shoppingcart.
+ * Used by Front Controller.
  * @author Lukas Bjørnvad (converted to command by Simon Asholt Norup)
  */
 

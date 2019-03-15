@@ -14,14 +14,17 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 /**
- *
+ * Command class for registering new users. Admin status must be applied manually in SQL database.
+ * Retrieves user parameters on input and adds to database.
+ * Does not redirect the main menu. User is redirected to login site on creation.
+ * Used by Front Controller.
  * @author Emil PC
  */
 public class RegistrationCommand extends Command {
 /**
  * Registration command, needs username, password and email which it then tries to use
  * to create a new user in the database.
- * It then forwards you based on wether the creation was succesful or not.
+ * It then forwards you based on whether the creation was succesful or not.
  * @param request
  * @param response
  * @throws ServletException
@@ -51,5 +54,4 @@ public class RegistrationCommand extends Command {
             e.printStackTrace();
         }
     }
-
 }

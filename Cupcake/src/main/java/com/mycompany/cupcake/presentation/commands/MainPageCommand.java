@@ -14,9 +14,12 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 /**
+ * Command Class for handling the main page of the website.
+ * Necessary when displaying current balance of the user defined on the session.
+ * Retrieves parameters from the user defined on the session.
+ * Used by Front Controller.
  *
  * @author Emil PC
- *
  */
 public class MainPageCommand extends Command {
 

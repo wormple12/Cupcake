@@ -13,6 +13,10 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 /**
+ * Command class for redirecting to the "ChooseCupcake".jsp
+ * Necessary when the user selects specific bottoms and toppings and constructing Cupcake objects.
+ * Sets attributes on the session for bottoms and toppings. 
+ * Used by Front Controller.
  * @author Simon Asholt Norup
  */
 public class ListCupcakeOptionsCommand extends Command {

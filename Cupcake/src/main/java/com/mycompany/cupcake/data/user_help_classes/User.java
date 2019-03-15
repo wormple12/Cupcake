@@ -6,6 +6,7 @@ package com.mycompany.cupcake.data.user_help_classes;
 import com.mycompany.cupcake.data.CupcakeDAO;
 
 /**
+ * Help class for the User object. Holds relevance when handling the SQL database user table.
  * @author Simon Asholt Norup
  */
 public class User {
@@ -16,7 +17,9 @@ public class User {
     private Boolean admin = false;
 
     /**
-     *
+     *User class constructor without the admin parameter.
+     *Implemented for functions where admin status doesn't have any relevance.
+     * 
      * @param username
      * @param password
      * @param email
@@ -28,7 +31,9 @@ public class User {
     }   
 
     /**
-     *
+     *User class constructor with the admin parameter.
+     *Implemented for functions where admin status has relevance.
+     * 
      * @param username
      * @param password
      * @param email
@@ -41,42 +46,24 @@ public class User {
         this.admin = admin;
     }
 
-    /**
-     *
-     * @return
-     */
+  
     public Boolean getAdmin() {
         return admin;
     }
 
-    /**
-     *
-     * @param admin
-     */
+   
     public void setAdmin(Boolean admin) {
         this.admin = admin;
     }
-    
-    /**
-     *
-     * @return
-     */
+   
     public String getUsername() {
         return username;
     }
 
-    /**
-     *
-     * @return
-     */
     public String getPassword() {
         return password;
     }
 
-    /**
-     *
-     * @return
-     */
     public String getEmail() {
         return email;
     }
