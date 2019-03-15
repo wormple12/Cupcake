@@ -10,10 +10,6 @@ all commands and jsp-pages: rename and put into folders for better overview
 
 registration og login - javascript input validering
 
-DAO.addOrder(): lineitemID og orderID skal være auto-incrementing i databasen. Random.nextInt kan i princippet ramme de samme tal igen, og id'erne er dermed ikke garanteret unikke.
-
 Bedre exception handling (lige nu bruger vi bare e.printStackTrace())
 
 JUnit Tests af klasserne
-
-Command-class should use HashMap instead of switch

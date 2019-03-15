@@ -1,22 +1,5 @@
 |User|
 start
-:register as user;
-|#AntiqueWhite|System|
-:confirm;
-stop
-
-
-|User|
-start
-:attempt login;
-|System|
-:validate login;
-:save user on session;
-stop
-
-
-|User|
-start
 :check out menu;
 |System|
 :retrieve and return all cupcake information from database;

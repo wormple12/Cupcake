@@ -1,0 +1,6 @@
+com.mycompany.cupcake.data
+com.mycompany.cupcake.data.cc_help_classes
+com.mycompany.cupcake.data.user_help_classes
+com.mycompany.cupcake.logic
+com.mycompany.cupcake.presentation
+com.mycompany.cupcake.presentation.commands
