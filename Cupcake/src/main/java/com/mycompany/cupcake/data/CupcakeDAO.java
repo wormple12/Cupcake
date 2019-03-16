@@ -96,34 +96,35 @@ public class CupcakeDAO {
                 + "SET "
                 + "password = ?, "
                 + "balance =  ?, "
-                + "email = ?, "
-                + "WHERE username = " + user.getUsername();
+                + "email = ? "
+                + "WHERE username = ?;";
+        System.out.println("****POST QUERY**********");
         preparedStmt = c.prepareStatement(query);
         preparedStmt.setString(1, user.getPassword());
+        System.out.println("*****POST USER GET PASS*****"+user.getPassword());
         preparedStmt.setDouble(2, getBalance(user.getUsername()));
+        System.out.println("**********POST GETBALANCE**************" + getBalance(user.getUsername()));
         preparedStmt.setString(3, user.getEmail());
-        preparedStmt.execute();
+        System.out.println("***********POST GET EMAIL*************" + user.getEmail());
+        preparedStmt.setString(4, user.getUsername());
+        System.out.println("***********POST GET username*************" + user.getUsername());
+        preparedStmt.executeUpdate();
         preparedStmt.close();
         c.close();
+        System.out.println("*********POST CLOSE***************");
     }
 
     public void deleteUser(User user) throws Exception {
-        System.out.println("*******'Entered Delete User*********");
         PreparedStatement preparedStmt;
         DBConnector connector = new DBConnector();
         Connection c = connector.getConnection();
-        System.out.println("*********Post Connector*********");
         String query
                 = "DELETE FROM users "
-                + "WHERE username = '" + user.getUsername()+"';";
-        System.out.println("*********Post query*************");
+                + "WHERE username = '" + user.getUsername() + "';";
         preparedStmt = c.prepareStatement(query);
         preparedStmt.execute();
         preparedStmt.close();
-        System.out.println("*********post prep closed*********");
         c.close();
-        System.out.println("*********post close************");
-        System.out.println(user);
     }
 
     //Returns an ArrayList with all Bottoms from the database

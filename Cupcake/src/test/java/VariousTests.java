@@ -113,29 +113,38 @@ public class VariousTests {
     @Test
     public void testDAOCreateDeleteUser() throws Exception {
         User user = new User("testUser", "testPassword", "testEmail");
+        User fetchUser = null;
+        
         String ExpectedPass = "testPassword";
         CupcakeDAO dao = new CupcakeDAO();
         dao.createUser(user);
-        String actualName = "";
-        System.out.println("******");
-        System.out.println(user);
-        System.out.println("******");
-
-        User grabUser = null;
-        grabUser = dao.getUser("testUser");
-        String ActualPass = grabUser.getPassword();
-
-        System.out.println("Expected: " + ExpectedPass);
-        System.out.println("Actual: " + ActualPass);
+        fetchUser = dao.getUser("testUser");
+        String ActualPass = fetchUser.getPassword();
         assertEquals(ExpectedPass, ActualPass);
-
         try {
             dao.deleteUser(user);
-            actualName = user.getUsername();
-            System.out.println(actualName);
+            dao.deleteUser(fetchUser);
         } catch (Exception e) {
-            System.out.println("Something happened..");
+            System.out.println("Deletion in testDAOCreateDeleteUser Failed..");
         }
-        assertEquals(null, actualName);
+    }
+
+    @Test
+    public void testDAOCreateReadUpdateDeleteUser() throws Exception {
+        User user = new User("testUser2", "testPassword2", "testEmail2");
+        User userToUpdate = new User("testUser3", "testPassword3", "testEmail3");
+
+        String ExpectedPass = "testPassword3";
+        CupcakeDAO dao = new CupcakeDAO();
+        dao.createUser(user);
+        user = userToUpdate;
+        dao.updateUser(user);
+        String ActualPass = user.getPassword();
+        assertEquals(ExpectedPass, ActualPass);
+        try {
+            dao.deleteUser(user);
+        } catch (Exception e) {
+            System.out.println("Deletion in testDAOCreateReadDeleteUser Failed..");
+        }
     }
 }
