@@ -16,4 +16,4 @@ JUnit Tests af klasserne
 
 User Info Box skal være side om side med diverse tables. Skal de ligge i samme <div>?
 
-Find ud af hvorfor DELETE user (crud) eksekvere efter brug af metoden. //optional
+Find ud af hvorfor DELETE user (crud) eksekverer efter brug af metoden. //optional
