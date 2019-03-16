@@ -5,6 +5,7 @@
  */
 
 import com.mycompany.cupcake.data.CupcakeDAO;
+import com.mycompany.cupcake.data.cc_help_classes.Topping;
 import com.mycompany.cupcake.data.user_help_classes.User;
 import com.mycompany.cupcake.logic.DBConnector;
 //import com.mysql.jdbc.Connection;
@@ -13,6 +14,7 @@ import java.sql.Connection;
 import java.sql.ResultSet;
 import java.util.logging.Level;
 import java.sql.Statement;
+import java.util.ArrayList;
 import java.util.logging.Logger;
 import org.junit.After;
 import org.junit.AfterClass;
@@ -52,6 +54,8 @@ public class VariousTests {
     // @Test
     // public void hello() {}
     @Test
+
+    //Raw unused query to show versatility of database
     public void testSQLTableInfoByQuery() {
         boolean actualResult = false;
         String customerName = "";
@@ -86,16 +90,52 @@ public class VariousTests {
         }
     }
 
+    //DAO user test
     @Test
     public void testDAOGetUserEmail() throws Exception {
         String expectedEmail = "Redroom4hire@blackmail.onion";
         CupcakeDAO dao = new CupcakeDAO();
         User user = dao.getUser("pinky");
         String actualEmail = user.getEmail();
-        System.out.println("***********");
-        System.out.println("Expected:" + expectedEmail);
-        System.out.println("Actual:" + actualEmail);
-        System.out.println("***********");
         assertEquals(expectedEmail, actualEmail);
+    }
+
+    @Test
+    public void testDAOBalanceBygetAllToppings() throws Exception {
+        double expected = 5.0;
+        CupcakeDAO dao = new CupcakeDAO();
+        ArrayList<Topping> list = dao.getAllToppings();
+        Topping topping = list.get(1);
+        double actual = topping.getPrice();
+        assertEquals(expected, actual, 0);
+    }
+
+    @Test
+    public void testDAOCreateDeleteUser() throws Exception {
+        User user = new User("testUser", "testPassword", "testEmail");
+        String ExpectedPass = "testPassword";
+        CupcakeDAO dao = new CupcakeDAO();
+        dao.createUser(user);
+        String actualName = "";
+        System.out.println("******");
+        System.out.println(user);
+        System.out.println("******");
+
+        User grabUser = null;
+        grabUser = dao.getUser("testUser");
+        String ActualPass = grabUser.getPassword();
+
+        System.out.println("Expected: " + ExpectedPass);
+        System.out.println("Actual: " + ActualPass);
+        assertEquals(ExpectedPass, ActualPass);
+
+        try {
+            dao.deleteUser(user);
+            actualName = user.getUsername();
+            System.out.println(actualName);
+        } catch (Exception e) {
+            System.out.println("Something happened..");
+        }
+        assertEquals(null, actualName);
     }
 }
