@@ -13,3 +13,5 @@ registration og login - javascript input validering
 Bedre exception handling (lige nu bruger vi bare e.printStackTrace())
 
 JUnit Tests af klasserne
+
+User Info Box skal være side om side med diverse tables. Skal de ligge i samme <div>?
