@@ -29,33 +29,8 @@ import static org.junit.Assert.*;
  */
 public class VariousTests {
 
-    public VariousTests() {
-    }
-
-    @BeforeClass
-    public static void setUpClass() {
-    }
-
-    @AfterClass
-    public static void tearDownClass() {
-    }
-
-    @Before
-    public void setUp() {
-    }
-
-    @After
-    public void tearDown() {
-    }
-
-    // TODO add test methods here.
-    // The methods must be annotated with annotation @Test. For example:
-    //
-    // @Test
-    // public void hello() {}
-    @Test
-
     //Raw unused query to show versatility of database
+    @Test
     public void testSQLTableInfoByQuery() {
         boolean actualResult = false;
         String customerName = "";
@@ -100,8 +75,9 @@ public class VariousTests {
         assertEquals(expectedEmail, actualEmail);
     }
 
+    //DAO getting specific parameter from ArrayList
     @Test
-    public void testDAOBalanceBygetAllToppings() throws Exception {
+    public void testDAOPriceByGetAllToppings() throws Exception {
         double expected = 5.0;
         CupcakeDAO dao = new CupcakeDAO();
         ArrayList<Topping> list = dao.getAllToppings();
@@ -110,11 +86,12 @@ public class VariousTests {
         assertEquals(expected, actual, 0);
     }
 
+    //DAO shows creation and deletion
     @Test
     public void testDAOCreateDeleteUser() throws Exception {
         User user = new User("testUser", "testPassword", "testEmail");
         User fetchUser = null;
-        
+
         String ExpectedPass = "testPassword";
         CupcakeDAO dao = new CupcakeDAO();
         dao.createUser(user);
@@ -125,10 +102,12 @@ public class VariousTests {
             dao.deleteUser(user);
             dao.deleteUser(fetchUser);
         } catch (Exception e) {
+            e.printStackTrace();
             System.out.println("Deletion in testDAOCreateDeleteUser Failed..");
         }
     }
 
+    //DAO shows all CRUD functionalities on User object.
     @Test
     public void testDAOCreateReadUpdateDeleteUser() throws Exception {
         User user = new User("testUser2", "testPassword2", "testEmail2");
@@ -144,6 +123,7 @@ public class VariousTests {
         try {
             dao.deleteUser(user);
         } catch (Exception e) {
+            e.printStackTrace();
             System.out.println("Deletion in testDAOCreateReadDeleteUser Failed..");
         }
     }

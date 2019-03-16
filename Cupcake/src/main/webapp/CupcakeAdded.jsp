@@ -20,16 +20,16 @@
     </head>
     <body>
         <jsp:include page="siteheader.jsp" />
-        
+
         <%
-            Cupcake cupcake = (Cupcake)request.getAttribute("Cupcake");
+            Cupcake cupcake = (Cupcake) request.getAttribute("Cupcake");
             int qty = Integer.parseInt(request.getParameter("quantity"));
-            
+
             out.println("<h1>Adding: " + qty + " " + cupcake.getTopping().getTopping_name() + " cupcakes with " + cupcake.getBottom().getBottom_Name() + " bottom" + "</h1>");
 
             out.println("<form  action=" + "/Cupcake/c/cart" + "><input value=\"Go to Checkout\" type=submit>"
-                + "<input type=submit value=\"Order more\" formaction=/Cupcake/c/possibilities>"
-                + "</form>");
+                    + "<input type=submit value=\"Order more\" formaction=/Cupcake/c/possibilities>"
+                    + "</form>");
         %>
     </body>
 </html>

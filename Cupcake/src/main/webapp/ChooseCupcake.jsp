@@ -21,23 +21,23 @@
     </head>
     <body>
         <jsp:include page="siteheader.jsp" />
-        
+
         <form action="/Cupcake/c/addtocart" method = POST>
             <select name = top><!--Toppings:-->
-            <%
-                ArrayList<Topping> toppings = (ArrayList<Topping>) request.getAttribute("toppings");
-                for (Topping topping : toppings) {
-                    out.println("<option value =" + topping.getTopping_id() + "> " + topping.getTopping_name() + ", " + topping.getPrice() + ",- DKK</option>");
-                }
-            %>
+                <%
+                    ArrayList<Topping> toppings = (ArrayList<Topping>) request.getAttribute("toppings");
+                    for (Topping topping : toppings) {
+                        out.println("<option value =" + topping.getTopping_id() + "> " + topping.getTopping_name() + ", " + topping.getPrice() + ",- DKK</option>");
+                    }
+                %>
             </select>
             <select name = bottom><!--Bottoms:-->
-            <%
-                ArrayList<Bottom> bottoms = (ArrayList<Bottom>) request.getAttribute("bottoms");
-                for (Bottom bottom : bottoms) {
-                    out.println("<option value=\"" + bottom.getBottom_id() + "\">" + bottom.getBottom_Name() + ", " + bottom.getPrice() + ",- DKK</option>");
-                }
-            %>
+                <%
+                    ArrayList<Bottom> bottoms = (ArrayList<Bottom>) request.getAttribute("bottoms");
+                    for (Bottom bottom : bottoms) {
+                        out.println("<option value=\"" + bottom.getBottom_id() + "\">" + bottom.getBottom_Name() + ", " + bottom.getPrice() + ",- DKK</option>");
+                    }
+                %>
             </select>
             <input name="quantity">Quantity
             <input type= submit>

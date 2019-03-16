@@ -20,8 +20,10 @@ public class ShoppingCart {
     ArrayList<LineItem> items = new ArrayList<>();
 
     /**
-     *Adds an LineItem to the items ArrayList, if the cupcake type already is in the shoppingcart, then it adds to the quantity instead
-     * of making a new LineItem
+     * Adds an LineItem to the items ArrayList, if the cupcake type already is
+     * in the shoppingcart, then it adds to the quantity instead of making a new
+     * LineItem
+     *
      * @param item
      * @throws DataException
      */
@@ -33,7 +35,6 @@ public class ShoppingCart {
             items.add(item);
 
         }
-        
     }
 
     /**
@@ -55,11 +56,13 @@ public class ShoppingCart {
         }
         return price;
     }
-/**
- * checks if there is already such an cupcake in the ArrayList
- * @param cupcake
- * @return 
- */
+
+    /**
+     * checks if there is already such an cupcake in the ArrayList
+     *
+     * @param cupcake
+     * @return
+     */
     private int checkIf(Cupcake cupcake) {
         for (int i = 0; i < items.size(); i++) {
             if (items.get(i).getCupcake().equals(cupcake)) {

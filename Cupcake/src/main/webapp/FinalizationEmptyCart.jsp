@@ -1,7 +1,7 @@
 <%-- 
-    Document   : FinalizationSuccess
-    Created on : Mar 11, 2019, 11:48:14 AM
-    Author     : Simon Asholt Norup
+    Document   : FinalizationEmptyCart
+    Created on : 16-Mar-2019, 16:42:35
+    Author     : Henning
 --%>
 
 <%@page import="com.mycompany.cupcake.data.user_help_classes.User"%>
@@ -19,10 +19,9 @@
     </head>
     <body>
         <jsp:include page="siteheader.jsp" />
-
         <%
             User user = (User) request.getSession().getAttribute("User");
-            out.println("<h1>Sorry " + user.getUsername() + " you do not have the necessary funds to complete this purchase</h1>");
+            out.println("<h1>Sorry " + user.getUsername() + " your cart is empty</h1>");
         %>
     </body>
 </html>

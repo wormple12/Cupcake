@@ -98,20 +98,14 @@ public class CupcakeDAO {
                 + "balance =  ?, "
                 + "email = ? "
                 + "WHERE username = ?;";
-        System.out.println("****POST QUERY**********");
         preparedStmt = c.prepareStatement(query);
         preparedStmt.setString(1, user.getPassword());
-        System.out.println("*****POST USER GET PASS*****"+user.getPassword());
         preparedStmt.setDouble(2, getBalance(user.getUsername()));
-        System.out.println("**********POST GETBALANCE**************" + getBalance(user.getUsername()));
         preparedStmt.setString(3, user.getEmail());
-        System.out.println("***********POST GET EMAIL*************" + user.getEmail());
         preparedStmt.setString(4, user.getUsername());
-        System.out.println("***********POST GET username*************" + user.getUsername());
         preparedStmt.executeUpdate();
         preparedStmt.close();
         c.close();
-        System.out.println("*********POST CLOSE***************");
     }
 
     public void deleteUser(User user) throws Exception {
