@@ -1,4 +1,4 @@
-AdminPageOrderDetails.jsp og InvoiceDetails.jsp bruger stadig SQL statements, som burde være i CupcakeDAO-klassen
+AdminPageOrderDetails.jsp og InvoiceDetails.jsp bruger stadig SQL statements, som burde vÃ¦re i CupcakeDAO-klassen
 
 Shopping Cart button should be in menu or in pageheader
 
@@ -14,4 +14,6 @@ Bedre exception handling (lige nu bruger vi bare e.printStackTrace())
 
 JUnit Tests af klasserne
 
-User Info Box skal være side om side med diverse tables. Skal de ligge i samme <div>?
+User Info Box skal vÃ¦re side om side med diverse tables. Skal de ligge i samme <div>?
+
+Find ud af hvorfor DELETE user (crud) eksekvere efter brug af metoden. //optional
