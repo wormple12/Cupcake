@@ -26,3 +26,7 @@ You can host the website yourself by defining and locating the target .war folde
 * [Tomcat](https://tomcat.apache.org/) - Java Servlet, JavaServer Pages, Java Expression Language and Java WebSocket technologies
 
 Maven is preinstalled in the Netbeans IDE, which is the IDE that was used in the creation of this project. Other IDEs may not.
+
+## Acknowledgements
+
+The github page is currently a redirection to the Javadoc. Ultimately, it was never created for anything else. One could argue, that it should function as hub of the project with graphics. 
