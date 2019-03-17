@@ -12,14 +12,16 @@ Furthermore, the project includes introductions to: HTML, CSS, .jsp sites and mo
 
 ### Import notes
 
-To test the admin status use the following account: 
+**To test the admin status use the following account:** 
 
 username = pinky
+
 password = 66654321
 
-To test a standard user with credits:
+**To test a standard user with credits:**
 
 username = standarduser
+
 password = 1234
 
 As part of the assignment a Javadoc must be provided for the program. It can be found in the project's github pages:
