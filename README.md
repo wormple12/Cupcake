@@ -10,7 +10,7 @@ The purpose is to gain understanding of:
 
 Furthermore, the project includes introductions to: HTML, CSS, .jsp sites and more.
 
-## Import notes:
+## Import notes
 
 As part of the assignment a Javadoc must be provided for the program. It can be found in the project's github pages:
 
