@@ -87,6 +87,11 @@ public class CupcakeDAO {
         return user;
     }
 
+    /**
+     *
+     * @param user
+     * @throws Exception
+     */
     public void updateUser(User user) throws Exception {
         PreparedStatement preparedStmt;
         DBConnector connector = new DBConnector();
@@ -108,6 +113,11 @@ public class CupcakeDAO {
         c.close();
     }
 
+    /**
+     *
+     * @param user
+     * @throws Exception
+     */
     public void deleteUser(User user) throws Exception {
         PreparedStatement preparedStmt;
         DBConnector connector = new DBConnector();
