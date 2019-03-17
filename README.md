@@ -1,4 +1,4 @@
-# Cupcake
+## Cupcake
 
 This is an educational project. It was created due to it being a prerequisite to the entrance of an exam.
 The project involves a scenario where a firm has tasked programmers to create a website.
@@ -10,7 +10,7 @@ The purpose is to gain understanding of:
 
 Furthermore, the project includes introductions to: HTML, CSS, .jsp sites and more.
 
-## Import notes
+### Import notes
 
 As part of the assignment a Javadoc must be provided for the program. It can be found in the project's github pages:
 
@@ -27,6 +27,6 @@ You can host the website yourself by defining and locating the target .war folde
 
 Maven is preinstalled in the Netbeans IDE, which is the IDE that was used in the creation of this project. Other IDEs may not.
 
-## Acknowledgements
+### Acknowledgements
 
 The github page is currently a redirection to the Javadoc. Ultimately, it was never created for anything else. One could argue, that it should function as hub of the project with graphics. 
