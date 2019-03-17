@@ -1,0 +1,37 @@
+@startuml
+
+title Relationships - Class Diagram
+
+
+class FrontController {
+  +void processRequest()
+}
+
+class Command {
+    +void execute()
+    +Command from()
+}
+
+class CupcakeDAO {
+    Fetches information as well as inserts into the database.
+}
+
+class DBConnector {
+    Connects to the MySQL database.
+    +Connection getConnection()
+}
+
+class JSPpage << (D,orchid) >> {
+    All HTML to be shown.
+}
+
+FrontController <|-down- Command: from()
+Command <|-up- FrontController: execute()
+
+Command <|-right- CupcakeDAO
+CupcakeDAO <|-down- DBConnector: getConnection()
+
+JSPpage <|-up- Command: getRequestDispatcher(path).forward()
+FrontController <|-up- JSPpage: redirect
+
+@enduml
