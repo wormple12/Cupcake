@@ -1,0 +1,10 @@
+To test the admin status use the following account:
+
+username = pinky
+password = 66654321
+
+To test a standard user with credits:
+
+username = standarduser
+password = 1234
+
