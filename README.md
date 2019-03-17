@@ -29,4 +29,4 @@ Maven is preinstalled in the Netbeans IDE, which is the IDE that was used in the
 
 ### Acknowledgements
 
-The github page is currently a redirection to the Javadoc. Ultimately, it was never created for anything else. One could argue, that it should function as hub of the project with graphics. 
+The github page is currently a redirection to the Javadoc. Ultimately, it was never created for anything else. One could argue, that it should function as a hub for the project with graphics. 
