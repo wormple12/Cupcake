@@ -44,30 +44,27 @@
 
                         for (Map.Entry<Integer, String> entry : orders.entrySet()) {
                 %>
-                            <tr>
-                                <td><%=entry.getKey()%></td>
-                                <td><%=entry.getValue()%></td>
-                                <td>
+                <tr>
+                    <td><%=entry.getKey()%></td>
+                    <td><%=entry.getValue()%></td>
+                    <td>
 
-                                    <a href="/Cupcake/InvoiceDetails.jsp?idorder=<%=entry.getKey()%>" >
-                                        <div style="height:100%;width:100%">
-                                            <!--<input type="radio" name="radio1" onclick="handleClick(this.id);" id="customerId" />-->
-                                            view
-                                        </div>
-                                </td>
-
-                            </tr>
+                        <a href="/Cupcake/InvoiceDetails.jsp?idorder=<%=entry.getKey()%>" >
+                            <div style="height:100%;width:100%">
+                                <!--<input type="radio" name="radio1" onclick="handleClick(this.id);" id="customerId" />-->
+                                view
+                            </div>
+                    </td>
+                </tr>
                 <%
-                        }
+                    }
                 %>
             </table>
             <%
-                    } catch (Exception e) {
-                        e.printStackTrace();
-                    }
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
             %>
         </form>
-
-
     </body>
 </html>

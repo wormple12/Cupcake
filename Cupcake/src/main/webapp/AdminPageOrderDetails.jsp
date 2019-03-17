@@ -51,7 +51,7 @@
                                 + "LEFT JOIN orders sc "
                                 + "ON sc.idorder = hs.orderid "
                                 + "LEFT JOIN bottoms bot ON ls.bottom=bot.bottom_id "
-                                + "LEFT JOIN toppings top ON ls.topping=top.topping_id "        
+                                + "LEFT JOIN toppings top ON ls.topping=top.topping_id "
                                 + "WHERE sc.idorder =" + request.getParameter("idorder") + ";");
 
                         while (rs.next()) {
@@ -80,7 +80,6 @@
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
-
             %>
         </form>
     </body>

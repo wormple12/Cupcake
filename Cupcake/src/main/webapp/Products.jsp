@@ -27,7 +27,7 @@
             <%
                 ShoppingCart cart = (ShoppingCart) request.getSession().getAttribute("ShoppingCart");
                 User user = (User) request.getSession().getAttribute("User");
-                
+
                 for (int i = 0; i < cart.getCart().size(); i++) {
                     LineItem item = cart.getCart().get(i);
                     int qty = item.getQty();
@@ -57,7 +57,6 @@
                 }
             %>
             <input type=submit value="Order more" formaction="/Cupcake/c/possibilities">
-
         </form>
     </body>
 </html>

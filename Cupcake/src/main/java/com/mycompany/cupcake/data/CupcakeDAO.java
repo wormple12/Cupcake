@@ -18,8 +18,10 @@ import java.util.HashMap;
 import java.util.Random;
 
 /**
- * This class handles all communication with the "cupcakedb" MySQL database. It fetches information as well as inserts into the database.
- * All methods requiring user input uses PreparedStatements to avoid SQLInjection issues.
+ * This class handles all communication with the "cupcakedb" MySQL database. It
+ * fetches information as well as inserts into the database. All methods
+ * requiring user input uses PreparedStatements to avoid SQLInjection issues.
+ *
  * @author Simon Asholt Norup
  */
 public class CupcakeDAO {
@@ -27,6 +29,28 @@ public class CupcakeDAO {
     final static boolean DEBUG = true;
 
     // DOES NOT USE PREPARESTATEMENT YET
+    //Creates new user object
+    /**
+     *
+     * @param user
+     * @throws Exception
+     */
+    public void createUser(User user) throws Exception {
+        PreparedStatement preparedStmt;
+        DBConnector connector = new DBConnector();
+        Connection c = connector.getConnection();
+        String query
+                = " insert into users (username, password, balance, email) VALUES(?,?,?,?)";
+        preparedStmt = c.prepareStatement(query);
+        preparedStmt.setString(1, user.getUsername());
+        preparedStmt.setString(2, user.getPassword());
+        preparedStmt.setDouble(3, 0);
+        preparedStmt.setString(4, user.getEmail());
+        preparedStmt.execute();
+
+        preparedStmt.close();
+        c.close();
+    }
 
     /**
      *
@@ -63,36 +87,44 @@ public class CupcakeDAO {
         return user;
     }
 
-    //Creates new user object
-
-    /**
-     *
-     * @param user
-     * @throws Exception
-     */
-    public void createUser(User user) throws Exception {
+    public void updateUser(User user) throws Exception {
         PreparedStatement preparedStmt;
         DBConnector connector = new DBConnector();
         Connection c = connector.getConnection();
         String query
-                = " insert into users (username, password, balance, email) VALUES(?,?,?,?)";
+                = "UPDATE users "
+                + "SET "
+                + "password = ?, "
+                + "balance =  ?, "
+                + "email = ? "
+                + "WHERE username = ?;";
         preparedStmt = c.prepareStatement(query);
-        preparedStmt.setString(1, user.getUsername());
-        preparedStmt.setString(2, user.getPassword());
-        preparedStmt.setDouble(3, 0);
-        preparedStmt.setString(4, user.getEmail());
-        preparedStmt.execute();
+        preparedStmt.setString(1, user.getPassword());
+        preparedStmt.setDouble(2, getBalance(user.getUsername()));
+        preparedStmt.setString(3, user.getEmail());
+        preparedStmt.setString(4, user.getUsername());
+        preparedStmt.executeUpdate();
+        preparedStmt.close();
+        c.close();
+    }
 
+    public void deleteUser(User user) throws Exception {
+        PreparedStatement preparedStmt;
+        DBConnector connector = new DBConnector();
+        Connection c = connector.getConnection();
+        String query
+                = "DELETE FROM users "
+                + "WHERE username = '" + user.getUsername() + "';";
+        preparedStmt = c.prepareStatement(query);
+        preparedStmt.execute();
         preparedStmt.close();
         c.close();
     }
 
     //Returns an ArrayList with all Bottoms from the database
-
     /**
      *
-     * @return
-     * @throws Exception
+     * @return @throws Exception
      */
     public ArrayList<Bottom> getAllBottoms() throws Exception {
         try {
@@ -122,11 +154,9 @@ public class CupcakeDAO {
     }
 
     //Returns an ArrayList with all Toppings from the database
-
     /**
      *
-     * @return
-     * @throws Exception
+     * @return @throws Exception
      */
     public ArrayList<Topping> getAllToppings() throws Exception {
         try {
@@ -263,13 +293,13 @@ public class CupcakeDAO {
         return new Topping(topping_id, topping_name, price);
     }
 
-     
-     /**
-      * Adds order from shoppingcart
-      * @param cart
-      * @param username
-      * @throws Exception 
-      */
+    /**
+     * Adds order from shoppingcart
+     *
+     * @param cart
+     * @param username
+     * @throws Exception
+     */
     public void addOrder(ShoppingCart cart, String username) throws Exception {
         PreparedStatement preparedStmt;
         DBConnector connector = new DBConnector();
@@ -305,13 +335,12 @@ public class CupcakeDAO {
         c.close();
     }
 
-      
-              /**
-               *
-               * @param username
-               * @return ordernumber + customer name
-               * @throws Exception 
-               */
+    /**
+     *
+     * @param username
+     * @return ordernumber + customer name
+     * @throws Exception
+     */
     public HashMap<Integer, String> getAllOrdersSimple(String username) throws Exception {
         HashMap<Integer, String> result = new HashMap<>();
 

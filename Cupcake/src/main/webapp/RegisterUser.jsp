@@ -19,16 +19,13 @@
         <link rel="stylesheet" type="text/css" href="/Cupcake/css.css">
         <link rel="stylesheet" type="text/css" href="/Cupcake/cupcakebackground.css">
     </head>
-
     <body>
-
         <div id="topmenu">
             <select onChange="window.location.href = this.value">   
                 <option value = "/Cupcake/c/registration"> Create new user </option>
                 <option value = "/Cupcake/c/login"> Login </option>
             </select>
         </div>
-
         <h1> Create new user </h1>
         <form action="/Cupcake/c/registration" method=POST>
             Username: <br> <input type=text name=username style="color: black"> <br> 
